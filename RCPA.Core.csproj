@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{594B9AF6-4E27-4230-A60A-1B61FA3171F9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RCPA</RootNamespace>
+    <AssemblyName>RCPA.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Win32|AnyCPU'">
+    <OutputPath>bin\Win32\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Win32|x64'">
+    <OutputPath>bin\x64\Win32\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="alglibnet2">
+      <HintPath>..\lib\alglib\alglibnet2.dll</HintPath>
+    </Reference>
+    <Reference Include="DigitalRune.Windows.Docking">
+      <HintPath>..\lib\DigitalRune.Windows.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=2.4.0.26, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MathNet.Numerics.2.4.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Meta.Numerics">
+      <HintPath>..\packages\Meta.Numerics.2.1.0\lib\Meta.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.84.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.1.0.84.0\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.84.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.1.0.84.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="ZedGraph, Version=5.1.6.417, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ZedGraph.5.1.6\lib\net35-Client\ZedGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="zlib.net, Version=1.0.3.0, Culture=neutral, PublicKeyToken=47d7877cb3620160">
+      <HintPath>..\packages\zlib.net.1.0.4.0\lib\zlib.net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractParallelMainProcessor.cs" />
+    <Compile Include="AbstractParallelTaskProcessor.cs" />
+    <Compile Include="Annotation.cs" />
+    <Compile Include="AnnotationFormat.cs" />
+    <Compile Include="Batte\CodeProject\Download\BatchDownload.cs" />
+    <Compile Include="Batte\CodeProject\Download\Download.cs" />
+    <Compile Include="Batte\CodeProject\Download\Progress.cs" />
+    <Compile Include="AnnotationPropertyFactory.cs" />
+    <Compile Include="ComponentExtension.cs" />
+    <Compile Include="ConcurrentList.cs" />
+    <Compile Include="ConsoleFileProcessorWorker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Converter\AbstractPropertyNameConverter.cs" />
+    <Compile Include="Converter\AnnotationConverter.cs" />
+    <Compile Include="Converter\AnnotationConverterFactory.cs" />
+    <Compile Include="Converter\BooleanConverter.cs" />
+    <Compile Include="DB\Access.cs" />
+    <Compile Include="Extension\FileExtension.cs" />
+    <Compile Include="Extension\MathNetExtensitions.cs" />
+    <Compile Include="Extension\SQLiteDBHelper.cs" />
+    <Compile Include="Extension\XmlExtensions.cs" />
+    <Compile Include="Format\FileIndexFormat.cs" />
+    <Compile Include="Format\AnnotationToPropertyConverter.cs" />
+    <Compile Include="Converter\CompositePropertyConverter.cs" />
+    <Compile Include="Converter\EmptyConverter.cs" />
+    <Compile Include="Converter\IPropertyConverterFactory.cs" />
+    <Compile Include="Converter\PropertyAliasConverter.cs" />
+    <Compile Include="Converter\PropertyConverterFactory.cs" />
+    <Compile Include="Converter\StringConverter.cs" />
+    <Compile Include="Converter\IntegerConverter.cs" />
+    <Compile Include="Converter\DoubleConverter.cs" />
+    <Compile Include="EnumUtils.cs" />
+    <Compile Include="FileChangedEvent.cs" />
+    <Compile Include="Format\IFileDefinition.cs" />
+    <Compile Include="Format\TextFileDefinition.cs" />
+    <Compile Include="Format\TextFileReader.cs" />
+    <Compile Include="Gui\Command\ConsoleCommand.cs" />
+    <Compile Include="Gui\RcpaRadioField.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Gui\RcpaRadioField.Designer.cs">
+      <DependentUpon>RcpaRadioField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\IntegerField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\IntegerField.Designer.cs">
+      <DependentUpon>IntegerField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\DoubleField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\DoubleField.Designer.cs">
+      <DependentUpon>DoubleField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\RcpaCheckField.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Gui\RcpaCheckField.Designer.cs">
+      <DependentUpon>RcpaCheckField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\TextField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\TextField.Designer.cs">
+      <DependentUpon>TextField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\ListViewField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\ListViewField.Designer.cs">
+      <DependentUpon>ListViewField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\ProgressField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\ProgressField.Designer.cs">
+      <DependentUpon>ProgressField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\FileField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\FileField.Designer.cs">
+      <DependentUpon>FileField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\OptionFileTextAdaptor.cs" />
+    <Compile Include="Gui\RcpaTextField2.cs" />
+    <Compile Include="Gui\RcpaFileField2.cs" />
+    <Compile Include="Gui\ListViewColumnField.cs" />
+    <Compile Include="Gui\ListViewColumnSorter.cs" />
+    <Compile Include="Gui\RcpaListViewMultipleFileDirectoryField.cs" />
+    <Compile Include="Gui\OptionFileRadioButtonAdaptor.cs" />
+    <Compile Include="Gui\RcpaRadioButton.cs" />
+    <Compile Include="Gui\IProgress.cs" />
+    <Compile Include="Gui\RcpaOptionAttribute.cs" />
+    <Compile Include="Gui\RcpaOptionAttributeUtils.cs" />
+    <Compile Include="Gui\RcpaFormState.cs" />
+    <Compile Include="Gui\DisableClose.cs" />
+    <Compile Include="Gui\Event\ListBoxFileEventHandlers.cs" />
+    <Compile Include="Gui\SelectFromListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\SelectFromListForm.Designer.cs">
+      <DependentUpon>SelectFromListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\WinFormConsole.cs" />
+    <Compile Include="Gui\Image\GraphicsHelper.cs" />
+    <Compile Include="Gui\ListBoxField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\ListBoxField.Designer.cs">
+      <DependentUpon>ListBoxField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\TreeViewMS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IAnnotationConverter.cs" />
+    <Compile Include="ItemInfoListOldReader.cs" />
+    <Compile Include="FileProcessor.cs" />
+    <Compile Include="FileProcessorWorker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Filter.cs" />
+    <Compile Include="Gui\AbstractFileProcessorUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\AbstractFileProcessorUI.Designer.cs">
+      <DependentUpon>AbstractFileProcessorUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\AbstractMultipleProgressFileProcessorUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\AbstractMultipleProgressFileProcessorUI.Designer.cs">
+      <DependentUpon>AbstractMultipleProgressFileProcessorUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbstractOptionFileAdaptor.cs" />
+    <Compile Include="Gui\AbstractRcpaComponent.cs" />
+    <Compile Include="Gui\AbstractTurboProcessorUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\AbstractTurboProcessorUI.Designer.cs">
+      <DependentUpon>AbstractTurboProcessorUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\AbstractUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\AbstractUI.Designer.cs">
+      <DependentUpon>AbstractUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\OptionFileStringComboBoxAdaptor.cs" />
+    <Compile Include="Gui\OptionFileComboBoxAdaptor.cs" />
+    <Compile Include="Gui\Event\ItemInfosEventHandlers.cs" />
+    <Compile Include="Gui\Event\ListBoxEventHandlers.cs" />
+    <Compile Include="Gui\Event\ListViewEventHandlers.cs" />
+    <Compile Include="Gui\OptionFileCheckBoxAdaptor.cs" />
+    <Compile Include="Gui\Command\CommandForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\Command\CommandForm.Designer.cs">
+      <DependentUpon>CommandForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Command\Constants.cs" />
+    <Compile Include="Gui\Command\IToolCommand.cs" />
+    <Compile Include="Gui\Command\IToolSecondLevelCommand.cs" />
+    <Compile Include="Gui\Command\MenuCommandType.cs" />
+    <Compile Include="Gui\Command\ToolCommandSeparator.cs" />
+    <Compile Include="Gui\Command\ToolSecondLevelCommandSeparator.cs" />
+    <Compile Include="Gui\ComponentUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\ComponentUI.Designer.cs">
+      <DependentUpon>ComponentUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\AbstractProcessorUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\AbstractProcessorUI.Designer.cs">
+      <DependentUpon>AbstractProcessorUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\OptionFileTextBoxAdaptor.cs" />
+    <Compile Include="ItemInfoListNewReader.cs" />
+    <Compile Include="IXml.cs" />
+    <Compile Include="LineFormat.cs" />
+    <Compile Include="MyConvert.cs" />
+    <Compile Include="ObjectHelper.cs" />
+    <Compile Include="ObjectPool.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="PropertyConverter.cs" />
+    <Compile Include="RcpaListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RcpaListBox.Designer.cs">
+      <DependentUpon>RcpaListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Time\ICounter.cs" />
+    <Compile Include="Utils\BeanUtils.cs" />
+    <Compile Include="Utils\NumericalRecipes.cs" />
+    <Compile Include="Utils\ResizeAndRotationHelper.cs" />
+    <Compile Include="Utils\GraphicsUtils.cs" />
+    <Compile Include="Utils\RotationHelper.cs" />
+    <Compile Include="Utils\ListFileReader.cs" />
+    <Compile Include="Gui\ItemInfosListViewAdaptor.cs" />
+    <Compile Include="Gui\FileArgument\AbstractFileArgument.cs" />
+    <Compile Include="Gui\FileArgument\IFileArgument.cs" />
+    <Compile Include="Gui\FileArgument\OpenFileArgument.cs" />
+    <Compile Include="Gui\FileArgument\SaveFileArgument.cs" />
+    <Compile Include="Gui\FolderBrowser.cs" />
+    <Compile Include="IItemInfos.cs" />
+    <Compile Include="Extension\ZedGraphicExtension.cs" />
+    <Compile Include="Gui\InputDirectoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\InputDirectoryForm.Designer.cs">
+      <DependentUpon>InputDirectoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\InputDoubleTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\InputDoubleTextForm.Designer.cs">
+      <DependentUpon>InputDoubleTextForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\InputTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\InputTextForm.Designer.cs">
+      <DependentUpon>InputTextForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IOptionFile.cs" />
+    <Compile Include="Gui\IRcpaComponent.cs" />
+    <Compile Include="Gui\IRcpaFileDirectoryComponent.cs" />
+    <Compile Include="ItemInfo.cs" />
+    <Compile Include="OptionFileItemInfosAdaptor.cs" />
+    <Compile Include="Gui\ItemInfosValidator.cs" />
+    <Compile Include="Gui\IValidator.cs" />
+    <Compile Include="Gui\MultipleFileField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\MultipleFileField.Designer.cs">
+      <DependentUpon>MultipleFileField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\ItemInfosListBoxAdaptor.cs" />
+    <Compile Include="Gui\MultipleProgressField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\MultipleProgressField.Designer.cs">
+      <DependentUpon>MultipleProgressField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\ProgressClass.cs" />
+    <Compile Include="Gui\RcpaCheckBox.cs" />
+    <Compile Include="Gui\RcpaComboBox.cs" />
+    <Compile Include="Gui\RcpaComponentList.cs" />
+    <Compile Include="Gui\RcpaMultipleFileComponent.cs" />
+    <Compile Include="Gui\RcpaDirectoryField.cs" />
+    <Compile Include="Gui\RcpaDoubleField.cs" />
+    <Compile Include="Gui\RcpaFileField.cs" />
+    <Compile Include="Gui\RcpaIntegerField.cs" />
+    <Compile Include="Gui\RcpaListViewField.cs" />
+    <Compile Include="Gui\RcpaListViewMultipleDirectoryField.cs" />
+    <Compile Include="Gui\RcpaListViewMultipleFileField.cs" />
+    <Compile Include="Gui\RcpaListBoxMultipleFileField.cs" />
+    <Compile Include="Gui\RcpaStringComboBox.cs" />
+    <Compile Include="Gui\RcpaTextField.cs" />
+    <Compile Include="Gui\WorkerProgressChangedProxy.cs" />
+    <Compile Include="Gui\WorkerProgressUserState.cs" />
+    <Compile Include="IAnnotation.cs" />
+    <Compile Include="IFileFormat.cs" />
+    <Compile Include="IMergedFileReader.cs" />
+    <Compile Include="IMultipleFileSelector.cs" />
+    <Compile Include="IParser.cs" />
+    <Compile Include="IPropertyConverter.cs" />
+    <Compile Include="Pair.cs" />
+    <Compile Include="Parser\ParserFormat.cs" />
+    <Compile Include="Parser\ParserFormatList.cs" />
+    <Compile Include="Parser\ParserItem.cs" />
+    <Compile Include="Processor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserTerminatedException.cs" />
+    <Compile Include="Utils\AnnotationUtils.cs" />
+    <Compile Include="Utils\ByteConvert.cs" />
+    <Compile Include="Utils\Chinese.cs" />
+    <Compile Include="Utils\CollectionUtils.cs" />
+    <Compile Include="Utils\ConfigurationUtils.cs" />
+    <Compile Include="Utils\ConsoleProgressCallback.cs" />
+    <Compile Include="Utils\DTHasher.cs" />
+    <Compile Include="Utils\FileDownload.cs" />
+    <Compile Include="Utils\FileUtils.cs" />
+    <Compile Include="Utils\GuiUtils.cs" />
+    <Compile Include="Utils\IByteConvert.cs" />
+    <Compile Include="Utils\Int32SingleUnion.cs" />
+    <Compile Include="Utils\IProgressCallback.cs" />
+    <Compile Include="Utils\MathUtils.cs" />
+    <Compile Include="Utils\MiscUtils.cs" />
+    <Compile Include="Utils\NonNegativeLeastSquaresCalc.cs" />
+    <Compile Include="Utils\ProgressProxy.cs" />
+    <Compile Include="Time\QueryPerfCounter.cs" />
+    <Compile Include="Utils\StatisticsUtils.cs" />
+    <Compile Include="Utils\StreamUtils.cs" />
+    <Compile Include="Utils\StringUtils.cs" />
+    <Compile Include="Utils\SystemUtils.cs" />
+    <Compile Include="Utils\WorkerProgressCallback.cs" />
+    <Compile Include="Utils\ZipUtils.cs" />
+    <Compile Include="Extension\XmlLinqExtension.cs" />
+    <Compile Include="Utils\XmlHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Gui\AbstractFileProcessorUI.resx">
+      <DependentUpon>AbstractFileProcessorUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\AbstractMultipleProgressFileProcessorUI.resx">
+      <DependentUpon>AbstractMultipleProgressFileProcessorUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\AbstractTurboProcessorUI.resx">
+      <DependentUpon>AbstractTurboProcessorUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\AbstractUI.resx">
+      <DependentUpon>AbstractUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\Command\CommandForm.resx">
+      <DependentUpon>CommandForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\AbstractProcessorUI.resx">
+      <DependentUpon>AbstractProcessorUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\ComponentUI.resx">
+      <DependentUpon>ComponentUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\TextField.resx">
+      <DependentUpon>TextField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\ListViewField.resx">
+      <DependentUpon>ListViewField.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\ProgressField.resx">
+      <DependentUpon>ProgressField.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\FileField.resx">
+      <DependentUpon>FileField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\InputDirectoryForm.resx">
+      <DependentUpon>InputDirectoryForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\InputDoubleTextForm.resx">
+      <DependentUpon>InputDoubleTextForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\InputTextForm.resx">
+      <DependentUpon>InputTextForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\ListBoxField.resx">
+      <DependentUpon>ListBoxField.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\MultipleFileField.resx">
+      <DependentUpon>MultipleFileField.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\MultipleProgressField.resx">
+      <DependentUpon>MultipleProgressField.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\SelectFromListForm.resx">
+      <DependentUpon>SelectFromListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RcpaListBox.resx">
+      <DependentUpon>RcpaListBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Readme\MathNet.Numerics.authors.txt" />
+    <Content Include="App_Readme\MathNet.Numerics.copyright.txt" />
+    <Content Include="App_Readme\MathNet.Numerics.readme.txt" />
+    <Content Include="lib\C5.dll" />
+    <Content Include="lib\MathNet.Iridium.dll" />
+    <Content Include="lib\MathNet.Iridium.XML" />
+    <Content Include="lib\TimeStamp.dll">
+    </Content>
+    <Content Include="lib\ZedGraph.dll" />
+    <Content Include="lib\ZedGraph.xml" />
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
