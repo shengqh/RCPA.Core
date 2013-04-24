@@ -334,6 +334,20 @@
     <Compile Include="RcpaListBox.Designer.cs">
       <DependentUpon>RcpaListBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Seq\AccessNumberParser.cs" />
+    <Compile Include="Seq\AccessNumberParserFactory.cs" />
+    <Compile Include="Seq\AutoAccessNumberParser.cs" />
+    <Compile Include="Seq\DatabaseUtils.cs" />
+    <Compile Include="Seq\DatFormat.cs" />
+    <Compile Include="Seq\DefaultAccessNumberParser.cs" />
+    <Compile Include="Seq\FastaFormat.cs" />
+    <Compile Include="Seq\IAccessNumberParser.cs" />
+    <Compile Include="Seq\ISequenceFormat.cs" />
+    <Compile Include="Seq\NoExceptionAccessNumberParser.cs" />
+    <Compile Include="Seq\PseudoSequenceBuilder.cs" />
+    <Compile Include="Seq\ReversedDatabaseBuilder.cs" />
+    <Compile Include="Seq\Sequence.cs" />
+    <Compile Include="Seq\SequenceUtils.cs" />
     <Compile Include="Time\ICounter.cs" />
     <Compile Include="Utils\BeanUtils.cs" />
     <Compile Include="Utils\NumericalRecipes.cs" />
