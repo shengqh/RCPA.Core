@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using System.IO;
 using System.Reflection;
 using DigitalRune.Windows.Docking;
+using System.ComponentModel;
 
 namespace RCPA.Gui
 {
@@ -17,7 +18,10 @@ namespace RCPA.Gui
     {
       InitializeComponent();
 
-      ConfigFileName = FileUtils.GetConfigFile(GetType());
+      if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+      {
+        ConfigFileName = FileUtils.GetConfigFile(GetType());
+      }
 
       AddComponent(new RcpaFormState(this));
     }
