@@ -9,7 +9,7 @@ using RCPA.Gui.FileArgument;
 
 namespace RCPA.Gui
 {
-  public partial class AbstractFileProcessorUI : AbstractProcessorUI
+  public partial class AbstractFileProcessorUI : AbstractProcessorFileUI
   {
     protected IRcpaFileDirectoryComponent originalFile;
 

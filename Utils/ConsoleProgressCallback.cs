@@ -43,7 +43,7 @@ namespace RCPA.Utils
       long newpercentage = position * 100 / (maximum - minimum);
       if (newpercentage != currentPercentage)
       {
-        //Console.Out.WriteLine(MyConvert.Format("{0} of [{1}-{2}]", this.current, this.minimum, this.maximum));
+        Console.Out.Write(MyConvert.Format("\r{0}%", newpercentage));
         currentPercentage = newpercentage;
       }
 
@@ -57,8 +57,7 @@ namespace RCPA.Utils
 
     public override void SetMessage(int labelIndex, string message)
     {
-      Console.WriteLine();
-      Console.WriteLine(message);
+      Console.WriteLine("{0:yyyyMMdd HH:mm:ss} - {1}", DateTime.Now, message);
     }
 
     public override void Begin() { }

@@ -3,6 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
 using RCPA.Utils;
+using FolderSelect;
 
 namespace RCPA.Gui
 {
@@ -14,7 +15,7 @@ namespace RCPA.Gui
 
     private readonly EventHandler myEvent;
 
-    private FolderBrowserDialog dialog;
+    private FolderSelectDialog dialog;
     
     public RcpaDirectoryField(Button btnDir, TextBox txtValue, String key, String dirDescription, bool required)
       : base(txtValue, key, dirDescription, string.Empty, required)
@@ -76,13 +77,13 @@ namespace RCPA.Gui
     {
       if (dialog == null)
       {
-        dialog = new FolderBrowserDialog();
-        dialog.Description = dirDescription;
+        dialog = new FolderSelectDialog();
+        dialog.Title = dirDescription;
       }
 
-      if (dialog.ShowDialog(Form.ActiveForm) == DialogResult.OK)
+      if (dialog.ShowDialog(Form.ActiveForm.Handle))
       {
-        FullName = dialog.SelectedPath;
+        FullName = dialog.FileName;
       }
     }
   }

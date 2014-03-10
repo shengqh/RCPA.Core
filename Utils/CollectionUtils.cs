@@ -73,15 +73,41 @@ namespace RCPA
     {
       var result = new Dictionary<TKey1, Dictionary<TKey2, TSource>>();
 
-      var groups = items.GroupBy(keySelector1);
-
-      foreach (var group in groups)
+      foreach (var item in items)
       {
-        result[group.Key] = group.ToDictionary(keySelector2);
+        TKey1 key1 = keySelector1(item);
+        Dictionary<TKey2, TSource> map2;
+        if (!result.TryGetValue(key1, out map2))
+        {
+          map2 = new Dictionary<TKey2, TSource>();
+          result[key1] = map2;
+        }
+
+        map2[keySelector2(item)] = item;
       }
 
       return result;
     }
+
+    //public static Dictionary<TKey1, Dictionary<TKey2, TSource>> ToDoubleDictionary<TSource, TKey1, TKey2>(this IEnumerable<TSource> items, Func<TSource, TKey1> keySelector1, Func<TSource, TKey2> keySelector2)
+    //{
+    //  var result = new Dictionary<TKey1, Dictionary<TKey2, TSource>>();
+
+    //  foreach (var item in items)
+    //  {
+    //    TKey1 key1 = keySelector1(item);
+    //    Dictionary<TKey2, TSource> map2;
+    //    if (!result.TryGetValue(key1, out map2))
+    //    {
+    //      map2 = new Dictionary<TKey2, TSource>();
+    //      result[key1] = map2;
+    //    }
+
+    //    map2[keySelector2(item)] = item;
+    //  }
+
+    //  return result;
+    //}
 
     public static Dictionary<TKey1, Dictionary<TKey2, List<TSource>>> ToDoubleDictionaryGroup<TSource, TKey1, TKey2>(this IEnumerable<TSource> items, Func<TSource, TKey1> keySelector1, Func<TSource, TKey2> keySelector2)
     {

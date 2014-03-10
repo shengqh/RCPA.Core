@@ -35,10 +35,11 @@
       // 
       // btnOpen
       // 
+      this.btnOpen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.btnOpen.Dock = System.Windows.Forms.DockStyle.Left;
       this.btnOpen.Location = new System.Drawing.Point(0, 0);
       this.btnOpen.Name = "btnOpen";
-      this.btnOpen.Size = new System.Drawing.Size(226, 21);
+      this.btnOpen.Size = new System.Drawing.Size(226, 23);
       this.btnOpen.TabIndex = 0;
       this.btnOpen.Text = "button1";
       this.btnOpen.UseVisualStyleBackColor = true;
@@ -48,7 +49,7 @@
       this.txtFile.Dock = System.Windows.Forms.DockStyle.Fill;
       this.txtFile.Location = new System.Drawing.Point(226, 0);
       this.txtFile.Name = "txtFile";
-      this.txtFile.Size = new System.Drawing.Size(648, 21);
+      this.txtFile.Size = new System.Drawing.Size(648, 20);
       this.txtFile.TabIndex = 1;
       // 
       // btnLoad
@@ -56,7 +57,7 @@
       this.btnLoad.Dock = System.Windows.Forms.DockStyle.Right;
       this.btnLoad.Location = new System.Drawing.Point(874, 0);
       this.btnLoad.Name = "btnLoad";
-      this.btnLoad.Size = new System.Drawing.Size(73, 21);
+      this.btnLoad.Size = new System.Drawing.Size(73, 23);
       this.btnLoad.TabIndex = 2;
       this.btnLoad.Text = "Load";
       this.btnLoad.UseVisualStyleBackColor = true;
@@ -64,13 +65,13 @@
       // 
       // FileField
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.txtFile);
       this.Controls.Add(this.btnLoad);
       this.Controls.Add(this.btnOpen);
       this.Name = "FileField";
-      this.Size = new System.Drawing.Size(947, 21);
+      this.Size = new System.Drawing.Size(947, 23);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -80,6 +81,6 @@
 
     private System.Windows.Forms.Button btnOpen;
     private System.Windows.Forms.TextBox txtFile;
-    private System.Windows.Forms.Button btnLoad;
+    public System.Windows.Forms.Button btnLoad;
   }
 }

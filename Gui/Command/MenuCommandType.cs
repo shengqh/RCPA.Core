@@ -20,5 +20,7 @@ namespace RCPA.Gui.Command
     public static readonly string Help = "Help";
 
     public static readonly string Quantification_IsobaricLabelling = "Isobaric Labelling";
+
+    public static readonly string Setup = "Setup";
   }
 }

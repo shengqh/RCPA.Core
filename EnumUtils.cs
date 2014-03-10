@@ -17,7 +17,17 @@ namespace RCPA
       return Enum.GetValues(typeof(T)).Cast<object>().ToArray();
     }
 
+    public static string[] EnumToStringArray<T>()
+    {
+      return Enum.GetValues(typeof(T)).Cast<T>().ToList().ConvertAll(m => m.ToString()).ToArray();
+    }
+
     private static Dictionary<Type, Dictionary<string, object>> enumMap = new Dictionary<Type, Dictionary<string, object>>();
+
+    public static bool EnumHasValue<T>(string name)
+    {
+      return EnumToStringArray<T>().Contains(name);
+    }
 
     public static T StringToEnum<T>(string name, T defaultValue)
     {

@@ -10,6 +10,32 @@ using System;
 
 namespace RCPA
 {
+  public interface IProcessor
+  {
+    IEnumerable<string> Process();
+  }
+
+  public interface IThreadProcessor : IProcessor
+  {
+    IProgressCallback Progress { get; set; }
+  }
+
+  public abstract class AbstractThreadProcessor : ProgressClass, IThreadProcessor
+  {
+    public AbstractThreadProcessor()
+    {
+      Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+      this.Progress = new ConsoleProgressCallback();
+    }
+
+    #region IThreadFileProcessor Members
+
+    public abstract IEnumerable<string> Process();
+
+    #endregion
+  }
+
+
   public interface IFileProcessor
   {
     IEnumerable<string> Process(string fileName);

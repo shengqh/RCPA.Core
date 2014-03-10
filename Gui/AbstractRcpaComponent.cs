@@ -65,7 +65,9 @@ namespace RCPA.Gui
     #region IRcpaComponent Members
 
     public virtual void ValidateComponent()
-    { }
+    {
+      Error.Clear();
+    }
 
     public virtual bool Enabled
     {

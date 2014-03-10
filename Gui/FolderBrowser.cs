@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ookii.Dialogs;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -9,9 +10,14 @@ namespace RCPA.Gui
   public class FolderBrowser : IDisposable
   {
     private FolderBrowserDialog dialog = new FolderBrowserDialog();
+    private VistaFolderBrowserDialog vista = null;
 
     public FolderBrowser()
     {
+      if (VistaFolderBrowserDialog.IsVistaFolderDialogSupported)
+      {
+        vista = new VistaFolderBrowserDialog();
+      }
     }
 
     public FolderBrowser(bool showNewFolderButton)
@@ -21,14 +27,43 @@ namespace RCPA.Gui
 
     public string SelectedPath
     {
-      get { return this.dialog.SelectedPath; }
-      set { this.dialog.SelectedPath = value; }
+      get
+      {
+        if (vista == null)
+        {
+          return this.dialog.SelectedPath;
+        }
+
+        return vista.SelectedPath;
+      }
+      set
+      {
+        if (vista == null)
+        {
+          this.dialog.SelectedPath = value;
+        }
+        vista.SelectedPath = value;
+      }
     }
 
     public bool ShowNewFolderButton
     {
-      get { return this.dialog.ShowNewFolderButton; }
-      set { this.dialog.ShowNewFolderButton = value; }
+      get {
+        if (vista == null)
+        {
+          return this.dialog.ShowNewFolderButton;
+        }
+        return vista.ShowNewFolderButton;
+      }
+      set {
+        if (vista == null)
+        {
+          this.dialog.ShowNewFolderButton = value;
+        }
+
+        vista.ShowNewFolderButton = value;
+
+      }
     }
 
     #region IDisposable Members
@@ -48,8 +83,12 @@ namespace RCPA.Gui
 
     public DialogResult ShowDialog(IWin32Window owner)
     {
-      return this.dialog.ShowDialog(owner);
+      if (vista == null)
+      {
+        return this.dialog.ShowDialog(owner);
+      }
+
+      return vista.ShowDialog(owner);
     }
   }
-
 }

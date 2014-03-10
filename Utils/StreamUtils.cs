@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Text;
 using System.Reflection;
 
@@ -28,6 +29,16 @@ namespace System.IO
     {
       s.DiscardBufferedData();
       s.BaseStream.Seek(positionFromBegin, SeekOrigin.Begin);
+    }
+
+    public static StreamWriter GetWriter(string filename, bool gzipped)
+    {
+      return gzipped ? new StreamWriter(new GZipStream(File.Create(filename), CompressionMode.Compress)) : new StreamWriter(filename);
+    }
+
+    public static StreamReader GetReader(string filename)
+    {
+      return filename.ToLower().EndsWith(".gz") ? new StreamReader(new GZipStream(File.OpenRead(filename), CompressionMode.Decompress)) : new StreamReader(filename);
     }
   }
 }

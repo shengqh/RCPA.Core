@@ -47,7 +47,10 @@ namespace RCPA.Gui
       FileArgument = new OpenFileArgument("All", "*");
     }
 
-    [Localizable(true)]
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
     [Category("File"), DescriptionAttribute("Gets or sets the Load Button visible"), DefaultValue(false)]
     public bool LoadButtonVisible
     {
@@ -55,15 +58,21 @@ namespace RCPA.Gui
       set { btnLoad.Visible = value; }
     }
 
-    [Localizable(true)]
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
     [Category("File"), DescriptionAttribute("Gets or sets the Open Button width")]
-    public int OpenButtonWidth
+    public int WidthOpenButton
     {
       get { return btnOpen.Width; }
       set { btnOpen.Width = value; }
     }
 
-    [Localizable(true)]
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
     [Category("File"), DescriptionAttribute("Gets or sets the Open Button Text")]
     public string OpenButtonText
     {
@@ -73,7 +82,10 @@ namespace RCPA.Gui
 
     private string _key = string.Empty;
 
-    [Localizable(true)]
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
     [Category("File"), DescriptionAttribute("Gets or sets the key stored to config file")]
     public string Key
     {
@@ -97,7 +109,10 @@ namespace RCPA.Gui
 
     private bool _required;
 
-    [Localizable(true)]
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
     [Category("File"), DescriptionAttribute("Gets or sets the file requirement"), DefaultValue(true)]
     public bool Required
     {
@@ -134,7 +149,10 @@ namespace RCPA.Gui
         _field.RemoveClickEvent();
       }
 
-      _field = new RcpaFileField(btnOpen, txtFile, Key, FileArgument, Required);
+      if (null != FileArgument)
+      {
+        _field = new RcpaFileField(btnOpen, txtFile, Key, FileArgument, Required);
+      }
     }
 
     #region IRcpaComponent Members

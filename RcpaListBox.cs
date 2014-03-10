@@ -60,6 +60,7 @@ namespace RCPA
         finally
         {
           Box.EndUpdate();
+          this.Invalidate();
         }
       }
     }
@@ -186,9 +187,7 @@ namespace RCPA
     #region IRcpaComponent Members
 
     public virtual void ValidateComponent()
-    { 
-      return;
-    }
+    { }
 
     #endregion
 

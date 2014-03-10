@@ -36,25 +36,25 @@ namespace RCPA.Gui
       // 
       // lblProgress
       // 
-      this.lblProgress.Location = new System.Drawing.Point(0, 34);
-      this.lblProgress.Size = new System.Drawing.Size(955, 21);
+      this.lblProgress.Location = new System.Drawing.Point(0, 36);
+      this.lblProgress.Size = new System.Drawing.Size(955, 23);
       // 
       // progressBar
       // 
-      this.progressBar.Location = new System.Drawing.Point(0, 55);
-      this.progressBar.Size = new System.Drawing.Size(955, 21);
+      this.progressBar.Location = new System.Drawing.Point(0, 59);
+      this.progressBar.Size = new System.Drawing.Size(955, 23);
       // 
       // btnClose
       // 
-      this.btnClose.Location = new System.Drawing.Point(525, 7);
+      this.btnClose.Location = new System.Drawing.Point(525, 8);
       // 
       // btnCancel
       // 
-      this.btnCancel.Location = new System.Drawing.Point(440, 7);
+      this.btnCancel.Location = new System.Drawing.Point(440, 8);
       // 
       // btnGo
       // 
-      this.btnGo.Location = new System.Drawing.Point(355, 7);
+      this.btnGo.Location = new System.Drawing.Point(355, 8);
       // 
       // pnlFile
       // 
@@ -62,9 +62,9 @@ namespace RCPA.Gui
             | System.Windows.Forms.AnchorStyles.Right)));
       this.pnlFile.Controls.Add(this.txtOriginalFile);
       this.pnlFile.Controls.Add(this.btnOriginalFile);
-      this.pnlFile.Location = new System.Drawing.Point(0, 12);
+      this.pnlFile.Location = new System.Drawing.Point(0, 13);
       this.pnlFile.Name = "pnlFile";
-      this.pnlFile.Size = new System.Drawing.Size(955, 22);
+      this.pnlFile.Size = new System.Drawing.Size(955, 24);
       this.pnlFile.TabIndex = 9;
       // 
       // txtOriginalFile
@@ -72,7 +72,7 @@ namespace RCPA.Gui
       this.txtOriginalFile.Dock = System.Windows.Forms.DockStyle.Fill;
       this.txtOriginalFile.Location = new System.Drawing.Point(246, 0);
       this.txtOriginalFile.Name = "txtOriginalFile";
-      this.txtOriginalFile.Size = new System.Drawing.Size(709, 21);
+      this.txtOriginalFile.Size = new System.Drawing.Size(709, 20);
       this.txtOriginalFile.TabIndex = 5;
       // 
       // btnOriginalFile
@@ -80,15 +80,15 @@ namespace RCPA.Gui
       this.btnOriginalFile.Dock = System.Windows.Forms.DockStyle.Left;
       this.btnOriginalFile.Location = new System.Drawing.Point(0, 0);
       this.btnOriginalFile.Name = "btnOriginalFile";
-      this.btnOriginalFile.Size = new System.Drawing.Size(246, 22);
+      this.btnOriginalFile.Size = new System.Drawing.Size(246, 24);
       this.btnOriginalFile.TabIndex = 3;
       this.btnOriginalFile.Text = "btnOriginalFile";
       this.btnOriginalFile.UseVisualStyleBackColor = true;
       // 
       // AbstractFileProcessorUI
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-      this.ClientSize = new System.Drawing.Size(955, 112);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.ClientSize = new System.Drawing.Size(955, 121);
       this.Controls.Add(this.pnlFile);
       this.Name = "AbstractFileProcessorUI";
       this.Controls.SetChildIndex(this.progressBar, 0);

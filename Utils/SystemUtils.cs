@@ -7,8 +7,35 @@ namespace RCPA.Utils
 {
   public static class SystemUtils
   {
+    private static object GetRegisteryValueRInstallPath()
+    {
+      var v = RegistryHelpers.GetRegistryValue(@"SOFTWARE\R-core\R\", "InstallPath");
+      return v;
+    }
+
+    public static string GetRscriptExecuteLocation()
+    {
+      var v = GetRegisteryValueRInstallPath();
+      if (v == null)
+      {
+        return null;
+      }
+      return (string)v + (Environment.Is64BitOperatingSystem ? @"\bin\x64\Rscript.exe" : @"\bin\Rscript.exe");
+    }
+
+    public static string GetRExecuteLocation()
+    {
+      var v = GetRegisteryValueRInstallPath();
+      if (v == null)
+      {
+        return null;
+      }
+      return (string)v + (Environment.Is64BitOperatingSystem ? @"\bin\x64\R.exe" : @"\bin\R.exe");
+    }
+
     public static void Execute(string executeFilename, string arguments)
     {
+      Console.WriteLine("Processing {0} {1}", executeFilename, arguments);
       ProcessStartInfo psi = new ProcessStartInfo();
       psi.FileName = executeFilename;
       psi.Arguments = arguments;
@@ -18,8 +45,9 @@ namespace RCPA.Utils
       myProcess.WaitForExit();
     }
 
-    public static void Execute(string executeFilename, string arguments,string workingDirectory)
+    public static void Execute(string executeFilename, string arguments, string workingDirectory)
     {
+      Console.WriteLine("Processing {0} {1}", executeFilename, arguments);
       ProcessStartInfo psi = new ProcessStartInfo();
       psi.FileName = executeFilename;
       psi.Arguments = arguments;

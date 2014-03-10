@@ -89,7 +89,7 @@ namespace RCPA
 
       using (StreamWriter sw = new StreamWriter(fileName))
       {
-        sw.WriteLine(Format.GetHeader());
+        sw.WriteLine(Format.Headers);
         t.ForEach(m => sw.WriteLine(Format.GetString(m)));
       }
     }

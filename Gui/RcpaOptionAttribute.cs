@@ -8,7 +8,7 @@ namespace RCPA.Gui
 {
   public enum RcpaOptionType { Int32, Double, String, Boolean, StringArray, StringList, IXml };
 
-  [AttributeUsageAttribute(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
+  [AttributeUsageAttribute(AttributeTargets.Property | AttributeTargets.Field, Inherited = true, AllowMultiple = false)]
   public class RcpaOptionAttribute : Attribute
   {
     public RcpaOptionAttribute(string name, RcpaOptionType valueType)

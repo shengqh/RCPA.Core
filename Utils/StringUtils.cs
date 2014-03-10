@@ -2,11 +2,24 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace System
 {
   public static class StringUtils
   {
+    public static string GetDoubleFormat(int decimalCount)
+    {
+      if (decimalCount <= 0)
+      {
+        return "{0:0}";
+      }
+      else
+      {
+        return "{0:0." + new string('0', decimalCount) + "}";
+      }
+    }
+
     public static void AddTo(StringBuilder sb, IEnumerable<string> source, object delimiter)
     {
       bool first = true;
@@ -23,6 +36,15 @@ namespace System
           sb.Append(current);
         }
       }
+    }
+
+    public static string ToDoubleQuotes(this string source)
+    {
+      if (string.IsNullOrEmpty(source))
+      {
+        return "\"\"";
+      }
+      return "\"" + source + "\"";
     }
 
     public static string Merge(this IEnumerable<string> source, object delimiter)
@@ -85,6 +107,29 @@ namespace System
       {
         return source;
       }
+    }
+
+    public static string ByteToHexString(byte[] data)
+    {
+      // Create a new Stringbuilder to collect the bytes 
+      // and create a string.
+      StringBuilder sBuilder = new StringBuilder();
+
+      // Loop through each byte of the hashed data  
+      // and format each one as a hexadecimal string. 
+      for (int i = 0; i < data.Length; i++)
+      {
+        sBuilder.Append(data[i].ToString("x2"));
+      }
+
+      // Return the hexadecimal string. 
+      return sBuilder.ToString();
+    }
+
+    public static string GetMd5Hash(MD5 md5Hash, string input)
+    {
+      // Convert the input string to a byte array and compute the hash. 
+      return ByteToHexString(md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input)));
     }
   }
 }

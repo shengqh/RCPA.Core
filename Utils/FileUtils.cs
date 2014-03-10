@@ -1,10 +1,12 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using LumenWorks.Framework.IO.Csv;
+using System.Security.Cryptography;
 
 namespace RCPA
 {
@@ -23,11 +25,11 @@ namespace RCPA
     }
 
     /// <summary>
-    /// Ìæ»»×îºóÒ»¸öºó×ºÃû¡£
+    /// æ›¿æ¢æœ€åä¸€ä¸ªåç¼€åã€‚
     /// </summary>
-    /// <param name="fileName">Ô­ÎÄ¼şÃû</param>
-    /// <param name="extension">Ä¿±êºó×º£¬¿ÉÒÔ°üº¬'.'£¬Ò²¿ÉÒÔ²»°üº¬'.'£¬ºóÕß»á×Ô¶¯Ìí¼Ó'.'</param>
-    /// <returns>½á¹ûÎÄ¼şÃû</returns>
+    /// <param name="fileName">åŸæ–‡ä»¶å</param>
+    /// <param name="extension">ç›®æ ‡åç¼€ï¼Œå¯ä»¥åŒ…å«'.'ï¼Œä¹Ÿå¯ä»¥ä¸åŒ…å«'.'ï¼Œåè€…ä¼šè‡ªåŠ¨æ·»åŠ '.'</param>
+    /// <returns>ç»“æœæ–‡ä»¶å</returns>
     public static string ChangeExtension(string fileName, string extension)
     {
       if (extension == null)
@@ -50,10 +52,10 @@ namespace RCPA
     }
 
     /// <summary>
-    /// ÒÆ³ı×îºóÒ»¸öºó×ºÃû¡£
+    /// ç§»é™¤æœ€åä¸€ä¸ªåç¼€åã€‚
     /// </summary>
-    /// <param name="fileName">Ô­ÎÄ¼şÃû</param>
-    /// <returns>½á¹ûÎÄ¼şÃû</returns>
+    /// <param name="fileName">åŸæ–‡ä»¶å</param>
+    /// <returns>ç»“æœæ–‡ä»¶å</returns>
     public static string RemoveExtension(string fileName)
     {
       FileInfo fi = new FileInfo(fileName);
@@ -66,10 +68,10 @@ namespace RCPA
     }
 
     /// <summary>
-    /// ÒÆ³ıËùÓĞºó×ºÃû£¬½á¹ûÖĞ²»°üº¬'.'¡£
+    /// ç§»é™¤æ‰€æœ‰åç¼€åï¼Œç»“æœä¸­ä¸åŒ…å«'.'ã€‚
     /// </summary>
-    /// <param name="fileName">Ô­ÎÄ¼şÃû</param>
-    /// <returns>½á¹ûÎÄ¼şÃû</returns>
+    /// <param name="fileName">åŸæ–‡ä»¶å</param>
+    /// <returns>ç»“æœæ–‡ä»¶å</returns>
     public static string RemoveAllExtension(string fileName)
     {
       int startIndex = fileName.LastIndexOfAny(pathchars);
@@ -299,14 +301,14 @@ namespace RCPA
     }
 
     /// <summary>
-    /// »ñÈ¡AssemblyµÄÔËĞĞÂ·¾¶
+    /// è·å–Assemblyçš„è¿è¡Œè·¯å¾„
     /// </summary>
     /// <returns></returns>
     public static string GetAssemblyPath()
     {
       string _CodeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
 
-      _CodeBase = _CodeBase.Substring(8, _CodeBase.Length - 8);    // 8ÊÇ file:// µÄ³¤¶È
+      _CodeBase = _CodeBase.Substring(8, _CodeBase.Length - 8);    // 8æ˜¯ file:// çš„é•¿åº¦
 
       string[] arrSection = _CodeBase.Split(new char[] { '/' });
 
@@ -321,7 +323,7 @@ namespace RCPA
 
     public static string CreateDirectory(string parentDir, string name)
     {
-      var result = parentDir + "\\" + name;
+      var result = parentDir + "/" + name;
 
       if (!Directory.Exists(result))
       {
@@ -329,6 +331,57 @@ namespace RCPA
       }
 
       return new DirectoryInfo(result).FullName;
+    }
+
+    public static string GetFullLinixName(string fileName)
+    {
+      return new FileInfo(fileName).FullName.Replace("\\", "/");
+    }
+
+    public static List<List<string>> ReadCsvFile(string fileName)
+    {
+      var result = new List<List<string>>();
+      using (var sr = new StreamReader(fileName))
+      {
+        using (var reader = new CsvReader(sr, false))
+        {
+          while (reader.ReadNextRecord())
+          {
+            var parts = new List<string>();
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+              parts.Add(reader[i]);
+            }
+            result.Add(parts);
+          }
+        }
+      }
+      return result;
+    }
+
+    public static string GetMd5HashForFile(MD5 md5Hash, string fileName)
+    {
+      using (var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+      {
+        byte[] computedHashCode = md5Hash.ComputeHash(fs);
+        return StringUtils.ByteToHexString(computedHashCode);
+      }
+    }
+
+    public static void DoGetRecursiveDirectories(string rootDir, List<string> result)
+    {
+      foreach (string d in Directory.GetDirectories(rootDir))
+      {
+        result.Add(d);
+        DoGetRecursiveDirectories(d, result);
+      }
+    }
+
+    public static List<string> GetRecursiveDirectories(string rootDir)
+    {
+      List<string> result = new List<string>();
+      DoGetRecursiveDirectories(rootDir, result);
+      return result;
     }
   }
 }

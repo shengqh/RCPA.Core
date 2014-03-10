@@ -1,11 +1,11 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using RCPA.Proteomics.PropertyConverter;
 
 namespace RCPA.Converter
 {
-  public abstract class PropertyConverterFactory<T> : IPropertyConverterFactory<T> where T : IAnnotation
+  public abstract class PropertyConverterFactory<T> : AbstractPropertyConverterFactory<T> where T : IAnnotation
   {
     protected HashSet<string> _ignoreKey = new HashSet<string>();
 
@@ -25,7 +25,12 @@ namespace RCPA.Converter
       }
     }
 
-    public IPropertyConverter<T> FindConverter(string name, string version)
+    public void InsertConverter(IPropertyConverter<T> item)
+    {
+      itemMap.Insert(0, item);
+    }
+
+    public override IPropertyConverter<T> FindConverter(string name, string version = "")
     {
       var result = itemMap.Find(m => m.HasName(name) && m.Version == version);
       if (result != null)
@@ -47,22 +52,17 @@ namespace RCPA.Converter
       return new AnnotationConverter<T>(name);
     }
 
-    public virtual IPropertyConverter<T> FindConverter(string name)
-    {
-      return FindConverter(name, "");
-    }
-
     /// <summary>
-    /// ´Ó±êÌâ³ö·¢´´½¨converter£¬ÓÃÓÚ¶ÁÈ¡ÎÄ¼ş¡£
-    /// Ê×ÏÈ¸ù¾İheader²úÉúËùÓĞÔ­Ê¼µÄconverterÒÔ¼°ÆäÑÜÉúµÄconverter¡£
-    /// ¶ÔÓÚÈÎÒâÒ»¸öÑÜÉúconverter£¬Èç¹ûÕÒµ½ÓëÆäÃû×ÖÏàÍ¬µÄÔ­Ê¼converter£¬
-    /// Í¬Ê±Ô­Ê¼µÄconverterÊÇAnnotationConverter£¬ÔòÓÃÑÜÉúconverterÌæ»»µôÔ­Ê¼converter¡£ 
+    /// ä»æ ‡é¢˜å‡ºå‘åˆ›å»ºconverterï¼Œç”¨äºè¯»å–æ–‡ä»¶ã€‚
+    /// é¦–å…ˆæ ¹æ®headeräº§ç”Ÿæ‰€æœ‰åŸå§‹çš„converterä»¥åŠå…¶è¡ç”Ÿçš„converterã€‚
+    /// å¯¹äºä»»æ„ä¸€ä¸ªè¡ç”Ÿconverterï¼Œå¦‚æœæ‰¾åˆ°ä¸å…¶åå­—ç›¸åŒçš„åŸå§‹converterï¼Œ
+    /// åŒæ—¶åŸå§‹çš„converteræ˜¯AnnotationConverterï¼Œåˆ™ç”¨è¡ç”Ÿconverteræ›¿æ¢æ‰åŸå§‹converterã€‚ 
     /// </summary>
     /// <param name="header"></param>
     /// <param name="delimiter"></param>
     /// <param name="version"></param>
     /// <returns></returns>
-    public IPropertyConverter<T> GetConverters(string header, char delimiter, string version)
+    public override IPropertyConverter<T> GetConverters(string header, char delimiter, string version = "")
     {
       string[] parts = header.Split(new char[] { delimiter });
       var result = new List<IPropertyConverter<T>>();
@@ -103,20 +103,20 @@ namespace RCPA.Converter
     }
 
     /// <summary>
-    /// ÓÃÓÚ´ÓÕæÊµÊı¾İ³ö·¢£¬´´½¨converter¡£
-    /// Ê×ÏÈ¸ù¾İheader²úÉúËùÓĞ¿ÉÄÜµÄconverterÒÔ¼°ÆäÑÜÉúµÄconverter¡£
-    /// È»ºóÈç¹ûÕÒµ½Ãû×ÖÏàÍ¬µÄÁ½¸öconverter£¨c1ºÍc2£©£º
-    /// 1£¬c1ÊÇAnnotationConverter
-    /// 1.1£¬c2ÊÇAnnotationConverter£¬É¾³ıc2
-    /// 1.2£¬·ñÔò£¬É¾³ıc1
-    /// 2£¬·ñÔò£¬É¾³ıc2
+    /// ç”¨äºä»çœŸå®æ•°æ®å‡ºå‘ï¼Œåˆ›å»ºconverterã€‚
+    /// é¦–å…ˆæ ¹æ®headeräº§ç”Ÿæ‰€æœ‰å¯èƒ½çš„converterä»¥åŠå…¶è¡ç”Ÿçš„converterã€‚
+    /// ç„¶åå¦‚æœæ‰¾åˆ°åå­—ç›¸åŒçš„ä¸¤ä¸ªconverterï¼ˆc1å’Œc2ï¼‰ï¼š
+    /// 1ï¼Œc1æ˜¯AnnotationConverter
+    /// 1.1ï¼Œc2æ˜¯AnnotationConverterï¼Œåˆ é™¤c2
+    /// 1.2ï¼Œå¦åˆ™ï¼Œåˆ é™¤c1
+    /// 2ï¼Œå¦åˆ™ï¼Œåˆ é™¤c2
     /// </summary>
     /// <param name="header"></param>
     /// <param name="delimiter"></param>
     /// <param name="version"></param>
     /// <param name="items"></param>
     /// <returns></returns>
-    public IPropertyConverter<T> GetConverters(string header, char delimiter, string version, List<T> items)
+    public override IPropertyConverter<T> GetConverters(string header, char delimiter, string version, List<T> items)
     {
       string[] parts = header.Split(new char[] { delimiter });
       var result = new List<IPropertyConverter<T>>();
@@ -171,12 +171,5 @@ namespace RCPA.Converter
 
       return new CompositePropertyConverter<T>(result, delimiter);
     }
-
-    public IPropertyConverter<T> GetConverters(string header, char delimiter)
-    {
-      return GetConverters(header, delimiter, "");
-    }
-
-    public abstract T Allocate();
   }
 }

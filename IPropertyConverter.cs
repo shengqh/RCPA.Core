@@ -1,4 +1,4 @@
-using System.Text;
+ï»¿using System.Text;
 using System.Collections.Generic;
 namespace RCPA
 {
@@ -15,18 +15,18 @@ namespace RCPA
     void SetProperty(T t, string value);
 
     /// <summary>
-    /// ¸ù¾İÊµ¼ÊÊı¾İ£¬²úÉúÏà¹ØÁªµÄConverter
+    /// æ ¹æ®å®é™…æ•°æ®ï¼Œäº§ç”Ÿç›¸å…³è”çš„Converter
     /// </summary>
-    /// <param name="items">Êµ¼ÊÊı¾İÁĞ±í</param>
-    /// <returns>¹ØÁªConverterÁĞ±í£¬Ä¬ÈÏ·µ»Ønull</returns>
+    /// <param name="items">å®é™…æ•°æ®åˆ—è¡¨</param>
+    /// <returns>å…³è”Converteråˆ—è¡¨ï¼Œé»˜è®¤è¿”å›null</returns>
     List<IPropertyConverter<T>> GetRelativeConverter(List<T> items);
 
     /// <summary>
-    /// ¸ù¾İÎÄ¼ş¶ÁÈ¡»òÕßÉè¶¨µÄheader£¬²úÉúÏà¹ØÁªµÄConverter
+    /// æ ¹æ®æ–‡ä»¶è¯»å–æˆ–è€…è®¾å®šçš„headerï¼Œäº§ç”Ÿç›¸å…³è”çš„Converter
     /// </summary>
-    /// <param name="header">ÎÄ¼ş¶ÁÈ¡£¨»òÕßÉè¶¨µÄ£©header</param>
-    /// <param name="delimiter">ÎÄ¼ş¶ÁÈ¡£¨»òÕßÉè¶¨µÄ£©·Ö¸ô×Ö·û</param>
-    /// <returns>¹ØÁªConverterÁĞ±í£¬Ä¬ÈÏ·µ»Ønull</returns>
+    /// <param name="header">æ–‡ä»¶è¯»å–ï¼ˆæˆ–è€…è®¾å®šçš„ï¼‰header</param>
+    /// <param name="delimiter">æ–‡ä»¶è¯»å–ï¼ˆæˆ–è€…è®¾å®šçš„ï¼‰åˆ†éš”å­—ç¬¦</param>
+    /// <returns>å…³è”Converteråˆ—è¡¨ï¼Œé»˜è®¤è¿”å›null</returns>
     List<IPropertyConverter<T>> GetRelativeConverter(string header, char delimiter);
 
     bool HasName(string name);

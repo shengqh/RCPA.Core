@@ -28,6 +28,10 @@ namespace RCPA.Gui
       {
         return int.Parse(Text);
       }
+      set
+      {
+        Text = value.ToString();
+      }
     }
   }
 }

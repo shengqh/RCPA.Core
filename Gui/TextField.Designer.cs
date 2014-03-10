@@ -30,6 +30,7 @@
     {
       this.TextEdit = new System.Windows.Forms.TextBox();
       this.lblCaption = new System.Windows.Forms.Label();
+      this.lblDescription = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
       // TextEdit
@@ -38,7 +39,7 @@
       this.TextEdit.Location = new System.Drawing.Point(193, 0);
       this.TextEdit.Margin = new System.Windows.Forms.Padding(0);
       this.TextEdit.Name = "TextEdit";
-      this.TextEdit.Size = new System.Drawing.Size(754, 20);
+      this.TextEdit.Size = new System.Drawing.Size(735, 20);
       this.TextEdit.TabIndex = 1;
       // 
       // lblCaption
@@ -51,11 +52,21 @@
       this.lblCaption.Text = "Description";
       this.lblCaption.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
+      // lblDescription
+      // 
+      this.lblDescription.Dock = System.Windows.Forms.DockStyle.Right;
+      this.lblDescription.Location = new System.Drawing.Point(928, 0);
+      this.lblDescription.Name = "lblDescription";
+      this.lblDescription.Size = new System.Drawing.Size(19, 23);
+      this.lblDescription.TabIndex = 3;
+      this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
       // TextField
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.TextEdit);
+      this.Controls.Add(this.lblDescription);
       this.Controls.Add(this.lblCaption);
       this.Name = "TextField";
       this.Size = new System.Drawing.Size(947, 23);
@@ -68,6 +79,7 @@
 
     public System.Windows.Forms.TextBox TextEdit;
     public System.Windows.Forms.Label lblCaption;
+    public System.Windows.Forms.Label lblDescription;
 
   }
 }

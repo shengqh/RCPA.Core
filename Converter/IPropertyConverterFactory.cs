@@ -10,9 +10,7 @@ namespace RCPA.Converter
 
     IPropertyConverter<T> FindConverter(string name, string version);
 
-    IPropertyConverter<T> GetConverters(string header, char delimiter);
-
-    IPropertyConverter<T> GetConverters(string header, char delimiter, string version);
+    IPropertyConverter<T> GetConverters(string header, char delimiter, string version = "");
 
     IPropertyConverter<T> GetConverters(string header, char delimiter, string version, List<T> items);
 
@@ -29,11 +27,6 @@ namespace RCPA.Converter
     }
 
     public abstract IPropertyConverter<T> FindConverter(string name, string version);
-
-    public virtual IPropertyConverter<T> GetConverters(string header, char delimiter)
-    {
-      return GetConverters(header, delimiter, "");
-    }
 
     public abstract IPropertyConverter<T> GetConverters(string header, char delimiter, string version);
 

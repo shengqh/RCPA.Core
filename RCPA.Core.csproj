@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,51 +47,17 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Win32|AnyCPU'">
     <OutputPath>bin\Win32\</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Win32|x64'">
-    <OutputPath>bin\x64\Win32\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="alglibnet2">
@@ -102,28 +69,38 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\SQH.Lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="MathNet.Numerics, Version=2.4.0.26, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="LumenWorks.Framework.IO">
+      <HintPath>..\SQH.Lib\LumenWorks.Framework.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=2.6.1.30, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SQH.Lib\MathNet.Numerics.dll</HintPath>
+      <HintPath>..\packages\MathNet.Numerics.2.6.2\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics.IO">
+      <HintPath>..\packages\MathNet.Numerics.2.6.2\lib\net40\MathNet.Numerics.IO.dll</HintPath>
     </Reference>
     <Reference Include="Meta.Numerics">
       <HintPath>..\SQH.Lib\Meta.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Ookii.Dialogs">
+      <HintPath>..\SQH.Lib\Ookii.Dialogs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.SQLite, Version=1.0.84.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+    <Reference Include="System.Data.SQLite, Version=1.0.90.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SQH.Lib\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\packages\System.Data.SQLite.1.0.90.0\lib\net40\System.Data.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.84.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.90.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SQH.Lib\System.Data.SQLite.Linq.dll</HintPath>
+      <HintPath>..\packages\System.Data.SQLite.1.0.90.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -156,7 +133,50 @@
     <Compile Include="Converter\AnnotationConverter.cs" />
     <Compile Include="Converter\AnnotationConverterFactory.cs" />
     <Compile Include="Converter\BooleanConverter.cs" />
+    <Compile Include="Extension\WinFormsExtensions.cs" />
+    <Compile Include="Gui\AbstractProcessorBaseUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\AbstractProcessorBaseUI.Designer.cs">
+      <DependentUpon>AbstractProcessorBaseUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\AbstractProcessorUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\AbstractProcessorUI.Designer.cs">
+      <DependentUpon>AbstractProcessorUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\AnnotationCell.cs" />
+    <Compile Include="Gui\AnnotationColumn.cs" />
+    <Compile Include="Gui\RcpaListSelection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\RcpaListSelection.Designer.cs">
+      <DependentUpon>RcpaListSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\RcpaSelectList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\RcpaSelectList.Designer.cs">
+      <DependentUpon>RcpaSelectList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\WorkerProgressChangedTextBoxProxy.cs" />
+    <Compile Include="Gui\DirectoryField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\DirectoryField.Designer.cs">
+      <DependentUpon>DirectoryField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessorWorker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DB\Access.cs" />
+    <Compile Include="ExternalProgramConfigUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExternalProgramConfigUI.Designer.cs">
+      <DependentUpon>ExternalProgramConfigUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extension\FileExtension.cs" />
     <Compile Include="Extension\MathNetExtensitions.cs" />
     <Compile Include="Extension\SQLiteDBHelper.cs" />
@@ -177,6 +197,7 @@
     <Compile Include="Format\TextFileDefinition.cs" />
     <Compile Include="Format\TextFileReader.cs" />
     <Compile Include="Gui\Command\ConsoleCommand.cs" />
+    <Compile Include="Gui\FolderSelectDialog.cs" />
     <Compile Include="Gui\RcpaRadioField.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -201,6 +222,7 @@
     <Compile Include="Gui\RcpaCheckField.Designer.cs">
       <DependentUpon>RcpaCheckField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gui\Reflector.cs" />
     <Compile Include="Gui\TextField.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -239,12 +261,6 @@
     <Compile Include="Gui\RcpaFormState.cs" />
     <Compile Include="Gui\DisableClose.cs" />
     <Compile Include="Gui\Event\ListBoxFileEventHandlers.cs" />
-    <Compile Include="Gui\SelectFromListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Gui\SelectFromListForm.Designer.cs">
-      <DependentUpon>SelectFromListForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Gui\WinFormConsole.cs" />
     <Compile Include="Gui\Image\GraphicsHelper.cs" />
     <Compile Include="Gui\ListBoxField.cs">
@@ -313,11 +329,11 @@
     <Compile Include="Gui\ComponentUI.Designer.cs">
       <DependentUpon>ComponentUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gui\AbstractProcessorUI.cs">
+    <Compile Include="Gui\AbstractProcessorFileUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gui\AbstractProcessorUI.Designer.cs">
-      <DependentUpon>AbstractProcessorUI.cs</DependentUpon>
+    <Compile Include="Gui\AbstractProcessorFileUI.Designer.cs">
+      <DependentUpon>AbstractProcessorFileUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Gui\OptionFileTextBoxAdaptor.cs" />
     <Compile Include="ItemInfoListNewReader.cs" />
@@ -351,6 +367,7 @@
     <Compile Include="Time\ICounter.cs" />
     <Compile Include="Utils\BeanUtils.cs" />
     <Compile Include="Utils\NumericalRecipes.cs" />
+    <Compile Include="Utils\RegistryHelpers.cs" />
     <Compile Include="Utils\ResizeAndRotationHelper.cs" />
     <Compile Include="Utils\GraphicsUtils.cs" />
     <Compile Include="Utils\RotationHelper.cs" />
@@ -449,16 +466,22 @@
     <Compile Include="Utils\NonNegativeLeastSquaresCalc.cs" />
     <Compile Include="Utils\ProgressProxy.cs" />
     <Compile Include="Time\QueryPerfCounter.cs" />
+    <Compile Include="Utils\RProcessor.cs" />
     <Compile Include="Utils\StatisticsUtils.cs" />
     <Compile Include="Utils\StreamUtils.cs" />
     <Compile Include="Utils\StringUtils.cs" />
     <Compile Include="Utils\SystemUtils.cs" />
+    <Compile Include="Utils\TimeCost.cs" />
     <Compile Include="Utils\WorkerProgressCallback.cs" />
     <Compile Include="Utils\ZipUtils.cs" />
     <Compile Include="Extension\XmlLinqExtension.cs" />
     <Compile Include="Utils\XmlHelper.cs" />
+    <Compile Include="XmlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ExternalProgramConfigUI.resx">
+      <DependentUpon>ExternalProgramConfigUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gui\AbstractFileProcessorUI.resx">
       <DependentUpon>AbstractFileProcessorUI.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -479,12 +502,32 @@
       <DependentUpon>CommandForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gui\AbstractProcessorUI.resx">
-      <DependentUpon>AbstractProcessorUI.cs</DependentUpon>
+    <EmbeddedResource Include="Gui\AbstractProcessorFileUI.resx">
+      <DependentUpon>AbstractProcessorFileUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\ComponentUI.resx">
       <DependentUpon>ComponentUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\AbstractProcessorBaseUI.resx">
+      <DependentUpon>AbstractProcessorBaseUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\AbstractProcessorUI.resx">
+      <DependentUpon>AbstractProcessorUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\DirectoryField.resx">
+      <DependentUpon>DirectoryField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\IntegerField.resx">
+      <DependentUpon>IntegerField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\RcpaListSelection.resx">
+      <DependentUpon>RcpaListSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\RcpaSelectList.resx">
+      <DependentUpon>RcpaSelectList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\TextField.resx">
       <DependentUpon>TextField.cs</DependentUpon>
@@ -524,18 +567,12 @@
       <DependentUpon>MultipleProgressField.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gui\SelectFromListForm.resx">
-      <DependentUpon>SelectFromListForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RcpaListBox.resx">
       <DependentUpon>RcpaListBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Readme\MathNet.Numerics.authors.txt" />
-    <Content Include="App_Readme\MathNet.Numerics.copyright.txt" />
-    <Content Include="App_Readme\MathNet.Numerics.readme.txt" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

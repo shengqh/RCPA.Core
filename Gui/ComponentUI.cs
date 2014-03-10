@@ -158,6 +158,13 @@ namespace RCPA.Gui
       return ShowDialog();
     }
 
+    public DialogResult MyShowDialog(IWin32Window owner)
+    {
+      LoadOption();
+      StartPosition = FormStartPosition.CenterScreen;
+      return ShowDialog(owner);
+    }
+
     public void MyShow()
     {
       LoadOption();

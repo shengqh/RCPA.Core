@@ -93,6 +93,8 @@ namespace RCPA.Gui
 
     public override void ValidateComponent()
     {
+      base.ValidateComponent();
+
       if (HasPrecondition)
       {
         if (!PreconditionPassed && Text.Length == 0)
@@ -111,7 +113,7 @@ namespace RCPA.Gui
       if (Text.Length == 0)
       {
         this.txtValue.Focus();
-        throw new InvalidOperationException("Input " + this.title + " first");
+        throw new InvalidOperationException(GetValidateError());
       }
 
       if (!Validate(Text))

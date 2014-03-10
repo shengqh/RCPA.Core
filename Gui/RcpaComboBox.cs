@@ -11,14 +11,17 @@ namespace RCPA.Gui
   {
     private readonly ComboBox cb;
     private readonly int defaultIndex;
+    private readonly bool required;
+    private readonly string key;
+    private readonly string description;
 
     public T[] Items { get; private set; }
 
-    public RcpaComboBox(ComboBox cb, String key, T[] values, int defaultIndex)
-      : this(cb, key, values, (from v in values select v.ToString()).ToArray(), defaultIndex)
+    public RcpaComboBox(ComboBox cb, String key, T[] values, int defaultIndex, bool required=false, string description = "")
+      : this(cb, key, values, (from v in values select v.ToString()).ToArray(), defaultIndex, required, description)
     { }
 
-    public RcpaComboBox(ComboBox cb, String key, T[] values, string[] displayValues, int defaultIndex)
+    public RcpaComboBox(ComboBox cb, String key, T[] values, string[] displayValues, int defaultIndex, bool required = false, string description = "")
     {
       if (values.Length != displayValues.Length)
       {
@@ -28,11 +31,18 @@ namespace RCPA.Gui
       }
 
       this.cb = cb;
+      this.required = required;
+      this.key = key;
+      this.description = string.IsNullOrWhiteSpace(description) ? key : description;
 
       ResetItems(values, displayValues);
 
       this.defaultIndex = defaultIndex;
-      cb.SelectedIndex = defaultIndex;
+
+      if (cb.Items.Count > defaultIndex)
+      {
+        cb.SelectedIndex = defaultIndex;
+      }
 
       Adaptor = new OptionFileComboBoxAdaptor(cb, key, defaultIndex);
 
@@ -88,6 +98,17 @@ namespace RCPA.Gui
       set
       {
         cb.Enabled = value;
+      }
+    }
+
+    public override void ValidateComponent()
+    {
+      base.ValidateComponent();
+
+      if (required && this.SelectedIndex == -1)
+      {
+        Error.SetError(cb, "Required");
+        throw new Exception(description + " is required!");
       }
     }
   }

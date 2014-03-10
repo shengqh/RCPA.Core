@@ -79,7 +79,14 @@ namespace RCPA.Gui.Command
     {
       var mi = (ToolStripMenuItem)who;
       var command = (IToolCommand)mi.Tag;
-      command.Run();
+      try
+      {
+        command.Run();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
     }
 
     [RcpaOptionAttribute("WinFormConsoleVisible", RcpaOptionType.Boolean)]

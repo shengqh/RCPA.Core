@@ -28,17 +28,11 @@ namespace RCPA.Gui
     /// </summary>
     private void InitializeComponent()
     {
-      this.lblProgress = new System.Windows.Forms.Label();
-      this.progressBar = new System.Windows.Forms.ProgressBar();
       this.SuspendLayout();
       // 
       // btnClose
       // 
       this.btnClose.Location = new System.Drawing.Point(494, 9);
-      // 
-      // btnCancel
-      // 
-      this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
       // 
       // btnGo
       // 
@@ -76,9 +70,5 @@ namespace RCPA.Gui
     }
 
     #endregion
-
-    protected System.Windows.Forms.Label lblProgress;
-    protected System.Windows.Forms.ProgressBar progressBar;
-
   }
 }

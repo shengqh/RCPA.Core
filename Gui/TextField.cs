@@ -24,7 +24,10 @@ namespace RCPA.Gui
 
     private string _key = string.Empty;
 
-    [Localizable(true)]
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
     [Category("File"), DescriptionAttribute("Gets or sets the key stored to config file")]
     public string Key
     {
@@ -45,7 +48,10 @@ namespace RCPA.Gui
       }
     }
 
-    [Localizable(true)]
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
     [Category("File"), DescriptionAttribute("Gets or sets the caption")]
     public string Caption
     {
@@ -60,29 +66,86 @@ namespace RCPA.Gui
     }
 
     [Localizable(true)]
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
+    [Category("File"), DescriptionAttribute("Gets or sets the caption width")]
+    public int CaptionWidth
+    {
+      get
+      {
+        return lblCaption.Width;
+      }
+      set
+      {
+        lblCaption.Width = value;
+      }
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
+    [Category("File"), DescriptionAttribute("Gets or sets the description")]
+    public string Description
+    {
+      get
+      {
+        return lblDescription.Text;
+      }
+      set
+      {
+        lblDescription.Text = value;
+        if (!string.IsNullOrEmpty(value))
+        {
+          lblDescription.Visible = true;
+          TextEdit.Dock = DockStyle.Left;
+          lblDescription.Dock = DockStyle.Fill;
+          lblDescription.BringToFront();
+        }
+        else
+        {
+          lblDescription.Visible = false;
+          lblDescription.Dock = DockStyle.Right;
+          TextEdit.Dock = DockStyle.Fill;
+        }
+      }
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
+    [Category("File"), DescriptionAttribute("Gets or sets the text width")]
+    public int TextWidth
+    {
+      get
+      {
+        return TextEdit.Width;
+      }
+      set
+      {
+        TextEdit.Width = value;
+      }
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
     [Category("File"), DescriptionAttribute("Gets or sets the text requirement"), DefaultValue(true)]
     public bool Required { get; set; }
 
-    [Localizable(true)]
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
     [Category("File"), DescriptionAttribute("Gets or sets default value")]
     public string DefaultValue
     {
       get { return TextEdit.Text; }
       set { TextEdit.Text = value; }
-    }
-
-    [Localizable(true)]
-    [Category("File"), DescriptionAttribute("Gets or sets the caption size")]
-    public Size CaptionSize
-    {
-      get
-      {
-        return lblCaption.Size;
-      }
-      set
-      {
-        lblCaption.Size = value;
-      }
     }
 
     protected virtual IRcpaComponent Field
@@ -128,6 +191,14 @@ namespace RCPA.Gui
     {
       get { return TextEdit.Text; }
       set { TextEdit.Text = value; }
+    }
+
+    public TextBox Box
+    {
+      get
+      {
+        return TextEdit;
+      }
     }
   }
 }

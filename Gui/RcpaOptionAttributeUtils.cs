@@ -77,7 +77,7 @@ namespace RCPA.Gui
 
       foreach (var item in members)
       {
-        object[] attributes = item.GetCustomAttributes(typeof(RcpaOptionAttribute), false);
+        object[] attributes = item.GetCustomAttributes(typeof(RcpaOptionAttribute), true);
         foreach (RcpaOptionAttribute fieldAttribute in attributes)
         {
           var xmlElement = source.Element(fieldAttribute.Name);

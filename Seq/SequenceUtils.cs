@@ -19,7 +19,7 @@ namespace RCPA.Seq
       using (StreamReader sr = new StreamReader(filename))
       {
         string line;
-        var chars = new char[]{'\t',' '};
+        var chars = new char[] { '\t', ' ' };
         while ((line = sr.ReadLine()) != null)
         {
           if (line.StartsWith(">"))
@@ -54,7 +54,7 @@ namespace RCPA.Seq
       return result;
     }
 
-    public static Dictionary<string,string> ReadAccessNumberReferenceMap(ISequenceFormat sf, string filename, IAccessNumberParser parser)
+    public static Dictionary<string, string> ReadAccessNumberReferenceMap(ISequenceFormat sf, string filename, IAccessNumberParser parser)
     {
       Dictionary<string, string> result = new Dictionary<string, string>();
       using (StreamReader sr = new StreamReader(filename))
@@ -98,7 +98,7 @@ namespace RCPA.Seq
     {
       return GetReversedSequence(sequence, "REVERSED_", indexLength, index);
     }
-    
+
     public static Sequence GetReversedSequence(string sequence, string prefix, int indexLength, int index)
     {
       return new Sequence(prefix + StringUtils.LeftFill(index, indexLength, '0'), GetReversedSequence(sequence));
@@ -127,7 +127,7 @@ namespace RCPA.Seq
         }
 
         double total = result.Values.Sum();
-        
+
         foreach (char c in result.Keys.ToArray())
         {
           result[c] = result[c] / total;
@@ -136,51 +136,31 @@ namespace RCPA.Seq
       return result;
     }
 
-    public static string ToAnotherStrand(string seq)
+    private static Dictionary<char, char> complementMap = new Dictionary<char, char>();
+
+    static SequenceUtils()
+    {
+      complementMap['A'] = 'T';
+      complementMap['T'] = 'A';
+      complementMap['G'] = 'C';
+      complementMap['C'] = 'G';
+      complementMap['a'] = 't';
+      complementMap['t'] = 'a';
+      complementMap['g'] = 'c';
+      complementMap['c'] = 'g';
+      complementMap['N'] = 'N';
+    }
+
+    public static string GetReverseComplementedSequence(string seq)
     {
       StringBuilder result = new StringBuilder();
+      char t;
       for (int i = seq.Length - 1; i >= 0; i--)
       {
         var c = seq[i];
-        if (c == 'A')
+        if (complementMap.TryGetValue(c, out t))
         {
-          result.Append('T');
-        }
-        else if (c == 'T')
-        {
-          result.Append('A');
-        }
-        else if (c == 'G')
-        {
-          result.Append('C');
-        }
-        else if (c == 'C')
-        {
-          result.Append('G');
-        }
-        else if (c == 'N')
-        {
-          result.Append(c);
-        }
-        else if (c == 'a')
-        {
-          result.Append('t');
-        }
-        else if (c == 't')
-        {
-          result.Append('a');
-        }
-        else if (c == 'g')
-        {
-          result.Append('c');
-        }
-        else if (c == 'c')
-        {
-          result.Append('g');
-        }
-        else if (c == 'n')
-        {
-          result.Append(c);
+          result.Append(t);
         }
         else
         {
