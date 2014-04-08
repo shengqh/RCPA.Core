@@ -133,6 +133,7 @@
     <Compile Include="Converter\AnnotationConverter.cs" />
     <Compile Include="Converter\AnnotationConverterFactory.cs" />
     <Compile Include="Converter\BooleanConverter.cs" />
+    <Compile Include="Extension\GenericCollectionExtension.cs" />
     <Compile Include="Extension\WinFormsExtensions.cs" />
     <Compile Include="Gui\AbstractProcessorBaseUI.cs">
       <SubType>Form</SubType>
