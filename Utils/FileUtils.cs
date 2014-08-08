@@ -368,6 +368,14 @@ namespace RCPA
       }
     }
 
+    public static string GetMd5HashForFile(string fileName)
+    {
+      using (var fun = MD5.Create())
+      {
+        return GetMd5HashForFile(fun, fileName);
+      }
+    }
+
     public static void DoGetRecursiveDirectories(string rootDir, List<string> result)
     {
       foreach (string d in Directory.GetDirectories(rootDir))

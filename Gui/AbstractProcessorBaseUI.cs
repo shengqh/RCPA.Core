@@ -42,7 +42,7 @@ namespace RCPA.Gui
       foreach (var file in returnInfo)
       {
         sb.Append("\n" + file);
-        if (!new FileInfo(file).Exists)
+        if (!File.Exists(file))
         {
           bIsFile = false;
         }

@@ -43,7 +43,7 @@ namespace RCPA.Utils
       long newpercentage = position * 100 / (maximum - minimum);
       if (newpercentage != currentPercentage)
       {
-        Console.Out.Write(MyConvert.Format("\r{0}%", newpercentage));
+        Console.Out.WriteLine(MyConvert.Format("{0}%", newpercentage));
         currentPercentage = newpercentage;
       }
 

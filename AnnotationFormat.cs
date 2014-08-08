@@ -29,7 +29,7 @@ namespace RCPA
       this.ignoreHeaderPattern = ignoreHeaderPattern;
     }
 
-    public List<Annotation> ReadFromFile(string fileName)
+    public virtual List<Annotation> ReadFromFile(string fileName)
     {
       var result = new List<Annotation>();
 
@@ -80,7 +80,7 @@ namespace RCPA
       _format = new LineFormat<Annotation>(AnnotationPropertyFactory.GetInstance(), anns);
     }
 
-    public void WriteToFile(string fileName, List<Annotation> t)
+    public virtual void WriteToFile(string fileName, List<Annotation> t)
     {
       if (_format == null)
       {

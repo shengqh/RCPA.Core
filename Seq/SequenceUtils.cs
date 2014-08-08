@@ -151,22 +151,34 @@ namespace RCPA.Seq
       complementMap['N'] = 'N';
     }
 
+    public static char GetComplementAllele(char source)
+    {
+      char t;
+      if (complementMap.TryGetValue(source, out t))
+      {
+        return t;
+      }
+
+      Console.WriteLine("Unknown how to get complement allele of {0}, return itself.", source);
+      return source;
+    }
+
+    public static string GetComplementedSequence(string seq)
+    {
+      StringBuilder result = new StringBuilder();
+      for (int i = 0; i < seq.Length; i++)
+      {
+        result.Append(GetComplementAllele(seq[i]));
+      }
+      return result.ToString();
+    }
+
     public static string GetReverseComplementedSequence(string seq)
     {
       StringBuilder result = new StringBuilder();
-      char t;
       for (int i = seq.Length - 1; i >= 0; i--)
       {
-        var c = seq[i];
-        if (complementMap.TryGetValue(c, out t))
-        {
-          result.Append(t);
-        }
-        else
-        {
-          Console.WriteLine("bp = {0}", c);
-          result.Append(c);
-        }
+        result.Append(GetComplementAllele(seq[i]));
       }
       return result.ToString();
     }

@@ -74,18 +74,18 @@ namespace RCPA
         var finishedFiles = new ConcurrentList<string>();
         var curProcessors = new ConcurrentList<IParallelTaskFileProcessor>();
 
-        Parallel.ForEach(_sourceFiles, Option, (m, loopState) =>
+        Parallel.ForEach(_sourceFiles, Option, (sourceFile, loopState) =>
         {
-          curFiles.Add(m);
+          curFiles.Add(sourceFile);
 
           Progress.SetMessage("Processing {0}, finished {1} / {2}", curFiles.Count, finishedFiles.Count, totalCount);
 
-          IParallelTaskFileProcessor processor = GetTaskProcessor(aPath, m);
+          IParallelTaskFileProcessor processor = GetTaskProcessor(aPath, sourceFile);
 
           if (processor == null)
           {
-            curFiles.Remove(m);
-            finishedFiles.Add(m);
+            curFiles.Remove(sourceFile);
+            finishedFiles.Add(sourceFile);
             return;
           }
 
@@ -95,15 +95,15 @@ namespace RCPA
           curProcessors.Add(processor);
           try
           {
-            var curResult = processor.Process(m);
+            var curResult = processor.Process(sourceFile);
 
             foreach (var f in curResult)
             {
               result.Add(f);
             }
 
-            curFiles.Remove(m);
-            finishedFiles.Add(m);
+            curFiles.Remove(sourceFile);
+            finishedFiles.Add(sourceFile);
 
             Progress.SetPosition(finishedFiles.Count);
             Progress.SetMessage("Processing {0}, finished {1} / {2}", curFiles.Count, finishedFiles.Count, totalCount);

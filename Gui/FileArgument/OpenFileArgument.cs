@@ -8,20 +8,22 @@ namespace RCPA.Gui.FileArgument
   {
     private readonly OpenFileDialog fileDialog;
 
-    public OpenFileArgument(String fileDescription, String extension)
+    public OpenFileArgument(String fileDescription, String extension, bool multiselect = false)
       : base(fileDescription, extension)
     {
       this.fileDialog = new OpenFileDialog();
       this.fileDialog.AutoUpgradeEnabled = true;
       this.fileDialog.Filter = fileFilter;
+      this.fileDialog.Multiselect = multiselect;
     }
 
-    public OpenFileArgument(String fileDescription, String[] extensions)
+    public OpenFileArgument(String fileDescription, String[] extensions, bool multiselect = false)
       : base(fileDescription, extensions)
     {
       this.fileDialog = new OpenFileDialog();
       this.fileDialog.AutoUpgradeEnabled = true;
       this.fileDialog.Filter = fileFilter;
+      this.fileDialog.Multiselect = multiselect;
     }
 
     public override FileDialog GetFileDialog()
