@@ -48,7 +48,7 @@ namespace RCPA
       _tokenSource = new CancellationTokenSource();
       _option = new ParallelOptions()
       {
-        MaxDegreeOfParallelism = Environment.ProcessorCount,
+        MaxDegreeOfParallelism = Environment.ProcessorCount - 1,
         CancellationToken = _tokenSource.Token
       };
 
