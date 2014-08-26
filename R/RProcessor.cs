@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace RCPA.Utils
+namespace RCPA.R
 {
   public class RProcessor : AbstractThreadProcessor
   {
@@ -52,28 +52,33 @@ namespace RCPA.Utils
         throw new Exception(string.Format("R command start failed : {0}", ex.Message));
       }
 
+      var log = _rFile + ".log";
       try
       {
-        string line;
-        while ((line = rproc.StandardOutput.ReadLine()) != null)
+        using (var sw = new StreamWriter(log))
         {
-          Progress.SetMessage(line);
-        }
-
-        while ((line = rproc.StandardError.ReadLine()) != null)
-        {
-          if (line.StartsWith("The system cannot find the path specified"))
+          string line;
+          while ((line = rproc.StandardOutput.ReadLine()) != null)
           {
-            if (Environment.Is64BitOperatingSystem)
-            {
-              throw new Exception("make sure you setup correct X64 version of the R at Setup->Extenal program!");
-            }
-            else
-            {
-              throw new Exception("make sure you setup correct X86 version of the R at Setup->Extenal program!");
-            }
+            sw.WriteLine(line);
           }
-          Progress.SetMessage("E:" + line);
+
+          while ((line = rproc.StandardError.ReadLine()) != null)
+          {
+            if (line.StartsWith("The system cannot find the path specified"))
+            {
+              if (Environment.Is64BitOperatingSystem)
+              {
+                throw new Exception("make sure you setup correct X64 version of the R at Setup->Extenal program!");
+              }
+              else
+              {
+                throw new Exception("make sure you setup correct X86 version of the R at Setup->Extenal program!");
+              }
+            }
+            Progress.SetMessage("E:" + line);
+            sw.WriteLine("E:" + line);
+          }
         }
       }
       catch (Exception ex)
@@ -85,7 +90,12 @@ namespace RCPA.Utils
       {
         if (!File.Exists(_expectResultFile))
         {
-          throw new Exception(string.Format("R command failed to genearte result as {0}. You can manully run the R script file {1} to find out the problem.", _expectResultFile, _rFile));
+          if (File.Exists(log) && File.ReadAllText(log).Contains("nnls"))
+          {
+            throw new Exception("R command failed to genearte result. Make sure you have installed all necessary packages in R");
+          }
+
+          throw new Exception(string.Format("R command failed to genearte result as {0}. Check the log file {1}.\nYou can manully run the R script file {2} to find out the problem.", _expectResultFile, log, _rFile));
         }
 
         return new string[] { _expectResultFile };

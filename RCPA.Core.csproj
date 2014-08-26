@@ -168,6 +168,9 @@
     <Compile Include="Gui\DirectoryField.Designer.cs">
       <DependentUpon>DirectoryField.cs</DependentUpon>
     </Compile>
+    <Compile Include="IRTemplateProcessorOptions.cs" />
+    <Compile Include="Normalization\NormalizationRCalculator.cs" />
+    <Compile Include="Normalization\NormalizationRCalculatorOptions.cs" />
     <Compile Include="ProcessorWorker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -351,6 +354,7 @@
     <Compile Include="RcpaListBox.Designer.cs">
       <DependentUpon>RcpaListBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="R\RTemplateProcessor.cs" />
     <Compile Include="Seq\AccessNumberParser.cs" />
     <Compile Include="Seq\AccessNumberParserFactory.cs" />
     <Compile Include="Seq\AutoAccessNumberParser.cs" />
@@ -467,7 +471,7 @@
     <Compile Include="Utils\NonNegativeLeastSquaresCalc.cs" />
     <Compile Include="Utils\ProgressProxy.cs" />
     <Compile Include="Time\QueryPerfCounter.cs" />
-    <Compile Include="Utils\RProcessor.cs" />
+    <Compile Include="R\RProcessor.cs" />
     <Compile Include="Utils\StatisticsUtils.cs" />
     <Compile Include="Utils\StreamUtils.cs" />
     <Compile Include="Utils\StringUtils.cs" />
@@ -583,7 +587,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="template\CyclicLoessNormalization.r">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

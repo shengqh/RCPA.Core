@@ -31,7 +31,7 @@ namespace RCPA
     protected override void OnAfterLoadOption(EventArgs e)
     {
       base.OnAfterLoadOption(e);
-      if (string.IsNullOrWhiteSpace(rExecute.FullName))
+      if (string.IsNullOrWhiteSpace(rExecute.FullName) || !File.Exists(rExecute.FullName))
       {
         rExecute.FullName = SystemUtils.GetRExecuteLocation();
       }
@@ -98,13 +98,20 @@ namespace RCPA
         return config.GetExternalProgram(programName);
       }
 
-      while (config.MyShowDialog() == DialogResult.OK)
+      try
       {
-        var name = config.GetExternalProgram(programName);
-        if (File.Exists(name))
+        while (config.MyShowDialog() == DialogResult.OK)
         {
-          return name;
+          var filename = config.GetExternalProgram(programName);
+          if (File.Exists(filename))
+          {
+            return filename;
+          }
         }
+      }
+      catch (Exception)
+      {
+        throw new Exception("You may need to call Setup->Extenal programs to setup " + programName);
       }
 
       return null;
