@@ -169,8 +169,6 @@
       <DependentUpon>DirectoryField.cs</DependentUpon>
     </Compile>
     <Compile Include="IRTemplateProcessorOptions.cs" />
-    <Compile Include="Normalization\NormalizationRCalculator.cs" />
-    <Compile Include="Normalization\NormalizationRCalculatorOptions.cs" />
     <Compile Include="ProcessorWorker.cs">
       <SubType>Component</SubType>
     </Compile>

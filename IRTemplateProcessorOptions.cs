@@ -8,8 +8,31 @@ namespace RCPA
   public interface IRTemplateProcessorOptions
   {
     string InputFile { get; set; }
+
     string OutputFile { get; set; }
+
     string RExecute { get; set; }
+
     string RTemplate { get; set; }
+
+    List<string> Parameters { get; set; }
+  }
+
+  public class RTemplateProcessorOptions : IRTemplateProcessorOptions
+  {
+    public RTemplateProcessorOptions()
+    {
+      this.Parameters = new List<string>();
+    }
+
+    public string InputFile { get; set; }
+
+    public string OutputFile { get; set; }
+
+    public string RExecute { get; set; }
+
+    public string RTemplate { get; set; }
+
+    public List<string> Parameters { get; set; }
   }
 }

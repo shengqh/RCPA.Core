@@ -39,6 +39,11 @@ namespace RCPA.R
         sw.WriteLine("inputfile<-\"{0}\"", inputfile);
         sw.WriteLine("outputfile<-\"{0}\"", outputfile);
 
+        foreach (var param in options.Parameters)
+        {
+          sw.WriteLine(param);
+        }
+
         WriteAdditionalDefinitions(sw);
 
         string line = File.ReadAllText(options.RTemplate);
