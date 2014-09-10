@@ -6,7 +6,7 @@ outputfile<-"8-deisotopic-top10-removeitraq-range.noredundant.I114I115.isobaric.
 
 #predefine_end
 
-library(limma)
+library("affy")
 
 setwd(outputdir)
 
@@ -67,18 +67,15 @@ drawimage<-function(data, pngFilename){
   dev.off()
 }
 
-beforepng<-paste0(outputfile, ".PreCyclicLoessNorm.png")
+beforepng<-paste0(outputfile, ".BeforeLoessNorm.png")
 drawimage(data, beforepng)
 
 #loess non-linear regression
-logdata<-log(data)
-log_loess_data<-normalizeCyclicLoess(logdata, method="affy")
-loess_data<-exp(log_loess_data)
-
+loess_data<-normalize.loess(data, log.it=T, maxit=3)
 colnames(loess_data)<-colnames(data)
 rownames(loess_data)<-rownames(data)
 
-afterpng<-paste0(outputfile, ".PostCyclicLoessNorm.png")
+afterpng<-paste0(outputfile, ".PostLoessNorm.png")
 drawimage(loess_data, afterpng)
 
 loess_data<-cbind(rownames(loess_data), loess_data)

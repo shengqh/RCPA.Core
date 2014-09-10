@@ -585,6 +585,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="template\LoessNormalization.r">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="template\CyclicLoessNormalization.r">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
