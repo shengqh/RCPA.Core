@@ -91,7 +91,7 @@ namespace System.Xml.Linq
       return bool.Parse(GetChildValue(parent, childName, defaultValue.ToString()));
     }
 
-    public static XElement FindFirstChild(this XElement ele, string name)
+    public static XElement FindFirstDescendant(this XElement ele, string name)
     {
       if (ele.Name.LocalName == name)
       {
@@ -102,7 +102,7 @@ namespace System.Xml.Linq
       {
         foreach (var e in ele.Elements())
         {
-          var ret = e.FindFirstChild(name);
+          var ret = e.FindFirstDescendant(name);
           if (ret != null)
           {
             return ret;
@@ -113,7 +113,7 @@ namespace System.Xml.Linq
       return null;
     }
 
-    public static XElement FindFirstChild(this XElement ele, string name, string attname, string attvalue)
+    public static XElement FindFirstDescendant(this XElement ele, string name, string attname, string attvalue)
     {
       if (ele.Name.LocalName == name)
       {
@@ -128,7 +128,7 @@ namespace System.Xml.Linq
       {
         foreach (var e in ele.Elements())
         {
-          var ret = e.FindFirstChild(name, attname, attvalue);
+          var ret = e.FindFirstDescendant(name, attname, attvalue);
           if (ret != null)
           {
             return ret;
@@ -139,7 +139,7 @@ namespace System.Xml.Linq
       return null;
     }
 
-    private static void DoFindChildren(this XElement ele, string name, List<XElement> result)
+    private static void DoFindDescendants(this XElement ele, string name, List<XElement> result)
     {
       if (ele.Name.LocalName == name)
       {
@@ -151,18 +151,53 @@ namespace System.Xml.Linq
       {
         foreach (var e in ele.Elements())
         {
-          e.DoFindChildren(name, result);
+          e.DoFindDescendants(name, result);
         }
       }
     }
 
-    public static List<XElement> FindChildren(this XElement ele, string name)
+    public static List<XElement> FindDescendants(this XElement ele, string name)
     {
       List<XElement> result = new List<XElement>();
 
-      ele.DoFindChildren(name, result);
+      ele.DoFindDescendants(name, result);
 
       return result;
     }
+
+    public static XElement FindElement(this XElement ele, string name)
+    {
+      foreach (var subele in ele.Elements())
+      {
+        if (subele.Name.LocalName.Equals(name))
+        {
+          return subele;
+        }
+      }
+
+      return null;
+    }
+
+    public static List<XElement> FindElements(this XElement ele, string name)
+    {
+      return (from subele in ele.Elements()
+              where subele.Name.LocalName.Equals(name)
+              select subele).ToList();
+    }
+
+    public static XAttribute FindAttribute(this XElement ele, string name)
+    {
+      foreach (var subele in ele.Attributes())
+      {
+        if (subele.Name.LocalName.Equals(name))
+        {
+          return subele;
+        }
+      }
+
+      return null;
+    }
+
+
   }
 }

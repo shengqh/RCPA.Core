@@ -265,7 +265,7 @@ namespace RCPA
 
     public static DirectoryInfo GetConfigDir()
     {
-      DirectoryInfo result = new DirectoryInfo(new FileInfo(Application.ExecutablePath).DirectoryName + "/config");
+      DirectoryInfo result = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "/config");
       if (!result.Exists)
       {
         result.Create();
@@ -275,7 +275,7 @@ namespace RCPA
 
     public static DirectoryInfo GetTemplateDir()
     {
-      DirectoryInfo result = new DirectoryInfo(new FileInfo(Application.ExecutablePath).DirectoryName + "/template");
+      DirectoryInfo result = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "/template");
       if (!result.Exists)
       {
         result.Create();
@@ -292,7 +292,7 @@ namespace RCPA
 
     public static DirectoryInfo GetLogDir()
     {
-      DirectoryInfo result = new DirectoryInfo(new FileInfo(Application.ExecutablePath).DirectoryName + "/log");
+      DirectoryInfo result = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "/log");
       if (!result.Exists)
       {
         result.Create();
