@@ -10,7 +10,7 @@ using RCPA.Utils;
 
 namespace RCPA
 {
-  public abstract class AbstractParallelMainProcessor : AbstractThreadProcessor, IProgressCallback
+  public abstract class AbstractParallelMainFileProcessor : AbstractThreadFileProcessor, IProgressCallback
   {
     private CancellationTokenSource _tokenSource;
     public CancellationTokenSource TokenSource
@@ -39,9 +39,11 @@ namespace RCPA
       }
     }
 
+    private List<string> _sourceFiles;
+
     public bool ParallelMode { get; set; }
 
-    public AbstractParallelMainProcessor()
+    public AbstractParallelMainFileProcessor(IEnumerable<string> ASourceFiles)
     {
       _tokenSource = new CancellationTokenSource();
       _option = new ParallelOptions()
@@ -50,49 +52,61 @@ namespace RCPA
         CancellationToken = _tokenSource.Token
       };
 
+      this._sourceFiles = ASourceFiles.ToList();
       this.ParallelMode = true;
     }
 
-    public override IEnumerable<string> Process()
+    public override IEnumerable<string> Process(string aPath)
     {
-      PrepareBeforeProcessing();
+      PrepareBeforeProcessing(aPath);
 
       var result = new ConcurrentBag<string>();
-      var taskProcessors = GetTaskProcessors();
 
-      if (ParallelMode && taskProcessors.Count > 1)
+      if (ParallelMode && _sourceFiles.Count > 1)
       {
         var exceptions = new ConcurrentQueue<Exception>();
 
-        int totalCount = taskProcessors.Count;
+        int totalCount = _sourceFiles.Count;
 
         Progress.SetRange(0, totalCount);
 
-        var finishedProcessors = new ConcurrentList<IParallelTaskProcessor>();
-        var curProcessors = new ConcurrentList<IParallelTaskProcessor>();
+        var curFiles = new ConcurrentList<string>();
+        var finishedFiles = new ConcurrentList<string>();
+        var curProcessors = new ConcurrentList<IParallelTaskFileProcessor>();
 
-        Parallel.ForEach(taskProcessors, Option, (processor, loopState) =>
+        Parallel.ForEach(_sourceFiles, Option, (sourceFile, loopState) =>
         {
-          curProcessors.Add(processor);
+          curFiles.Add(sourceFile);
 
-          Progress.SetMessage("Processing {0}, finished {1} / {2}", curProcessors.Count, finishedProcessors.Count, totalCount);
+          Progress.SetMessage("Processing {0}, finished {1} / {2}", curFiles.Count, finishedFiles.Count, totalCount);
+
+          IParallelTaskFileProcessor processor = GetTaskProcessor(aPath, sourceFile);
+
+          if (processor == null)
+          {
+            curFiles.Remove(sourceFile);
+            finishedFiles.Add(sourceFile);
+            return;
+          }
 
           processor.LoopState = loopState;
           processor.Progress = Progress;
+
+          curProcessors.Add(processor);
           try
           {
-            var curResult = processor.Process();
+            var curResult = processor.Process(sourceFile);
 
             foreach (var f in curResult)
             {
               result.Add(f);
             }
 
-            curProcessors.Remove(processor);
-            finishedProcessors.Add(processor);
+            curFiles.Remove(sourceFile);
+            finishedFiles.Add(sourceFile);
 
-            Progress.SetPosition(finishedProcessors.Count);
-            Progress.SetMessage("Processing {0}, finished {1} / {2}", curProcessors.Count, finishedProcessors.Count, totalCount);
+            Progress.SetPosition(finishedFiles.Count);
+            Progress.SetMessage("Processing {0}, finished {1} / {2}", curFiles.Count, finishedFiles.Count, totalCount);
           }
           catch (Exception e)
           {
@@ -127,20 +141,21 @@ namespace RCPA
       }
       else
       {
-        for (int i = 0; i < taskProcessors.Count; i++)
+        for (int i = 0; i < _sourceFiles.Count; i++)
         {
           if (Progress.IsCancellationPending())
           {
             throw new UserTerminatedException();
           }
 
-          string rootMsg = MyConvert.Format("{0} / {1}", i + 1, taskProcessors.Count);
+          string rootMsg = MyConvert.Format("{0} / {1} : {2}", i + 1, _sourceFiles.Count, _sourceFiles[i]);
 
           Progress.SetMessage(1, rootMsg);
-          var processor = taskProcessors[i];
+
+          IParallelTaskFileProcessor processor = GetTaskProcessor(aPath, _sourceFiles[i]);
           processor.Progress = Progress;
 
-          var curResult = processor.Process();
+          var curResult = processor.Process(_sourceFiles[i]);
 
           foreach (var f in curResult)
           {
@@ -149,16 +164,17 @@ namespace RCPA
         }
       }
 
-      DoAfterProcessing(result);
+      DoAfterProcessing(aPath, result);
 
       return result;
     }
 
-    protected virtual void DoAfterProcessing(ConcurrentBag<string> result) { }
+    protected virtual void DoAfterProcessing(string aPath, ConcurrentBag<string> result) { }
 
-    protected virtual void PrepareBeforeProcessing() { }
+    protected virtual void PrepareBeforeProcessing(string aPath) { }
 
-    protected abstract List<IParallelTaskProcessor> GetTaskProcessors();
+    protected abstract IParallelTaskFileProcessor GetTaskProcessor(string targetDir, string fileName);
+
 
     #region IProgressCallback Members
 

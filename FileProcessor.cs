@@ -20,6 +20,11 @@ namespace RCPA
     IProgressCallback Progress { get; set; }
   }
 
+  public interface IParallelTaskProcessor : IThreadProcessor
+  {
+    ParallelLoopState LoopState { get; set; }
+  }
+
   public abstract class AbstractThreadProcessor : ProgressClass, IThreadProcessor
   {
     public AbstractThreadProcessor()

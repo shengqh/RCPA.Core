@@ -145,6 +145,14 @@ namespace RCPA.Gui
       return adaptor;
     }
 
+    public void SelectAll()
+    {
+      for (int i = 0; i < ListBox.Items.Count; i++)
+      {
+        ListBox.SetSelected(i, true);
+      }
+    }
+
     #region IRcpaComponent Members
 
     public void ValidateComponent()

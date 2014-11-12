@@ -117,5 +117,13 @@ namespace RCPA.Gui
     {
       return infoAdaptor;
     }
+  
+    public void SelectAll()
+    {
+      for (int i = 0; i < lvItems.Items.Count; i++)
+      {
+        lvItems.Items[i].Selected = true;
+      }
+    }
   }
 }

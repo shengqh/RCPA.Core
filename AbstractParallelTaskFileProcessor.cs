@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RCPA
 {
-  public abstract class AbstractParallelTaskProcessor : AbstractThreadProcessor, IParallelTaskProcessor
+  public abstract class AbstractParallelTaskFileProcessor : AbstractThreadFileProcessor, IParallelTaskFileProcessor
   {
     public ParallelLoopState LoopState { get; set; }
 

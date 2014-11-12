@@ -25,7 +25,7 @@ namespace MathNet.Numerics.Distributions
 
   public static class DistributionExtensitions
   {
-    public static double TwoTailProbability(this IDistribution nd, double value)
+      public static double TwoTailProbability(this IUnivariateDistribution nd, double value)
     {
       var result = nd.CumulativeDistribution(value);
       if (result > 0.5)
