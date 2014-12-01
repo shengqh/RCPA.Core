@@ -139,6 +139,21 @@ namespace System.Xml.Linq
       return null;
     }
 
+    public static Dictionary<string, XElement> ToDictionary(this XElement ele)
+    {
+      var result = new Dictionary<string, XElement>();
+
+      if (ele.HasElements)
+      {
+        foreach (var e in ele.Elements())
+        {
+          result[e.Name.LocalName] = e;
+        }
+      }
+
+      return result;
+    }
+
     private static void DoFindDescendants(this XElement ele, string name, List<XElement> result)
     {
       if (ele.Name.LocalName == name)

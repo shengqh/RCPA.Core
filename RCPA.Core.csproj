@@ -425,6 +425,8 @@
     <Compile Include="Seq\SequenceUtils.cs" />
     <Compile Include="Time\ICounter.cs" />
     <Compile Include="Utils\BeanUtils.cs" />
+    <Compile Include="Utils\MultipleLinesExtractor.cs" />
+    <Compile Include="Utils\MultipleLinesExtractorOptions.cs" />
     <Compile Include="Utils\NumericalRecipes.cs" />
     <Compile Include="Utils\RegistryHelpers.cs" />
     <Compile Include="Utils\ResizeAndRotationHelper.cs" />

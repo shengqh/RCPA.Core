@@ -101,7 +101,7 @@ namespace RCPA.Seq
 
     public static Sequence GetReversedSequence(string sequence, string prefix, int indexLength, int index)
     {
-      return new Sequence(prefix + StringUtils.LeftFill(index, indexLength, '0'), GetReversedSequence(sequence));
+      return new Sequence(prefix + index.ToString().PadLeft(indexLength, '0'), GetReversedSequence(sequence));
     }
 
     public static Dictionary<char, double> GetDatabaseComposition(string fastaFile)

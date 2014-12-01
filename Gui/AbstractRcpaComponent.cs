@@ -20,7 +20,7 @@ namespace RCPA.Gui
     {
       if (_preCondition != null)
       {
-        this.Enabled = _preCondition.Checked;
+        this.Enabled = _preCondition.Enabled && _preCondition.Checked;
       }
     }
 
@@ -35,6 +35,7 @@ namespace RCPA.Gui
         if (_preCondition != null)
         {
           _preCondition.CheckedChanged -= DoPreConditionChanged;
+          _preCondition.EnabledChanged -= DoPreConditionChanged;
         }
 
         _preCondition = value;
@@ -42,6 +43,7 @@ namespace RCPA.Gui
         if (_preCondition != null)
         {
           _preCondition.CheckedChanged += DoPreConditionChanged;
+          _preCondition.EnabledChanged += DoPreConditionChanged;
         }
       }
     }

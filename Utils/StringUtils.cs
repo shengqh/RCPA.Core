@@ -54,14 +54,30 @@ namespace System
       return sb.ToString();
     }
 
-    public static string LeftFill(object obj, int length, char fillChar)
+    /// <summary>
+    /// Take first few entries splitted by delimiter
+    /// </summary>
+    /// <param name="line">string line</param>
+    /// <param name="delimiter">delimiter</param>
+    /// <param name="count">max entry count</param>
+    /// <returns></returns>
+    public static string[] Take(this string line, char delimiter, int count)
     {
-      StringBuilder sb = new StringBuilder(obj.ToString());
-      while (sb.Length < length)
+      List<string> result = new List<string>();
+      int pos;
+      int lastpos = 0;
+      while ((pos = line.IndexOf(delimiter, lastpos)) != -1)
       {
-        sb.Insert(0, fillChar);
+        result.Add(line.Substring(lastpos, pos - lastpos));
+        if (result.Count >= count)
+        {
+          return result.ToArray();
+        }
+        lastpos = pos + 1;
       }
-      return sb.ToString();
+
+      result.Add(line.Substring(lastpos));
+      return result.ToArray();
     }
 
     public static string GetMergedHeader(string header, IEnumerable<string> annotations, char delimiter)
