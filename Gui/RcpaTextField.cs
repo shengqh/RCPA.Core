@@ -8,20 +8,41 @@ namespace RCPA.Gui
 {
   public class RcpaTextField : AbstractRcpaComponent
   {
-    private readonly string defaultValue;
+    private string defaultValue;
 
-    private readonly string title;
+    public string DefaultValue
+    {
+      get
+      {
+        return defaultValue;
+      }
+      set
+      {
+        defaultValue = value;
+        InitAdaptor();
+      }
+    }
+
+    private string key;
+
+    protected string title;
 
     protected TextBox txtValue;
 
     public RcpaTextField(TextBox txtValue, string key, string title, string defaultValue, bool required)
     {
       this.txtValue = txtValue;
+      this.key = key;
       this.title = title;
-      this.defaultValue = defaultValue;
+      this.DefaultValue = defaultValue;
       this.Required = required;
       this.txtValue.Text = defaultValue;
 
+      InitAdaptor();
+    }
+
+    private void InitAdaptor()
+    {
       Adaptor = new OptionFileTextBoxAdaptor(txtValue, key, defaultValue);
     }
 
@@ -60,9 +81,9 @@ namespace RCPA.Gui
     {
       var result = "Input " + title;
       
-      if (defaultValue != string.Empty)
+      if (DefaultValue != string.Empty)
       {
-        result = result + ", default value = " + defaultValue;
+        result = result + ", default value = " + DefaultValue;
       }
 
       return result;
@@ -119,7 +140,7 @@ namespace RCPA.Gui
       if (!Validate(Text))
       {
         this.txtValue.Focus();
-        throw new InvalidOperationException(MyConvert.Format("{0} is not a valid input for {1}. DefaultValue = {2}", Text, this.title, this.defaultValue));
+        throw new InvalidOperationException(MyConvert.Format("{0} is not a valid input for {1}. DefaultValue = {2}", Text, this.title, this.DefaultValue));
       }
     }
 

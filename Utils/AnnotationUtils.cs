@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using RCPA.Utils;
 using System.Linq;
 using System;
 
-namespace RCPA.Utils
+namespace RCPA
 {
   public static class AnnotationUtils
   {

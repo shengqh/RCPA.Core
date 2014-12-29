@@ -93,7 +93,7 @@ namespace RCPA.Gui
 
     #endregion
 
-    private System.Windows.Forms.Panel pnlButton;
+    protected System.Windows.Forms.Panel pnlButton;
     protected System.Windows.Forms.Button btnClose;
     protected System.Windows.Forms.Button btnCancel;
     protected System.Windows.Forms.Button btnGo;
