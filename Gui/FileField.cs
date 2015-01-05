@@ -122,8 +122,18 @@ namespace RCPA.Gui
       }
       set
       {
-        _required = value;
-        GenerateField();
+        if (_required != value)
+        {
+          _required = value;
+          if (_field != null)
+          {
+            _field.Required = value;
+          }
+          else
+          {
+            GenerateField();
+          }
+        }
       }
     }
 
