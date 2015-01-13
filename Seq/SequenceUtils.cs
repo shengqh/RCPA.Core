@@ -54,6 +54,11 @@ namespace RCPA.Seq
       return result;
     }
 
+    public static List<Sequence> Read(string filename)
+    {
+      return Read(new FastaFormat(), filename);
+    }
+
     public static Dictionary<string, string> ReadAccessNumberReferenceMap(ISequenceFormat sf, string filename, IAccessNumberParser parser)
     {
       Dictionary<string, string> result = new Dictionary<string, string>();
