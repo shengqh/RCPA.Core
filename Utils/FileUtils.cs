@@ -144,28 +144,12 @@ namespace RCPA
 
     }
 
-    public static void StringToFile(string sFileName, string sData)
-    {
-      using (StreamWriter sw = new StreamWriter(sFileName))
-      {
-        sw.WriteLine(sData);
-      }
-    }
-
-    public static string FileToString(string sFileName)
-    {
-      using (StreamReader sr = new StreamReader(sFileName))
-      {
-        return sr.ReadToEnd();
-      }
-    }
-
     public static string StringToTempGUIDFile(string sData, string fileExtension)
     {
       //returns file name
       System.Guid g = System.Guid.NewGuid();
       string sFileOut = AppPath() + g + "." + fileExtension;
-      StringToFile(sFileOut, sData);
+      File.WriteAllText(sFileOut, sData);
       return sFileOut;
     }
 
@@ -173,7 +157,7 @@ namespace RCPA
     {
       if (!File.Exists(sFileName))
       {
-        StringToFile(sFileName, "");
+        File.WriteAllText(sFileName, "");
       }
     }
 
@@ -359,23 +343,6 @@ namespace RCPA
       return result;
     }
 
-    public static string GetMd5HashForFile(MD5 md5Hash, string fileName)
-    {
-      using (var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-      {
-        byte[] computedHashCode = md5Hash.ComputeHash(fs);
-        return StringUtils.ByteToHexString(computedHashCode);
-      }
-    }
-
-    public static string GetMd5HashForFile(string fileName)
-    {
-      using (var fun = MD5.Create())
-      {
-        return GetMd5HashForFile(fun, fileName);
-      }
-    }
-
     public static void DoGetRecursiveDirectories(string rootDir, List<string> result)
     {
       foreach (string d in Directory.GetDirectories(rootDir))
@@ -390,6 +357,123 @@ namespace RCPA
       List<string> result = new List<string>();
       DoGetRecursiveDirectories(rootDir, result);
       return result;
+    }
+
+    public static bool IsAbsolutePath(string fileName)
+    {
+      return fileName.Any(m => pathchars.Contains(m));
+    }
+
+    public static string ToLinuxFormat(string fileName)
+    {
+      return fileName.Replace("\\", "/");
+    }
+
+    public static void TransformFile(string sourceFile, string targetFile, char delimiter = '\t', string newRowNameHeader = null)
+    {
+      string[,] data = ReadDataMatrix(sourceFile, delimiter);
+
+      var rowtitle = string.IsNullOrEmpty(newRowNameHeader) ? data[0, 0] : newRowNameHeader;
+      var rowCount = data.GetLength(0);
+      var colCount = data.GetLength(1);
+
+      Console.WriteLine("In data: RowCount={0}, ColCount={1}", rowCount, colCount);
+
+      using (var sw = new StreamWriter(targetFile))
+      {
+        sw.Write(rowtitle);
+        for (int i = 1; i < rowCount; i++)
+        {
+          sw.Write("{0}{1}", delimiter, data[i, 0]);
+        }
+        sw.WriteLine();
+
+        for (int colIndex = 1; colIndex < colCount; colIndex++)
+        {
+          sw.Write(data[0, colIndex]);
+          for (int rowIndex = 1; rowIndex < rowCount; rowIndex++)
+          {
+            sw.Write("{0}{1}", delimiter, data[rowIndex, colIndex]);
+          }
+          sw.WriteLine();
+        }
+      }
+    }
+
+    public static string[,] ReadDataMatrix(string sourceFile, char delimiter)
+    {
+      int colCount, rowCount;
+      ReadColRowCount(sourceFile, out colCount, out rowCount, delimiter);
+
+      Console.WriteLine("Initialization: RowCount={0}, ColCount={1}", rowCount, colCount);
+
+      if (colCount == 0)
+      {
+        throw new Exception("Empty file " + sourceFile);
+      }
+
+      string[,] data = new string[rowCount, colCount];
+      using (var sr = new StreamReader(sourceFile))
+      {
+        string line;
+        int rowIndex = -1;
+        while ((line = sr.ReadLine()) != null)
+        {
+          rowIndex++;
+          var parts = line.Split(delimiter);
+          for (int i = 0; i < parts.Length; i++)
+          {
+            data[rowIndex, i] = parts[i];
+          }
+        }
+      }
+      return data;
+    }
+
+    public static void ReadColRowNames(string sourceFile, out string[] cols, out string[] rows)
+    {
+      List<string> rowList = new List<string>();
+      using (var sr = new StreamReader(sourceFile))
+      {
+        string line = sr.ReadLine();
+        if (line == null)
+        {
+          cols = new string[0];
+          rows = new string[0];
+          return;
+        }
+
+        cols = line.Split('\t');
+        while ((line = sr.ReadLine()) != null)
+        {
+          rowList.Add(line.StringBefore("\t"));
+        }
+      }
+      rows = rowList.ToArray();
+    }
+
+    public static void ReadColRowCount(string sourceFile, out int colCount, out int rowCount, char delimiter = '\t')
+    {
+      using (var sr = new StreamReader(sourceFile))
+      {
+        string line = sr.ReadLine();
+        if (line == null)
+        {
+          colCount = 0;
+          rowCount = 0;
+          return;
+        }
+
+        colCount = line.Split(delimiter).Length;
+        rowCount = 1;
+        while ((line = sr.ReadLine()) != null)
+        {
+          if (!string.IsNullOrEmpty(line))
+          {
+            rowCount++;
+          }
+        }
+      }
     }
   }
 }

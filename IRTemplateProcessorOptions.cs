@@ -16,6 +16,8 @@ namespace RCPA
     string RTemplate { get; set; }
 
     List<string> Parameters { get; set; }
+
+    bool CreateNoWindow { get; set; }
   }
 
   public class RTemplateProcessorOptions : IRTemplateProcessorOptions
@@ -23,6 +25,7 @@ namespace RCPA
     public RTemplateProcessorOptions()
     {
       this.Parameters = new List<string>();
+      this.CreateNoWindow = true;
     }
 
     public string InputFile { get; set; }
@@ -34,5 +37,7 @@ namespace RCPA
     public string RTemplate { get; set; }
 
     public List<string> Parameters { get; set; }
+
+    public bool CreateNoWindow { get; set; }
   }
 }

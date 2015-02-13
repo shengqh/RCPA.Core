@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
+using System.IO.Compression;
 
 namespace RCPA.Utils
 {
@@ -49,7 +50,7 @@ namespace RCPA.Utils
       return false;
     }
 
-    public static StreamReader OpenFile(string filename, Func<string,bool> accept)
+    public static StreamReader OpenFile(string filename, Func<string, bool> accept)
     {
       ZipInputStream s = new ZipInputStream(new FileInfo(filename).OpenRead());
       ZipEntry theEntry;
@@ -69,5 +70,19 @@ namespace RCPA.Utils
       return null;
     }
 
+    public static void DecompressGzip(string sourceFile, string targetFile)
+    {
+      using (Stream fd = File.Create(targetFile))
+      using (Stream fs = File.OpenRead(sourceFile))
+      using (Stream csStream = new GZipStream(fs, CompressionMode.Decompress))
+      {
+        byte[] buffer = new byte[1024];
+        int nRead;
+        while ((nRead = csStream.Read(buffer, 0, buffer.Length)) > 0)
+        {
+          fd.Write(buffer, 0, nRead);
+        }
+      }
+    }
   }
 }

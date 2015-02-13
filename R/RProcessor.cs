@@ -13,15 +13,17 @@ namespace RCPA.R
     private bool _isR;
     private string _rFile;
     private string _expectResultFile;
+    private bool _createNoWindow;
 
 
-    public RProcessor(string rExecute, string rFile, string expectResultFile)
+    public RProcessor(string rExecute, string rFile, string expectResultFile, bool createNoWindow = true)
     {
       this._rExecute = FileUtils.GetFullLinixName(rExecute);
       var rname = new FileInfo(rExecute).Name.ToLower();
       this._isR = rname.Equals("r.exe") || rname.Equals("r");
       this._rFile = FileUtils.GetFullLinixName(rFile);
       this._expectResultFile = expectResultFile;
+      this._createNoWindow = createNoWindow;
     }
 
     public override IEnumerable<string> Process()
@@ -36,7 +38,7 @@ namespace RCPA.R
           UseShellExecute = false,
           RedirectStandardOutput = true,
           RedirectStandardError = true,
-          CreateNoWindow = true
+          CreateNoWindow = _createNoWindow
         }
       };
 
@@ -61,6 +63,7 @@ namespace RCPA.R
           while ((line = rproc.StandardOutput.ReadLine()) != null)
           {
             sw.WriteLine(line);
+            Progress.SetMessage(line);
           }
 
           while ((line = rproc.StandardError.ReadLine()) != null)

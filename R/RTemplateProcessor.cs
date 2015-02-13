@@ -26,6 +26,8 @@ namespace RCPA.R
       }
     }
 
+    private static readonly string PREDEFINED_END = "#predefine_end";
+
     public override IEnumerable<string> Process()
     {
       var outputdir = Path.GetDirectoryName(options.OutputFile).Replace("\\", "/");
@@ -46,14 +48,15 @@ namespace RCPA.R
 
         WriteAdditionalDefinitions(sw);
 
-        string line = File.ReadAllText(options.RTemplate);
+        bool hasPredefined = File.ReadAllText(options.RTemplate).Contains(PREDEFINED_END);
+        string line;
         using (var sr = new StreamReader(options.RTemplate))
         {
-          if (line.Contains("#predefine_end"))
+          if (hasPredefined)
           {
             while ((line = sr.ReadLine()) != null)
             {
-              if (line.Contains("#predefine_end"))
+              if (line.Contains(PREDEFINED_END))
               {
                 break;
               }
@@ -67,7 +70,7 @@ namespace RCPA.R
         }
       }
 
-      return new RProcessor(options.RExecute, targetrfile, options.OutputFile).Process();
+      return new RProcessor(options.RExecute, targetrfile, options.OutputFile, options.CreateNoWindow).Process();
     }
 
     protected virtual void WriteAdditionalDefinitions(StreamWriter sw) { }
