@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO.Compression;
 using System.Text;
 using System.Reflection;
+using RCPA.Utils;
 
 namespace System.IO
 {
@@ -10,19 +11,38 @@ namespace System.IO
   {
     public static long GetCharpos(this StreamReader s)
     {
-      Int32 charpos = (Int32)s.GetType().InvokeMember("charPos",
-      BindingFlags.DeclaredOnly |
-      BindingFlags.Public | BindingFlags.NonPublic |
-      BindingFlags.Instance | BindingFlags.GetField
-      , null, s, null);
+      if (SystemUtils.IsLinux) // in mono
+      {
+        Int32 charpos = (Int32)s.GetType().InvokeMember("pos",
+        BindingFlags.DeclaredOnly |
+        BindingFlags.Public | BindingFlags.NonPublic |
+        BindingFlags.Instance | BindingFlags.GetField
+        , null, s, null);
 
-      Int32 charlen = (Int32)s.GetType().InvokeMember("charLen",
-      BindingFlags.DeclaredOnly |
-      BindingFlags.Public | BindingFlags.NonPublic |
-      BindingFlags.Instance | BindingFlags.GetField
-      , null, s, null);
+        Int32 charlen = (Int32)s.GetType().InvokeMember("decoded_count",
+        BindingFlags.DeclaredOnly |
+        BindingFlags.Public | BindingFlags.NonPublic |
+        BindingFlags.Instance | BindingFlags.GetField
+        , null, s, null);
 
-      return s.BaseStream.Position - charlen + charpos;
+        return s.BaseStream.Position - charlen + charpos;
+      }
+      else
+      {
+        Int32 charpos = (Int32)s.GetType().InvokeMember("charPos",
+        BindingFlags.DeclaredOnly |
+        BindingFlags.Public | BindingFlags.NonPublic |
+        BindingFlags.Instance | BindingFlags.GetField
+        , null, s, null);
+
+        Int32 charlen = (Int32)s.GetType().InvokeMember("charLen",
+        BindingFlags.DeclaredOnly |
+        BindingFlags.Public | BindingFlags.NonPublic |
+        BindingFlags.Instance | BindingFlags.GetField
+        , null, s, null);
+
+        return s.BaseStream.Position - charlen + charpos;
+      }
     }
 
     public static void SetCharpos(this StreamReader s, long positionFromBegin)
