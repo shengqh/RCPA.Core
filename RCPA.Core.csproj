@@ -160,6 +160,7 @@
     <Compile Include="AbstractParallelTaskProcessor.cs" />
     <Compile Include="AbstractParallelMainProcessor.cs" />
     <Compile Include="Extension\GenericCollectionExtension.cs" />
+    <Compile Include="Extension\ReflectionExtension.cs" />
     <Compile Include="Extension\WinFormsExtensions.cs" />
     <Compile Include="Gui\AbstractProcessorBaseUI.cs">
       <SubType>Form</SubType>
@@ -194,6 +195,7 @@
     <Compile Include="Gui\DirectoryField.Designer.cs">
       <DependentUpon>DirectoryField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Commandline\ICommandLineCommand.cs" />
     <Compile Include="IRTemplateProcessorOptions.cs" />
     <Compile Include="ProcessorWorker.cs">
       <SubType>Component</SubType>

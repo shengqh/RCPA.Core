@@ -32,14 +32,17 @@ namespace RCPA.R
     {
       var outputdir = Path.GetDirectoryName(options.OutputFile).Replace("\\", "/");
       var inputfile = options.InputFile.Replace("\\", "/");
-      var outputfile = options.OutputFile.Replace("\\", "/");
 
       var targetrfile = options.OutputFile + ".r";
       using (var sw = new StreamWriter(targetrfile))
       {
         sw.WriteLine("outputdir<-\"{0}\"", outputdir);
         sw.WriteLine("inputfile<-\"{0}\"", inputfile);
-        sw.WriteLine("outputfile<-\"{0}\"", outputfile);
+        if (!options.NoResultFile)
+        {
+          var outputfile = options.OutputFile.Replace("\\", "/");
+          sw.WriteLine("outputfile<-\"{0}\"", outputfile);
+        }
 
         foreach (var param in options.Parameters)
         {
@@ -70,7 +73,13 @@ namespace RCPA.R
         }
       }
 
-      return new RProcessor(options.RExecute, targetrfile, options.OutputFile, options.CreateNoWindow).Process();
+      return new RProcessor(new RProcessorOptions()
+      {
+        RExecute = options.RExecute,
+        RFile = targetrfile,
+        ExpectResultFile = options.NoResultFile ? string.Empty : options.OutputFile,
+        CreateNoWindow = options.CreateNoWindow
+      }).Process();
     }
 
     protected virtual void WriteAdditionalDefinitions(StreamWriter sw) { }

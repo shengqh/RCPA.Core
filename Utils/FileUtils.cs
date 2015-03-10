@@ -369,6 +369,13 @@ namespace RCPA
       return fileName.Replace("\\", "/");
     }
 
+    /// <summary>
+    /// Transform the columns and the rows of the file
+    /// </summary>
+    /// <param name="sourceFile"></param>
+    /// <param name="targetFile"></param>
+    /// <param name="delimiter"></param>
+    /// <param name="newRowNameHeader"></param>
     public static void TransformFile(string sourceFile, string targetFile, char delimiter = '\t', string newRowNameHeader = null)
     {
       string[,] data = ReadDataMatrix(sourceFile, delimiter);
