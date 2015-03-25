@@ -30,7 +30,6 @@ namespace RCPA
     public AbstractThreadProcessor()
     {
       Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-      this.Progress = new ConsoleProgressCallback();
     }
 
     #region IThreadFileProcessor Members

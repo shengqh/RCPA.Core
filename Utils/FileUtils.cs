@@ -437,6 +437,20 @@ namespace RCPA
       return data;
     }
 
+    public static string[] ReadColumnNames(string sourceFile)
+    {
+      using (var sr = new StreamReader(sourceFile))
+      {
+        string line = sr.ReadLine();
+        if (line == null)
+        {
+          return new string[0];
+        }
+
+        return line.Split('\t');
+      }
+    }
+
     public static void ReadColRowNames(string sourceFile, out string[] cols, out string[] rows)
     {
       List<string> rowList = new List<string>();

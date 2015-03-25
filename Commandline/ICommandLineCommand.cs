@@ -27,42 +27,53 @@ namespace RCPA.Commandline
     public virtual bool Process(string[] args)
     {
       var result = true;
-      try
+      if (System.Diagnostics.Debugger.IsAttached)
       {
-        var options = CommandLine.Parser.Default.ParseArguments<T>(args,
-          () => { result = false; }
-          );
-
-        if (result)
+        result = DoProcess(args, result);
+      }
+      else
+      {
+        try
         {
-          if (!options.PrepareOptions())
+          result = DoProcess(args, result);
+        }
+        catch (Exception ex)
+        {
+          Console.Error.WriteLine(ex.StackTrace);
+          result = false;
+        }
+      }
+
+      return result;
+    }
+
+    private bool DoProcess(string[] args, bool result)
+    {
+      var options = CommandLine.Parser.Default.ParseArguments<T>(args, () => { result = false; });
+
+      if (result)
+      {
+        if (!options.PrepareOptions())
+        {
+          Console.Out.WriteLine(options.GetUsage());
+          result = false;
+        }
+        else
+        {
+          var files = GetProcessor(options).Process();
+          if (files != null && files.Count() > 0)
           {
-            Console.Out.WriteLine(options.GetUsage());
-            result = false;
-          }
-          else
-          {
-            var files = GetProcessor(options).Process();
-            if (files != null && files.Count() > 0)
+            if (files.All(File.Exists))
             {
-              if (files.All(File.Exists))
-              {
-                Console.WriteLine("File saved to :\n" + files.Merge("\n"));
-              }
-              else
-              {
-                Console.WriteLine(files.Merge("\n"));
-              }
+              Console.WriteLine("File saved to :\n" + files.Merge("\n"));
+            }
+            else
+            {
+              Console.WriteLine(files.Merge("\n"));
             }
           }
         }
       }
-      catch (Exception ex)
-      {
-        Console.Error.WriteLine(ex.StackTrace);
-        result = false;
-      }
-
       return result;
     }
 
