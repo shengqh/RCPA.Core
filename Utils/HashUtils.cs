@@ -106,5 +106,31 @@ namespace RCPA.Utils
         }
       }
     }
+
+    /// <summary>
+    /// Get MD5 hash value of a file. If the file is compressed, the MD5 hash of decompressed file will be returned. Only gzip and zip compression mode supported.
+    /// </summary>
+    /// <param name="file"></param>
+    /// <param name="forceCalculation"></param>
+    /// <param name="cacheMD5File"></param>
+    /// <returns></returns>
+    public static string GetDecompressedMD5Hash(string file, bool forceCalculation = false, bool cacheMD5File = true)
+    {
+      string md5;
+      if (file.ToLower().EndsWith(".gz"))
+      {
+        md5 = HashUtils.GetGzippedMD5Hash(file);
+      }
+      else if (file.ToLower().EndsWith(".zip"))
+      {
+        md5 = HashUtils.GetZippedMD5Hash(file);
+
+      }
+      else
+      {
+        md5 = HashUtils.GetMD5Hash(file);
+      }
+      return md5;
+    }
   }
 }

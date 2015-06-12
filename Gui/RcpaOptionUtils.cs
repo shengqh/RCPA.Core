@@ -9,7 +9,7 @@ using System.IO;
 
 namespace RCPA.Gui
 {
-  public static class RcpaOptionAttributeUtils
+  public static class RcpaOptionUtils
   {
     public static void SaveToXml(object source, string optionFile)
     {
@@ -35,8 +35,8 @@ namespace RCPA.Gui
 
       foreach (var item in members)
       {
-        object[] attributes = item.GetCustomAttributes(typeof(RcpaOptionAttribute), false);
-        foreach (RcpaOptionAttribute fieldAttribute in attributes)
+        object[] attributes = item.GetCustomAttributes(typeof(RcpaOption), false);
+        foreach (RcpaOption fieldAttribute in attributes)
         {
           //获得相应属性的值
           object value = type.InvokeMember(item.Name, BindingFlags.GetProperty | BindingFlags.GetField, null, source, null);
@@ -77,8 +77,8 @@ namespace RCPA.Gui
 
       foreach (var item in members)
       {
-        object[] attributes = item.GetCustomAttributes(typeof(RcpaOptionAttribute), true);
-        foreach (RcpaOptionAttribute fieldAttribute in attributes)
+        object[] attributes = item.GetCustomAttributes(typeof(RcpaOption), true);
+        foreach (RcpaOption fieldAttribute in attributes)
         {
           var xmlElement = source.Element(fieldAttribute.Name);
           if (xmlElement != null)

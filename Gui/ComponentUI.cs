@@ -93,7 +93,7 @@ namespace RCPA.Gui
 
         this.componentList.LoadFromXml(option);
 
-        RcpaOptionAttributeUtils.LoadFromXml(this, option);
+        RcpaOptionUtils.LoadFromXml(this, option);
 
         this.componentList.ResetEnabledByPrecondition();
       }
@@ -127,7 +127,7 @@ namespace RCPA.Gui
         this.componentList.RemoveFromXml(option);
         this.componentList.SaveToXml(option);
 
-        RcpaOptionAttributeUtils.SaveToXml(this, option);
+        RcpaOptionUtils.SaveToXml(this, option);
 
         option.Save(ConfigFileName);
       }

@@ -152,6 +152,18 @@ namespace RCPA.Gui
       }
     }
 
+    public EventHandler AfterBrowseFileEvent
+    {
+      get
+      {
+        return (null != _field) ? _field.AfterBrowseFileEvent : null;
+      }
+      set
+      {
+        _field.AfterBrowseFileEvent = value;
+      }
+    }
+
     private void GenerateField()
     {
       if (null != _field)

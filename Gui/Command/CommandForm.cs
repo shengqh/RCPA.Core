@@ -2,11 +2,14 @@ using System;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Collections.Generic;
 
 namespace RCPA.Gui.Command
 {
   public partial class CommandForm : ComponentUI
   {
+    private HashSet<Type> addedCommands = new HashSet<Type>();
+
     public CommandForm()
     {
       InitializeComponent();
@@ -19,6 +22,13 @@ namespace RCPA.Gui.Command
 
     public void AddCommand(IToolCommand command, string classification)
     {
+      var ctype = command.GetType();
+      if (!(command is ToolCommandSeparator) && addedCommands.Contains(ctype))
+      {
+        return;
+      }
+      addedCommands.Add(ctype);
+
       ToolStripMenuItem parent = null;
       foreach (ToolStripMenuItem pItem in this.mainMenu.Items)
       {
@@ -89,7 +99,7 @@ namespace RCPA.Gui.Command
       }
     }
 
-    [RcpaOptionAttribute("WinFormConsoleVisible", RcpaOptionType.Boolean)]
+    [RcpaOption("WinFormConsoleVisible", RcpaOptionType.Boolean)]
     public bool ViewConsole
     {
       get

@@ -9,15 +9,15 @@ namespace RCPA.Gui
   public enum RcpaOptionType { Int32, Double, String, Boolean, StringArray, StringList, IXml };
 
   [AttributeUsageAttribute(AttributeTargets.Property | AttributeTargets.Field, Inherited = true, AllowMultiple = false)]
-  public class RcpaOptionAttribute : Attribute
+  public class RcpaOption : Attribute
   {
-    public RcpaOptionAttribute(string name, RcpaOptionType valueType)
+    public RcpaOption(string name, RcpaOptionType valueType)
     {
       this.Name = name;
       this.ValueType = valueType;
     }
 
-    public RcpaOptionAttribute(string name, RcpaOptionType valueType, Func<Object> allocate)
+    public RcpaOption(string name, RcpaOptionType valueType, Func<Object> allocate)
     {
       this.Name = name;
       this.ValueType = valueType;
