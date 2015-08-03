@@ -249,7 +249,7 @@ namespace RCPA
 
     public static DirectoryInfo GetConfigDir()
     {
-      DirectoryInfo result = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "/config");
+      DirectoryInfo result = new DirectoryInfo(Path.Combine(AppPath(), "config"));
       if (!result.Exists)
       {
         result.Create();
@@ -259,7 +259,17 @@ namespace RCPA
 
     public static DirectoryInfo GetTemplateDir()
     {
-      DirectoryInfo result = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "/template");
+      DirectoryInfo result = new DirectoryInfo(Path.Combine(AppPath(), "template"));
+      if (!result.Exists)
+      {
+        result.Create();
+      }
+      return result;
+    }
+
+    public static DirectoryInfo GetLogDir()
+    {
+      DirectoryInfo result = new DirectoryInfo(Path.Combine(AppPath(), "log"));
       if (!result.Exists)
       {
         result.Create();
@@ -271,17 +281,7 @@ namespace RCPA
     {
       DirectoryInfo logDir = GetLogDir();
 
-      return logDir.FullName + "/" + ChangeExtension(new FileInfo(Application.ExecutablePath).Name, ".log");
-    }
-
-    public static DirectoryInfo GetLogDir()
-    {
-      DirectoryInfo result = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "/log");
-      if (!result.Exists)
-      {
-        result.Create();
-      }
-      return result;
+      return Path.Combine(logDir.FullName, ChangeExtension(new FileInfo(Application.ExecutablePath).Name, ".log"));
     }
 
     /// <summary>
@@ -290,9 +290,11 @@ namespace RCPA
     /// <returns></returns>
     public static string GetAssemblyPath()
     {
+      return AppDomain.CurrentDomain.BaseDirectory;
+      /*
       string _CodeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
 
-      _CodeBase = _CodeBase.Substring(8, _CodeBase.Length - 8);    // 8是 file:// 的长度
+      _CodeBase = _CodeBase.Substring(7, _CodeBase.Length - 7);    // 7是 file:// 的长度
 
       string[] arrSection = _CodeBase.Split(new char[] { '/' });
 
@@ -303,11 +305,12 @@ namespace RCPA
       }
 
       return _FolderPath;
+       */
     }
 
     public static string CreateDirectory(string parentDir, string name)
     {
-      var result = parentDir + "/" + name;
+      var result = Path.Combine(parentDir, name);
 
       if (!Directory.Exists(result))
       {
@@ -315,11 +318,6 @@ namespace RCPA
       }
 
       return new DirectoryInfo(result).FullName;
-    }
-
-    public static string GetFullLinixName(string fileName)
-    {
-      return new FileInfo(fileName).FullName.Replace("\\", "/");
     }
 
     public static List<List<string>> ReadCsvFile(string fileName)
@@ -367,6 +365,11 @@ namespace RCPA
     public static string ToLinuxFormat(string fileName)
     {
       return fileName.Replace("\\", "/");
+    }
+
+    public static string ToLinuxFullName(string fileName)
+    {
+      return new FileInfo(fileName).FullName.Replace("\\", "/");
     }
 
     /// <summary>

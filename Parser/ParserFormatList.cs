@@ -7,6 +7,7 @@ using System.Linq;
 using RCPA.Utils;
 using System.Xml.Linq;
 using System.Reflection;
+using System.ComponentModel;
 
 namespace RCPA.Parser
 {
@@ -14,23 +15,30 @@ namespace RCPA.Parser
   {
     public static ParserFormatList ReadFromOptionFile(string sectionName)
     {
-      var executeDir = FileUtils.GetAssemblyPath();
-      if (Directory.Exists(executeDir))
+      string optionFile = AppDomain.CurrentDomain.BaseDirectory + "/MiscOptions.xml";
+      if (File.Exists(optionFile))
       {
-        string optionFile = executeDir + "\\MiscOptions.xml";
-        if (File.Exists(optionFile))
+        var result = new ParserFormatList();
+
+        result.ReadFromFile(optionFile, sectionName);
+
+        result.Sort((p1, p2) => p1.GUInameIndex - p2.GUInameIndex);
+
+        return result;
+      }
+      else
+      {
+        bool designMode = (LicenseManager.UsageMode == LicenseUsageMode.Designtime);
+        if (!designMode)
         {
-          var result = new ParserFormatList();
-
-          result.ReadFromFile(optionFile, sectionName);
-
-          result.Sort((p1, p2) => p1.GUInameIndex - p2.GUInameIndex);
-
-          return result;
+          Console.Error.WriteLine(string.Format("Cannot find option file {0}", optionFile));
+          throw new Exception(string.Format("Cannot find option file {0}", optionFile));
+        }
+        else
+        {
+          return new ParserFormatList();
         }
       }
-
-      return null;
     }
 
     public void ReadFromFile(string fileName, string sectionName)

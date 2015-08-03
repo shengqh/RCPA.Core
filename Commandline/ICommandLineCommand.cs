@@ -39,7 +39,8 @@ namespace RCPA.Commandline
         }
         catch (Exception ex)
         {
-          Console.Error.WriteLine(ex.StackTrace);
+          Console.Error.WriteLine("Error: " + ex.Message);
+          Console.Error.WriteLine("Trace: " + ex.StackTrace);
           result = false;
         }
       }
