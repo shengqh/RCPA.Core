@@ -4,6 +4,7 @@ using System.IO.Compression;
 using System.Text;
 using System.Reflection;
 using RCPA.Utils;
+using ICSharpCode.SharpZipLib.GZip;
 
 namespace System.IO
 {
@@ -53,12 +54,14 @@ namespace System.IO
 
     public static StreamWriter GetWriter(string filename, bool gzipped)
     {
-      return gzipped ? new StreamWriter(new GZipStream(File.Create(filename), CompressionMode.Compress)) : new StreamWriter(filename);
+      //return gzipped ? new StreamWriter(new GZipStream(File.Create(filename), CompressionMode.Compress)) : new StreamWriter(filename);
+      return gzipped ? new StreamWriter(new GZipOutputStream(File.Create(filename))) : new StreamWriter(filename);
     }
 
     public static StreamReader GetReader(string filename)
     {
-      return filename.ToLower().EndsWith(".gz") ? new StreamReader(new GZipStream(File.OpenRead(filename), CompressionMode.Decompress)) : new StreamReader(filename);
+      //return filename.ToLower().EndsWith(".gz") ? new StreamReader(new GZipStream(File.OpenRead(filename), CompressionMode.Decompress)) : new StreamReader(filename);
+      return filename.ToLower().EndsWith(".gz") ? new StreamReader(new GZipInputStream(File.OpenRead(filename))) : new StreamReader(filename);
     }
   }
 }
