@@ -61,6 +61,8 @@ namespace RCPA.Commandline
         }
         else
         {
+          options.ResetDefaultValue(args);
+
           var files = GetProcessor(options).Process();
           if (files != null && files.Count() > 0)
           {

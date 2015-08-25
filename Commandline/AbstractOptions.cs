@@ -80,6 +80,8 @@ namespace RCPA.Commandline
     }
 
     public abstract bool PrepareOptions();
+
+    public virtual void ResetDefaultValue(string[] args) { }
   }
 
   public abstract class AbstractFileOptions : AbstractOptions

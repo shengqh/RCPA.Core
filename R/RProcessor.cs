@@ -25,7 +25,7 @@ namespace RCPA.R
     }
 
     public string RFile { get; set; }
-    
+
     public string ExpectResultFile { get; set; }
 
     public bool CreateNoWindow { get; set; }
@@ -47,7 +47,7 @@ namespace RCPA.R
       {
         StartInfo = new ProcessStartInfo
         {
-          FileName = options.RExecute.ToDoubleQuotes(),
+          FileName = File.Exists(options.RExecute) ? options.RExecute.ToDoubleQuotes() : options.RExecute,
           Arguments = string.Format("--vanilla {0} ", options.IsR ? "-f " + rfile + " --slave" : rfile),
           UseShellExecute = false,
           RedirectStandardOutput = true,
