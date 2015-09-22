@@ -31,6 +31,7 @@ namespace RCPA.Gui
       this.pnlFile = new System.Windows.Forms.Panel();
       this.txtOriginalFile = new System.Windows.Forms.TextBox();
       this.btnOriginalFile = new System.Windows.Forms.Button();
+      this.pnlButton.SuspendLayout();
       this.pnlFile.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -43,6 +44,11 @@ namespace RCPA.Gui
       // 
       this.progressBar.Location = new System.Drawing.Point(0, 59);
       this.progressBar.Size = new System.Drawing.Size(955, 23);
+      // 
+      // pnlButton
+      // 
+      this.pnlButton.Location = new System.Drawing.Point(0, 82);
+      this.pnlButton.Size = new System.Drawing.Size(955, 39);
       // 
       // btnClose
       // 
@@ -58,7 +64,7 @@ namespace RCPA.Gui
       // 
       // pnlFile
       // 
-      this.pnlFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.pnlFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.pnlFile.Controls.Add(this.txtOriginalFile);
       this.pnlFile.Controls.Add(this.btnOriginalFile);
@@ -91,9 +97,11 @@ namespace RCPA.Gui
       this.ClientSize = new System.Drawing.Size(955, 121);
       this.Controls.Add(this.pnlFile);
       this.Name = "AbstractFileProcessorUI";
+      this.Controls.SetChildIndex(this.pnlButton, 0);
       this.Controls.SetChildIndex(this.progressBar, 0);
       this.Controls.SetChildIndex(this.lblProgress, 0);
       this.Controls.SetChildIndex(this.pnlFile, 0);
+      this.pnlButton.ResumeLayout(false);
       this.pnlFile.ResumeLayout(false);
       this.pnlFile.PerformLayout();
       this.ResumeLayout(false);
