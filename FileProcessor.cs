@@ -53,6 +53,8 @@ namespace RCPA
   public interface IParallelTaskFileProcessor : IThreadFileProcessor
   {
     ParallelLoopState LoopState { get; set; }
+
+    string PrefixMessage { get; set; }
   }
 
   public abstract class AbstractThreadFileProcessor : ProgressClass, IThreadFileProcessor

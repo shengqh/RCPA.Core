@@ -157,7 +157,7 @@ namespace RCPA.Gui
 
     public void ValidateComponent()
     {
-      new ItemInfosValidator(adaptor, ValidateSelectedItemOnly, Required, (m => File.Exists(m)), FileDescription, "File not exists : {0}").Validate() ;
+      new ItemInfosValidator(adaptor, ValidateSelectedItemOnly, Required, (m => File.Exists(m)), FileDescription, "File not exists : {0}").Validate();
     }
 
     #endregion
@@ -180,5 +180,25 @@ namespace RCPA.Gui
     }
 
     #endregion
+
+    private void lbFiles_DragEnter(object sender, DragEventArgs e)
+    {
+      if (e.Data.GetDataPresent(DataFormats.FileDrop))
+      {
+        e.Effect = DragDropEffects.Copy;
+      }
+    }
+
+    private void lbFiles_DragDrop(object sender, DragEventArgs e)
+    {
+      string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+      foreach (string file in files)
+      {
+        if (!this.lbFiles.Items.Contains(file))
+        {
+          this.lbFiles.Items.Add(file);
+        }
+      }
+    }
   }
 }

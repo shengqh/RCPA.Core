@@ -43,6 +43,7 @@
       // 
       // lbFiles
       // 
+      this.lbFiles.AllowDrop = true;
       this.lbFiles.Dock = System.Windows.Forms.DockStyle.Fill;
       this.lbFiles.FormattingEnabled = true;
       this.lbFiles.Location = new System.Drawing.Point(0, 23);
@@ -51,6 +52,8 @@
       this.lbFiles.Size = new System.Drawing.Size(687, 419);
       this.lbFiles.Sorted = true;
       this.lbFiles.TabIndex = 5;
+      this.lbFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.lbFiles_DragDrop);
+      this.lbFiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.lbFiles_DragEnter);
       // 
       // panel1
       // 

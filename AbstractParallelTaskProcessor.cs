@@ -8,7 +8,14 @@ namespace RCPA
 {
   public abstract class AbstractParallelTaskProcessor : AbstractThreadProcessor, IParallelTaskProcessor
   {
+    public AbstractParallelTaskProcessor()
+    {
+      PrefixMessage = string.Empty;
+    }
+
     public ParallelLoopState LoopState { get; set; }
+
+    public string PrefixMessage { get; set; }
 
     public long From { get; set; }
 
@@ -28,7 +35,7 @@ namespace RCPA
     {
       if (null == LoopState)
       {
-        Progress.SetMessage(msg);
+        Progress.SetMessage(PrefixMessage + msg);
       }
     }
 

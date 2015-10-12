@@ -87,7 +87,7 @@ namespace RCPA.Seq
         Sequence seq;
         while ((seq = ff.ReadSequence(sr)) != null)
         {
-          Progress.SetPosition(StreamUtils.GetCharpos(sr));
+          Progress.SetPosition(sr.BaseStream.Position);
 
           if (isContaminant)
           {

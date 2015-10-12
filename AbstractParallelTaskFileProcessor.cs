@@ -8,6 +8,11 @@ namespace RCPA
 {
   public abstract class AbstractParallelTaskFileProcessor : AbstractThreadFileProcessor, IParallelTaskFileProcessor
   {
+    public AbstractParallelTaskFileProcessor()
+    {
+      PrefixMessage = string.Empty;
+    }
+
     public ParallelLoopState LoopState { get; set; }
 
     public long From { get; set; }
@@ -15,6 +20,8 @@ namespace RCPA
     public long To { get; set; }
 
     public long Position { get; set; }
+
+    public string PrefixMessage { get; set; }
 
     protected virtual bool IsLoopStopped
     {
@@ -28,7 +35,7 @@ namespace RCPA
     {
       if (null == LoopState)
       {
-        Progress.SetMessage(msg);
+        Progress.SetMessage(PrefixMessage + msg);
       }
     }
 

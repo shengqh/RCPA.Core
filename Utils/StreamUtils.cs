@@ -10,40 +10,59 @@ namespace System.IO
 {
   public static class StreamUtils
   {
-    public static long GetCharpos(this StreamReader s)
+    delegate long GetCharposFunc(StreamReader s);
+
+    private static GetCharposFunc funcByPlatform;
+
+    private static long GetCharposWindowsMono4(StreamReader s)
     {
-      if (SystemUtils.IsLinux) // in mono
+      Int32 charpos = (Int32)s.GetType().InvokeMember("charPos",
+      BindingFlags.DeclaredOnly |
+      BindingFlags.Public | BindingFlags.NonPublic |
+      BindingFlags.Instance | BindingFlags.GetField
+      , null, s, null);
+
+      Int32 charlen = (Int32)s.GetType().InvokeMember("charLen",
+      BindingFlags.DeclaredOnly |
+      BindingFlags.Public | BindingFlags.NonPublic |
+      BindingFlags.Instance | BindingFlags.GetField
+      , null, s, null);
+
+      return s.BaseStream.Position - charlen + charpos;
+    }
+
+    private static long GetCharposMono3(StreamReader s)
+    {
+      Int32 charpos = (Int32)s.GetType().InvokeMember("pos",
+      BindingFlags.DeclaredOnly |
+      BindingFlags.Public | BindingFlags.NonPublic |
+      BindingFlags.Instance | BindingFlags.GetField
+      , null, s, null);
+
+      Int32 charlen = (Int32)s.GetType().InvokeMember("decoded_count",
+      BindingFlags.DeclaredOnly |
+      BindingFlags.Public | BindingFlags.NonPublic |
+      BindingFlags.Instance | BindingFlags.GetField
+      , null, s, null);
+
+      return s.BaseStream.Position - charlen + charpos;
+    }
+
+    static StreamUtils()
+    {
+      if (SystemUtils.CurrentSystem == SystemType.Mono3Lower)
       {
-        Int32 charpos = (Int32)s.GetType().InvokeMember("pos",
-        BindingFlags.DeclaredOnly |
-        BindingFlags.Public | BindingFlags.NonPublic |
-        BindingFlags.Instance | BindingFlags.GetField
-        , null, s, null);
-
-        Int32 charlen = (Int32)s.GetType().InvokeMember("decoded_count",
-        BindingFlags.DeclaredOnly |
-        BindingFlags.Public | BindingFlags.NonPublic |
-        BindingFlags.Instance | BindingFlags.GetField
-        , null, s, null);
-
-        return s.BaseStream.Position - charlen + charpos;
+        funcByPlatform = GetCharposMono3;
       }
       else
       {
-        Int32 charpos = (Int32)s.GetType().InvokeMember("charPos",
-        BindingFlags.DeclaredOnly |
-        BindingFlags.Public | BindingFlags.NonPublic |
-        BindingFlags.Instance | BindingFlags.GetField
-        , null, s, null);
-
-        Int32 charlen = (Int32)s.GetType().InvokeMember("charLen",
-        BindingFlags.DeclaredOnly |
-        BindingFlags.Public | BindingFlags.NonPublic |
-        BindingFlags.Instance | BindingFlags.GetField
-        , null, s, null);
-
-        return s.BaseStream.Position - charlen + charpos;
+        funcByPlatform = GetCharposWindowsMono4;
       }
+    }
+
+    public static long GetCharpos(this StreamReader s)
+    {
+      return funcByPlatform(s);
     }
 
     public static void SetCharpos(this StreamReader s, long positionFromBegin)

@@ -4,11 +4,38 @@ using System.Text;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
+using System.Reflection;
 
 namespace RCPA.Utils
 {
+  public enum SystemType { Windows, Mono3Lower, Mono4Upper };
+
   public static class SystemUtils
   {
+    public static SystemType CurrentSystem { get; private set; }
+
+    static SystemUtils()
+    {
+      CurrentSystem = SystemType.Windows;
+
+      Type type = Type.GetType("Mono.Runtime");
+      if (type != null)
+      {
+        CurrentSystem = SystemType.Mono4Upper;
+
+        MethodInfo displayName = type.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
+        if (displayName != null)
+        {
+          var name = displayName.Invoke(null, null).ToString();
+          //Console.WriteLine("Current mono version = {0}", name);
+          if (name.Length > 1 && Char.IsDigit(name[0]) && int.Parse(name[0].ToString()) <= 3)
+          {
+            CurrentSystem = SystemType.Mono3Lower;
+          }
+        }
+      }
+    }
+
     private static object GetRegisteryValueRInstallPath()
     {
       var v = RegistryHelpers.GetRegistryValue(@"SOFTWARE\R-core\R\", "InstallPath");
@@ -70,8 +97,7 @@ namespace RCPA.Utils
     {
       get
       {
-        int p = (int)Environment.OSVersion.Platform;
-        return (p == 4) || (p == 6) || (p == 128);
+        return CurrentSystem != SystemType.Windows;
       }
     }
 
@@ -80,21 +106,21 @@ namespace RCPA.Utils
 
     [DllImport("kernel32.dll")]
     private static extern bool GetFileInformationByHandle(SafeFileHandle hFile, out BY_HANDLE_FILE_INFORMATION lpFileInformation);
-    
+
     [DllImport("kernel32.dll")]
     private static extern SafeFileHandle GetStdHandle(UInt32 nStdHandle);
-    
+
     [DllImport("kernel32.dll")]
     private static extern bool SetStdHandle(UInt32 nStdHandle, SafeFileHandle hHandle);
-    
+
     [DllImport("kernel32.dll")]
     private static extern bool DuplicateHandle(IntPtr hSourceProcessHandle, SafeFileHandle hSourceHandle, IntPtr hTargetProcessHandle, out SafeFileHandle lpTargetHandle, UInt32 dwDesiredAccess, Boolean bInheritHandle, UInt32 dwOptions);
-    
+
     private const UInt32 ATTACH_PARENT_PROCESS = 0xFFFFFFFF;
     private const UInt32 STD_OUTPUT_HANDLE = 0xFFFFFFF5;
     private const UInt32 STD_ERROR_HANDLE = 0xFFFFFFF4;
     private const UInt32 DUPLICATE_SAME_ACCESS = 2;
-    
+
     struct BY_HANDLE_FILE_INFORMATION
     {
       public UInt32 FileAttributes;
@@ -108,7 +134,7 @@ namespace RCPA.Utils
       public UInt32 FileIndexHigh;
       public UInt32 FileIndexLow;
     }
-    
+
     public static void InitConsoleHandles()
     {
       SafeFileHandle hStdOut, hStdErr, hStdOutDup, hStdErrDup;

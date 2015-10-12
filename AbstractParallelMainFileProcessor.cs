@@ -39,7 +39,7 @@ namespace RCPA
       }
     }
 
-    private List<string> _sourceFiles;
+    protected List<string> sourceFiles;
 
     public bool ParallelMode { get; set; }
 
@@ -52,7 +52,7 @@ namespace RCPA
         CancellationToken = _tokenSource.Token
       };
 
-      this._sourceFiles = ASourceFiles.ToList();
+      this.sourceFiles = ASourceFiles.ToList();
       this.ParallelMode = true;
     }
 
@@ -62,11 +62,11 @@ namespace RCPA
 
       var result = new ConcurrentBag<string>();
 
-      if (ParallelMode && _sourceFiles.Count > 1)
+      if (ParallelMode && sourceFiles.Count > 1)
       {
         var exceptions = new ConcurrentQueue<Exception>();
 
-        int totalCount = _sourceFiles.Count;
+        int totalCount = sourceFiles.Count;
 
         Progress.SetRange(0, totalCount);
 
@@ -74,7 +74,7 @@ namespace RCPA
         var finishedFiles = new ConcurrentList<string>();
         var curProcessors = new ConcurrentList<IParallelTaskFileProcessor>();
 
-        Parallel.ForEach(_sourceFiles, Option, (sourceFile, loopState) =>
+        Parallel.ForEach(sourceFiles, Option, (sourceFile, loopState) =>
         {
           curFiles.Add(sourceFile);
 
@@ -141,21 +141,22 @@ namespace RCPA
       }
       else
       {
-        for (int i = 0; i < _sourceFiles.Count; i++)
+        for (int i = 0; i < sourceFiles.Count; i++)
         {
           if (Progress.IsCancellationPending())
           {
             throw new UserTerminatedException();
           }
 
-          string rootMsg = MyConvert.Format("{0} / {1} : {2}", i + 1, _sourceFiles.Count, _sourceFiles[i]);
+          string rootMsg = MyConvert.Format("{0} / {1} : {2}", i + 1, sourceFiles.Count, sourceFiles[i]);
 
           Progress.SetMessage(1, rootMsg);
 
-          IParallelTaskFileProcessor processor = GetTaskProcessor(aPath, _sourceFiles[i]);
+          IParallelTaskFileProcessor processor = GetTaskProcessor(aPath, sourceFiles[i]);
+          processor.PrefixMessage = string.Format("{0} / {1} :", i + 1, sourceFiles.Count);
           processor.Progress = Progress;
 
-          var curResult = processor.Process(_sourceFiles[i]);
+          var curResult = processor.Process(sourceFiles[i]);
 
           foreach (var f in curResult)
           {
