@@ -384,6 +384,7 @@
       <DependentUpon>RcpaListBox.cs</DependentUpon>
     </Compile>
     <Compile Include="R\RTemplateProcessor.cs" />
+    <Compile Include="R\RUtils.cs" />
     <Compile Include="Seq\AccessNumberParser.cs" />
     <Compile Include="Seq\AccessNumberParserFactory.cs" />
     <Compile Include="Seq\AutoAccessNumberParser.cs" />
@@ -395,7 +396,6 @@
     <Compile Include="Seq\ISequenceFormat.cs" />
     <Compile Include="Seq\NoExceptionAccessNumberParser.cs" />
     <Compile Include="Seq\PseudoSequenceBuilder.cs" />
-    <Compile Include="Seq\ReversedDatabaseBuilder.cs" />
     <Compile Include="Seq\Sequence.cs" />
     <Compile Include="Seq\SequenceUtils.cs" />
     <Compile Include="Time\ICounter.cs" />
