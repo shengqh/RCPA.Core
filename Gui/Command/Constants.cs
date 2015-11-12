@@ -14,7 +14,7 @@ namespace RCPA.Gui.Command
     public static String FormatTitle(String title, String version,
                                      String authorContact)
     {
-      return title + " - " + version + " - " + authorContact + " - RCPA/SIBS";
+      return title + " - " + version + " - " + authorContact + " - CQS/RCPA";
     }
 
     public static String GetSqhVanderbiltTitle(String title, String version)
