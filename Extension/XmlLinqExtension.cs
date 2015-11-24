@@ -154,6 +154,14 @@ namespace System.Xml.Linq
       return result;
     }
 
+    public static Dictionary<string, string> ToDictionary(this XElement ele, string subElementName, string keyAttribute, string valueAttribute)
+    {
+      return (from e in ele.FindDescendants(subElementName)
+              let key = e.Attribute(keyAttribute).Value
+              let value = e.Attribute(valueAttribute).Value
+              select new { Key = key, Value = value }).ToDictionary(m => m.Key, m => m.Value);
+    }
+
     private static void DoFindDescendants(this XElement ele, string name, List<XElement> result)
     {
       if (ele.Name.LocalName == name)
