@@ -373,6 +373,30 @@ namespace RCPA
     }
 
     /// <summary>
+    /// Read lines. If fileName equals "-", stdin will be assumed as input.
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <returns></returns>
+    public static List<string> ReadFileLines(string fileName)
+    {
+      List<string> result = new List<string>();
+      if ("-".Equals(fileName))
+      {
+        string line;
+        while ((line = Console.In.ReadLine()) != null)
+        {
+          result.Add(line);
+        }
+      }
+      else
+      {
+        result.AddRange(File.ReadAllLines(fileName));
+      }
+
+      return result;
+    }
+
+    /// <summary>
     /// Transform the columns and the rows of the file
     /// </summary>
     /// <param name="sourceFile"></param>
