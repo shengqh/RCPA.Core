@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ICSharpCode.SharpZipLib.Zip;
+using System;
 using System.IO;
-using ICSharpCode.SharpZipLib.Zip;
 using System.IO.Compression;
-using ICSharpCode.SharpZipLib.GZip;
 
 namespace RCPA.Utils
 {
@@ -75,7 +71,7 @@ namespace RCPA.Utils
     {
       using (Stream fd = File.Create(targetFile))
       using (Stream fs = File.OpenRead(sourceFile))
-      using (Stream csStream = new GZipInputStream(fs))
+      using (Stream csStream = new GZipStream(fs, CompressionMode.Decompress))
       {
         byte[] buffer = new byte[1024];
         int nRead;

@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using CommandLine;
 using CommandLine.Text;
+using System.Linq;
 
 namespace RCPA.Commandline
 {
@@ -58,6 +59,40 @@ namespace RCPA.Commandline
       {
         _parsingErrors.Add(string.Format("Error regex pattern of {0} : {1}", patternName, pattern));
         return false;
+      }
+    }
+
+    protected void CheckProperty(string propertyName)
+    {
+      var properties = this.GetType().GetProperties().ToDictionary(m => m.Name);
+      if (!properties.ContainsKey(propertyName))
+      {
+        throw new ArgumentException("Property {0} not exist.", propertyName);
+      }
+
+      var pi = properties[propertyName];
+
+      OptionAttribute oa = (OptionAttribute)Attribute.GetCustomAttribute(pi, typeof(OptionAttribute));
+      if (oa == null)
+      {
+        throw new ArgumentException("Property {0} doesn't have attribute Option.", propertyName);
+      }
+
+      if (oa.MetaValue.Equals("FILE"))
+      {
+        string filename = pi.GetValue(this, null) as string;
+        if (!string.IsNullOrEmpty(filename) && !File.Exists(filename))
+        {
+          ParsingErrors.Add(string.Format("{0} not exists : {1}.", oa.HelpText, filename));
+        }
+      }
+      else if (oa.MetaValue.Equals("DIRECTORY"))
+      {
+        string dirname = pi.GetValue(this, null) as string;
+        if (!string.IsNullOrEmpty(dirname) && !Directory.Exists(dirname))
+        {
+          ParsingErrors.Add(string.Format("{0} not exists : {1}.", oa.HelpText, dirname));
+        }
       }
     }
 

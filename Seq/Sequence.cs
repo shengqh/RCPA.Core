@@ -7,7 +7,7 @@ namespace RCPA.Seq
 {
   public class Sequence
   {
-    private static Regex reg = new Regex(@"\s*(\S+)(.*)");
+    private static Regex reg = new Regex(@"\s*(\S+)\s*(.*)");
 
     public string SeqString { get; set; }
 

@@ -90,8 +90,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\SQH.Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="LumenWorks.Framework.IO">
       <HintPath>..\SQH.Lib\LumenWorks.Framework.IO.dll</HintPath>
@@ -400,9 +401,9 @@
     <Compile Include="Seq\SequenceUtils.cs" />
     <Compile Include="Time\ICounter.cs" />
     <Compile Include="Utils\BeanUtils.cs" />
+    <Compile Include="Utils\MapReader.cs" />
     <Compile Include="Utils\MultipleLinesExtractor.cs" />
     <Compile Include="Utils\MultipleLinesExtractorOptions.cs" />
-    <Compile Include="Utils\NumericalRecipes.cs" />
     <Compile Include="Utils\RegistryHelpers.cs" />
     <Compile Include="Utils\ResizeAndRotationHelper.cs" />
     <Compile Include="Utils\GraphicsUtils.cs" />
@@ -509,10 +510,10 @@
     <Compile Include="Utils\SystemUtils.cs" />
     <Compile Include="Utils\TimeCost.cs" />
     <Compile Include="Utils\WorkerProgressCallback.cs" />
+    <Compile Include="Utils\XmlUtils.cs" />
     <Compile Include="Utils\ZipUtils.cs" />
     <Compile Include="Extension\XmlLinqExtension.cs" />
     <Compile Include="Utils\XmlHelper.cs" />
-    <Compile Include="XmlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ExternalProgramConfigUI.resx">

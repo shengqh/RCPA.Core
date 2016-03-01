@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
 using System.IO;
 using System.IO.Compression;
-using ICSharpCode.SharpZipLib.GZip;
+using System.Security.Cryptography;
 
 namespace RCPA.Utils
 {
@@ -89,7 +86,7 @@ namespace RCPA.Utils
 
     public static string GetGzippedMD5Hash(string fileName, bool forceCalculation = false, bool cacheMD5File = true)
     {
-      return DoGetMD5Hash(fileName, m => new GZipInputStream(File.OpenRead(m)), forceCalculation, cacheMD5File);
+      return DoGetMD5Hash(fileName, m => new GZipStream(File.OpenRead(m), CompressionMode.Decompress), forceCalculation, cacheMD5File);
     }
 
     public static string GetZippedMD5Hash(string fileName, bool forceCalculation = false, bool cacheMD5File = true)

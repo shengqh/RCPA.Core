@@ -1,24 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using RCPA;
 using System.Text;
-using RCPA;
 
 namespace System.Xml
 {
   public static class XmlExtensions
   {
-    public static XmlWriter CreateXmlWriter(string fileName, Encoding encoding = null)
-    {
-      var enc = null == encoding ? Encoding.UTF8 : encoding;
-      var setting = new XmlWriterSettings()
-      {
-        Encoding = enc,
-        Indent = true
-      };
-      return XmlWriter.Create(fileName, setting);
-    }
-
     public static bool MoveToElement(this XmlReader xr, string localName)
     {
       if (!xr.IsStartElement(localName))
@@ -44,7 +30,7 @@ namespace System.Xml
     public static void WriteAttribute(this XmlWriter xw, string localName, object value)
     {
       xw.WriteStartAttribute(localName);
-      xw.WriteValue(value);
+      xw.WriteValue(value.ToString());
       xw.WriteEndAttribute();
     }
 

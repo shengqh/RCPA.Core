@@ -64,6 +64,45 @@ namespace System.Xml.Linq
       }
     }
 
+    public static int GetAttributeValue(this XElement parent, string attrName, int defaultValue)
+    {
+      var attr = parent.Attribute(attrName);
+      if (attr == null)
+      {
+        return defaultValue;
+      }
+      else
+      {
+        return int.Parse(attr.Value);
+      }
+    }
+
+    public static double GetAttributeValue(this XElement parent, string attrName, double defaultValue)
+    {
+      var attr = parent.Attribute(attrName);
+      if (attr == null)
+      {
+        return defaultValue;
+      }
+      else
+      {
+        return double.Parse(attr.Value);
+      }
+    }
+
+    public static bool GetAttributeValue(this XElement parent, string attrName, bool defaultValue)
+    {
+      var attr = parent.Attribute(attrName);
+      if (attr == null)
+      {
+        return defaultValue;
+      }
+      else
+      {
+        return bool.Parse(attr.Value);
+      }
+    }
+
     public static string GetChildValue(this XElement parent, string childName, string defaultValue)
     {
       var result = parent.Element(childName);
