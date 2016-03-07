@@ -79,7 +79,8 @@ namespace RCPA.R
         RFile = targetrfile,
         ExpectResultFile = options.NoResultFile ? string.Empty : options.OutputFile,
         CreateNoWindow = options.CreateNoWindow
-      }).Process();
+      })
+      { Progress = this.Progress }.Process();
     }
 
     protected virtual void WriteAdditionalDefinitions(StreamWriter sw) { }
