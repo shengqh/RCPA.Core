@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 using System.Reflection;
+using System.IO;
 
 namespace RCPA.Utils
 {
@@ -38,25 +39,34 @@ namespace RCPA.Utils
 
     private static object GetRegisteryValueRInstallPath()
     {
-      var v = RegistryHelpers.GetRegistryValue(@"SOFTWARE\R-core\R\", "InstallPath");
-      return v;
+      return RegistryHelpers.GetRegistryValue(@"SOFTWARE\R-core\R\", "InstallPath");
     }
 
-    public static string GetRscriptExecuteLocation()
+    public static string GetRscriptExecuteLocation(bool throwException = true)
     {
       var v = GetRegisteryValueRInstallPath();
       if (v == null)
       {
+        if (throwException)
+        {
+          throw new FileNotFoundException("Cannot find R from system registration, please install R!");
+        }
+
         return null;
       }
       return (string)v + (Environment.Is64BitOperatingSystem ? @"\bin\x64\Rscript.exe" : @"\bin\Rscript.exe");
     }
 
-    public static string GetRExecuteLocation()
+    public static string GetRExecuteLocation(bool throwException = true)
     {
       var v = GetRegisteryValueRInstallPath();
       if (v == null)
       {
+        if (throwException)
+        {
+          throw new FileNotFoundException("Cannot find R from system registration, please install R!");
+        }
+
         return null;
       }
       return (string)v + (Environment.Is64BitOperatingSystem ? @"\bin\x64\R.exe" : @"\bin\R.exe");

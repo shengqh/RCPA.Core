@@ -30,10 +30,16 @@ namespace RCPA.R
 
     public override IEnumerable<string> Process()
     {
+      if (!File.Exists(options.RTemplate))
+      {
+        throw new FileNotFoundException("Cannot find R template " + options.RTemplate);
+      }
+
       var outputdir = Path.GetDirectoryName(options.OutputFile).Replace("\\", "/");
       var inputfile = options.InputFile.Replace("\\", "/");
 
       var targetrfile = options.OutputFile + ".r";
+      Progress.SetMessage("Saving r file to " + targetrfile + "...");
       using (var sw = new StreamWriter(targetrfile))
       {
         sw.WriteLine("outputdir<-\"{0}\"", outputdir);
@@ -44,11 +50,13 @@ namespace RCPA.R
           sw.WriteLine("outputfile<-\"{0}\"", outputfile);
         }
 
+        Progress.SetMessage("Writing parameters ...");
         foreach (var param in options.Parameters)
         {
           sw.WriteLine(param);
         }
 
+        Progress.SetMessage("Writing additional informations ...");
         WriteAdditionalDefinitions(sw);
 
         bool hasPredefined = File.ReadAllText(options.RTemplate).Contains(PREDEFINED_END);
@@ -57,6 +65,7 @@ namespace RCPA.R
         {
           if (hasPredefined)
           {
+            Progress.SetMessage("Ignore predefined section ...");
             while ((line = sr.ReadLine()) != null)
             {
               if (line.Contains(PREDEFINED_END))
@@ -66,14 +75,18 @@ namespace RCPA.R
             }
           }
 
+          Progress.SetMessage("Copy lines from template " + options.RTemplate + "...");
           while ((line = sr.ReadLine()) != null)
           {
             sw.WriteLine(line);
           }
         }
       }
+      Progress.SetMessage("R file saved to " + targetrfile);
 
-      return new RProcessor(new RProcessorOptions()
+      Progress.SetMessage("Processing R file " + targetrfile + "...");
+
+      var result = new RProcessor(new RProcessorOptions()
       {
         RExecute = options.RExecute,
         RFile = targetrfile,
@@ -81,6 +94,10 @@ namespace RCPA.R
         CreateNoWindow = options.CreateNoWindow
       })
       { Progress = this.Progress }.Process();
+
+      Progress.SetMessage("R file " + targetrfile + " processed.");
+
+      return result;
     }
 
     protected virtual void WriteAdditionalDefinitions(StreamWriter sw) { }

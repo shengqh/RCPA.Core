@@ -29,6 +29,10 @@ namespace RCPA.Utils
     public static object GetRegistryValue(string keyPath, string keyName)
     {
       RegistryKey registry = GetRegistryKey(keyPath);
+      if(registry == null)
+      {
+        return null;
+      }
       return registry.GetValue(keyName);
     }
   }
