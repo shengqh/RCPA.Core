@@ -33,7 +33,7 @@ namespace RCPA
       base.OnAfterLoadOption(e);
       if (string.IsNullOrWhiteSpace(rExecute.FullName) || !File.Exists(rExecute.FullName))
       {
-        rExecute.FullName = SystemUtils.GetRExecuteLocation();
+        rExecute.FullName = SystemUtils.GetRExecuteLocation(false);
       }
     }
 
@@ -46,7 +46,7 @@ namespace RCPA
       }
       else
       {
-        throw new ArgumentException("Cannot find definition of {0}", programName);
+        throw new ArgumentException("Cannot find definition of " + programName);
       }
     }
 
@@ -93,6 +93,20 @@ namespace RCPA
     {
       config.LoadOption();
 
+      var program = config.GetExternalProgram(programName);
+
+      if (SystemUtils.IsLinux)
+      {
+        if (!string.IsNullOrWhiteSpace(program))
+        {
+          return program;
+        }
+        else
+        {
+          return programName;
+        }
+      }
+
       if (File.Exists(config.GetExternalProgram(programName)))
       {
         return config.GetExternalProgram(programName);
@@ -100,13 +114,17 @@ namespace RCPA
 
       try
       {
-        while (config.MyShowDialog() == DialogResult.OK)
+        if (config.MyShowDialog() == DialogResult.OK)
         {
           var filename = config.GetExternalProgram(programName);
           if (File.Exists(filename))
           {
             return filename;
           }
+        }
+        else
+        {
+          throw new Exception("You may need to call Setup->Extenal programs to setup " + programName);
         }
       }
       catch (Exception)

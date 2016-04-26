@@ -4,7 +4,7 @@ namespace RCPA.Gui
 {
   public class ProgressClass : IProgress
   {
-    private IProgressCallback progress = new ConsoleProgressCallback();
+    private IProgressCallback progress = new EmptyProgressCallback();
 
     public IProgressCallback Progress
     {
@@ -16,7 +16,7 @@ namespace RCPA.Gui
       {
         if (value == null)
         {
-          this.progress = new ConsoleProgressCallback();
+          this.progress = new EmptyProgressCallback();
         }
         else
         {

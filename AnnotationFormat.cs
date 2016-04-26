@@ -27,7 +27,10 @@ namespace RCPA
     public AnnotationFormat(string ignoreHeaderPattern = null)
     {
       this.ignoreHeaderPattern = ignoreHeaderPattern;
+      this.EndRegex = null;
     }
+
+    public Regex EndRegex { get; set; }
 
     public virtual List<Annotation> ReadFromFile(string fileName)
     {
@@ -54,6 +57,11 @@ namespace RCPA
         while ((line = sr.ReadLine()) != null)
         {
           if (line.Trim() == string.Empty)
+          {
+            break;
+          }
+
+          if(EndRegex != null && EndRegex.Match(line).Success)
           {
             break;
           }

@@ -150,6 +150,58 @@ namespace RCPA.Utils
       return result;
     }
 
+    public static double PearsonCorrelation(double[] x, double[] y, int maxLength)
+    {
+      if (null == x || null == y)
+      {
+        throw new ArgumentException("Argument x or y is null!");
+      }
+
+      if (0 == x.Length || 0 == y.Length)
+      {
+        throw new ArgumentException("Argument x or y is empty!");
+      }
+
+      double avga = 0;
+      double avgb = 0;
+      for (int i = 0; i < maxLength; i++)
+      {
+        avga += x[i];
+        avgb += y[i];
+      }
+      avga /= maxLength;
+      avgb /= maxLength;
+
+      double agr = 0;
+      double vara = 0;
+      double varb = 0;
+
+      for (int i = 0; i < maxLength; i++)
+      {
+        var xx = x[i] - avga;
+        var yy = y[i] - avgb;
+        agr += xx * yy;
+        vara += xx * xx;
+        varb += yy * yy;
+      }
+
+      double result;
+      if (vara == 0 || varb == 0)
+      {
+        result = 0;
+      }
+      else
+      {
+        result = (agr / Math.Sqrt(vara * varb));
+      }
+
+      if (Double.IsNaN(result))
+      {
+        throw new ArgumentException("NAN->" + agr + " " + vara + " " + varb);
+      }
+      return result;
+    }
+
     #region Nested type: SS
 
     private class SS

@@ -39,7 +39,29 @@ namespace RCPA.Utils
 
     private static object GetRegisteryValueRInstallPath()
     {
-      return RegistryHelpers.GetRegistryValue(@"SOFTWARE\R-core\R\", "InstallPath");
+      var reg = RegistryHelpers.GetRegistryKey(@"SOFTWARE\R-core\R\");
+      if (reg == null)
+      {
+        return null;
+      }
+
+      var path = reg.GetValue("InstallPath");
+      if (path != null)
+      {
+        return path;
+      }
+
+      foreach (var key in reg.GetSubKeyNames())
+      {
+        var subreg = reg.OpenSubKey(key);
+        var subpath = subreg.GetValue("InstallPath");
+        if (subpath != null)
+        {
+          return subpath;
+        }
+      }
+
+      return null;
     }
 
     public static string GetRscriptExecuteLocation(bool throwException = true)
@@ -59,6 +81,11 @@ namespace RCPA.Utils
 
     public static string GetRExecuteLocation(bool throwException = true)
     {
+      if (SystemUtils.IsLinux)
+      {
+        return "R";
+      }
+
       var v = GetRegisteryValueRInstallPath();
       if (v == null)
       {

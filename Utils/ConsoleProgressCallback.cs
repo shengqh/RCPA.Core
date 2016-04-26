@@ -57,7 +57,16 @@ namespace RCPA.Utils
 
     public override void SetMessage(int labelIndex, string message)
     {
-      Console.WriteLine("{0:yyyyMMdd HH:mm:ss} - {1}", DateTime.Now, message);
+      try
+      {
+        var timenow = DateTime.Now;
+        var timenowstr = timenow.ToString("yyyyMMdd HH:mm:ss");
+        Console.WriteLine("{0} - {1}", timenowstr, message);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine("Writing message failed : " + ex.Message);
+      }
     }
 
     public override void Begin() { }
