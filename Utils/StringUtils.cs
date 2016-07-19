@@ -147,5 +147,57 @@ namespace System
       // Convert the input string to a byte array and compute the hash. 
       return ByteToHexString(md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input)));
     }
+
+    private static string GetConcatOverlap(string s1, string s2, int minOverlap)
+    {
+      var minI = Math.Max(1, s1.Length - s2.Length);
+      var maxI = s1.Length - minOverlap;
+      for (int i = minI; i <= maxI; i++)
+      {
+        var bEquals = true;
+        for (int j = i; j < s1.Length; j++)
+        {
+          if (s1[j] != s2[j - i])
+          {
+            bEquals = false;
+            break;
+          }
+        }
+        if (bEquals)
+        {
+          return s1.Substring(0, i) + s2;
+        }
+      }
+
+      return null;
+    }
+
+
+    public static string ConcatOverlap(string s1, string s2, double minPercentage)
+    {
+      if (s1.Length < s2.Length)
+      {
+        if (s2.Contains(s1))
+        {
+          return s2;
+        }
+      }
+      else
+      {
+        if (s1.Contains(s2))
+        {
+          return s1;
+        }
+      }
+
+      var minLen = Math.Min(s1.Length, s2.Length);
+      var minOverlap = (int)(minLen * minPercentage);
+      var result = GetConcatOverlap(s1, s2, minOverlap);
+      if (result == null)
+      {
+        result = GetConcatOverlap(s2, s1, minOverlap);
+      }
+      return result;
+    }
   }
 }

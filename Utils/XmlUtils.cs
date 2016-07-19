@@ -5,10 +5,24 @@ namespace RCPA.Utils
 {
   public static class XmlUtils
   {
-    public static XmlTextWriter CreateWriter(string fileName, Encoding encoding = null)
+    public static XmlTextWriter CreateWriter(string fileName, Encoding encoding)
     {
-      var enc = null == encoding ? new UTF8Encoding(false) : encoding;
-      var result = new XmlTextWriter(fileName, enc);
+      XmlTextWriter result;
+      if (null == encoding)
+      {
+        result = CreateWriter(fileName);
+      }
+      else
+      {
+        result = new XmlTextWriter(fileName, encoding);
+      }
+      result.Formatting = Formatting.Indented;
+      return result;
+    }
+
+    public static XmlTextWriter CreateWriter(string fileName)
+    {
+      var result = new XmlTextWriter(fileName, new UTF8Encoding(false));
       result.Formatting = Formatting.Indented;
       return result;
     }

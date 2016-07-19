@@ -10,7 +10,6 @@ namespace RCPA.Gui
     private readonly TextBoxBase labels;
     private readonly ProgressBar[] progressBars;
 
-
     public WorkerProgressChangedTextBoxProxy(TextBoxBase labels, ProgressBar[] progressBars)
     {
       this.labels = labels;
@@ -37,20 +36,30 @@ namespace RCPA.Gui
         }
         else
         {
-          this.labels.AppendLine(eState.LabelText);
-          this.labels.SelectionStart = this.labels.Text.Length;
-          this.labels.ScrollToCaret();
+          AddLine(eState.LabelText);
         }
       }
 
       if (e.UserState is string)
       {
-        this.labels.AppendLine((string)e.UserState);
-        this.labels.SelectionStart = this.labels.Text.Length;
-        this.labels.ScrollToCaret();
+        AddLine((string)e.UserState);
       }
 
       this.progressBars[0].Value = e.ProgressPercentage;
+    }
+
+    private void AddLine(string line)
+    {
+      if (this.labels.SelectionStart == this.labels.Text.Length)
+      {
+        this.labels.AppendLine(line);
+        this.labels.SelectionStart = this.labels.Text.Length;
+        this.labels.ScrollToCaret();
+      }
+      else
+      {
+        this.labels.AppendLine(line);
+      }
     }
   }
 }
