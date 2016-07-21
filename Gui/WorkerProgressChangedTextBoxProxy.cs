@@ -50,16 +50,7 @@ namespace RCPA.Gui
 
     private void AddLine(string line)
     {
-      if (this.labels.SelectionStart == this.labels.Text.Length)
-      {
-        this.labels.AppendLine(line);
-        this.labels.SelectionStart = this.labels.Text.Length;
-        this.labels.ScrollToCaret();
-      }
-      else
-      {
-        this.labels.AppendLine(line);
-      }
+      this.labels.AppendLine(line);
     }
   }
 }
