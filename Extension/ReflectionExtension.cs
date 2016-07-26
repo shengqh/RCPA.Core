@@ -27,7 +27,7 @@ public static class ReflectionExtension
                   where srcProp.CanRead
                   && targetProperty != null
                   && (targetProperty.GetSetMethod(true) != null && !targetProperty.GetSetMethod(true).IsPrivate)
-                  && (targetProperty.GetSetMethod().Attributes & MethodAttributes.Static) == 0
+                  && (targetProperty.GetSetMethod(true).Attributes & MethodAttributes.Static) == 0
                   && targetProperty.PropertyType.IsAssignableFrom(srcProp.PropertyType)
                   select new { sourceProperty = srcProp, targetProperty = targetProperty };
     //map the properties
