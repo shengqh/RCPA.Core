@@ -202,6 +202,42 @@ namespace RCPA.Utils
       return result;
     }
 
+    public static double KullbackLeiblerDistance(double[] x, double[] y, int maxLength)
+    {
+      if (null == x || null == y)
+      {
+        throw new ArgumentException("Argument x or y is null!");
+      }
+
+      if (x.Length < maxLength || y.Length < y.Length)
+      {
+        throw new ArgumentException("Length of x or y is less than " + maxLength.ToString());
+      }
+
+      var xx = new double[maxLength];
+      var yy = new double[maxLength];
+      var xsum = 0.0;
+      var ysum = 0.0;
+      for (int i = 0; i < maxLength; i++)
+      {
+        xx[i] = x[i] <= 0.0 ? 1e-7 : x[i];
+        yy[i] = y[i] <= 0.0 ? 1e-7 : y[i];
+        xsum += xx[i];
+        ysum += yy[i];
+      }
+
+      var d1 = 0.0;
+      var d2 = 0.0;
+      for (int i = 0; i < maxLength; i++)
+      {
+        xx[i] = xx[i] / xsum;
+        yy[i] = yy[i] / ysum;
+        d1 += xx[i] * Math.Log(xx[i] / yy[i], 2);
+        d2 += yy[i] * Math.Log(yy[i] / xx[i], 2);
+      }
+      return (d1 + d2) / 2;
+    }
+
     #region Nested type: SS
 
     private class SS

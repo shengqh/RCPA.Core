@@ -83,7 +83,7 @@ namespace RCPA.Commandline
         string filename = pi.GetValue(this, null) as string;
         if (!string.IsNullOrEmpty(filename) && !File.Exists(filename))
         {
-          ParsingErrors.Add(string.Format("{0} not exists : {1}.", oa.HelpText, filename));
+          ParsingErrors.Add(string.Format("File {0} not exists : {1}.", oa.HelpText, filename));
         }
       }
       else if (oa.MetaValue.Equals("DIRECTORY"))
@@ -91,7 +91,17 @@ namespace RCPA.Commandline
         string dirname = pi.GetValue(this, null) as string;
         if (!string.IsNullOrEmpty(dirname) && !Directory.Exists(dirname))
         {
-          ParsingErrors.Add(string.Format("{0} not exists : {1}.", oa.HelpText, dirname));
+          ParsingErrors.Add(string.Format("Directory {0} not exists : {1}.", oa.HelpText, dirname));
+        }
+      }else if (oa.MetaValue.Equals("FILELIST"))
+      {
+        IList<string> filenames = pi.GetValue(this, null) as IList<string>;
+        foreach (var filename in filenames)
+        {
+          if (!string.IsNullOrEmpty(filename) && !File.Exists(filename))
+          {
+            ParsingErrors.Add(string.Format("File {0} not exists : {1}.", oa.HelpText, filename));
+          }
         }
       }
     }
