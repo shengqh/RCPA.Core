@@ -148,10 +148,10 @@ namespace System
       return ByteToHexString(md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input)));
     }
 
-    private static string GetConcatOverlap(string s1, string s2, int minOverlap)
+    private static string GetConcatOverlap(string s1, string s2, int minOverlapLength)
     {
       var minI = Math.Max(1, s1.Length - s2.Length);
-      var maxI = s1.Length - minOverlap;
+      var maxI = s1.Length - minOverlapLength;
       for (int i = minI; i <= maxI; i++)
       {
         var bEquals = true;
@@ -172,8 +172,7 @@ namespace System
       return null;
     }
 
-
-    public static string ConcatOverlap(string s1, string s2, double minPercentage)
+    public static string ConcatOverlapByPercentage(string s1, string s2, double minPercentage)
     {
       if (s1.Length < s2.Length)
       {
@@ -191,11 +190,37 @@ namespace System
       }
 
       var minLen = Math.Min(s1.Length, s2.Length);
-      var minOverlap = (int)(minLen * minPercentage);
-      var result = GetConcatOverlap(s1, s2, minOverlap);
+      var minOverlapLength = (int)(minLen * minPercentage);
+      var result = GetConcatOverlap(s1, s2, minOverlapLength);
       if (result == null)
       {
-        result = GetConcatOverlap(s2, s1, minOverlap);
+        result = GetConcatOverlap(s2, s1, minOverlapLength);
+      }
+      return result;
+    }
+
+    public static string ConcatOverlapByExtensionNumber(string s1, string s2, int maxExtension)
+    {
+      if (s1.Length < s2.Length)
+      {
+        if (s2.Contains(s1))
+        {
+          return s2;
+        }
+      }
+      else
+      {
+        if (s1.Contains(s2))
+        {
+          return s1;
+        }
+      }
+
+      var minOverlapLength = Math.Min(s1.Length, s2.Length) - maxExtension;
+      var result = GetConcatOverlap(s1, s2, minOverlapLength);
+      if (result == null)
+      {
+        result = GetConcatOverlap(s2, s1, minOverlapLength);
       }
       return result;
     }
