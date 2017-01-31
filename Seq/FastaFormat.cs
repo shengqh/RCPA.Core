@@ -6,6 +6,12 @@ namespace RCPA.Seq
 {
   public class FastaFormat : ISequenceFormat
   {
+    private int widthPerLine;
+    public FastaFormat(int widthPerLine = 70)
+    {
+      this.widthPerLine = widthPerLine;
+    }
+
     #region ISequenceFormat Members
 
     public Sequence ReadSequence(StreamReader reader)
@@ -48,7 +54,7 @@ namespace RCPA.Seq
       int pos = 0;
       while (pos < sequence.Length)
       {
-        int count = Math.Min(70, sequence.Length - pos);
+        int count = Math.Min(widthPerLine, sequence.Length - pos);
         writer.WriteLine(sequence.Substring(pos, count));
         pos += count;
       }

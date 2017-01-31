@@ -50,8 +50,8 @@ namespace RCPA.Commandline
 
     private bool DoProcess(string[] args, bool result)
     {
-      var options = CommandLine.Parser.Default.ParseArguments<T>(args, () => { result = false; });
-
+      var options = new T();
+      result = CommandLine.Parser.Default.ParseArguments(args, options);
       if (result)
       {
         if (!options.PrepareOptions())
@@ -76,6 +76,11 @@ namespace RCPA.Commandline
             }
           }
         }
+      }
+      else
+      {
+        Console.Out.WriteLine((from er in options.LastParserState.Errors select er.ToString()).Merge("\n"));
+        result = false;
       }
       return result;
     }
