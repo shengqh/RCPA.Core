@@ -24,9 +24,11 @@ namespace RCPA
     }
 
     private string ignoreHeaderPattern;
-    public AnnotationFormat(string ignoreHeaderPattern = null)
+    private bool hasHeader;
+    public AnnotationFormat(string ignoreHeaderPattern = null, bool hasHeader=true)
     {
       this.ignoreHeaderPattern = ignoreHeaderPattern;
+      this.hasHeader = hasHeader;
       this.EndRegex = null;
     }
 
@@ -39,20 +41,28 @@ namespace RCPA
       using (StreamReader sr = new StreamReader(fileName))
       {
         string line;
-        while ((line = sr.ReadLine()) != null)
+
+        if (hasHeader)
         {
-          if (string.IsNullOrEmpty(ignoreHeaderPattern))
+          while ((line = sr.ReadLine()) != null)
           {
-            break;
+            if (string.IsNullOrEmpty(ignoreHeaderPattern))
+            {
+              break;
+            }
+
+            if (!Regex.Match(line, ignoreHeaderPattern).Success)
+            {
+              break;
+            }
           }
 
-          if (!Regex.Match(line, ignoreHeaderPattern).Success)
-          {
-            break;
-          }
+          InitializeLineFormat(line);
         }
-
-        InitializeLineFormat(line);
+        else
+        {
+          _format = null;
+        }
 
         while ((line = sr.ReadLine()) != null)
         {
@@ -64,6 +74,13 @@ namespace RCPA
           if(EndRegex != null && EndRegex.Match(line).Success)
           {
             break;
+          }
+
+          if(!hasHeader && _format == null)
+          {
+            var parts = line.Split('\t');
+            var header = (from i in Enumerable.Range(1, parts.Length) select "X" + i.ToString()).Merge("\t");
+            InitializeLineFormat(header);
           }
 
           result.Add(Format.ParseString(line));
