@@ -38,8 +38,9 @@
       this.btnOpen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.btnOpen.Dock = System.Windows.Forms.DockStyle.Left;
       this.btnOpen.Location = new System.Drawing.Point(0, 0);
+      this.btnOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.btnOpen.Name = "btnOpen";
-      this.btnOpen.Size = new System.Drawing.Size(226, 23);
+      this.btnOpen.Size = new System.Drawing.Size(301, 28);
       this.btnOpen.TabIndex = 0;
       this.btnOpen.Text = "button1";
       this.btnOpen.UseVisualStyleBackColor = true;
@@ -47,17 +48,19 @@
       // txtFile
       // 
       this.txtFile.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.txtFile.Location = new System.Drawing.Point(226, 0);
+      this.txtFile.Location = new System.Drawing.Point(301, 0);
+      this.txtFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.txtFile.Name = "txtFile";
-      this.txtFile.Size = new System.Drawing.Size(648, 20);
+      this.txtFile.Size = new System.Drawing.Size(865, 22);
       this.txtFile.TabIndex = 1;
       // 
       // btnLoad
       // 
       this.btnLoad.Dock = System.Windows.Forms.DockStyle.Right;
-      this.btnLoad.Location = new System.Drawing.Point(874, 0);
+      this.btnLoad.Location = new System.Drawing.Point(1166, 0);
+      this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.btnLoad.Name = "btnLoad";
-      this.btnLoad.Size = new System.Drawing.Size(73, 23);
+      this.btnLoad.Size = new System.Drawing.Size(97, 28);
       this.btnLoad.TabIndex = 2;
       this.btnLoad.Text = "Load";
       this.btnLoad.UseVisualStyleBackColor = true;
@@ -65,13 +68,14 @@
       // 
       // FileField
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.txtFile);
       this.Controls.Add(this.btnLoad);
       this.Controls.Add(this.btnOpen);
+      this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.Name = "FileField";
-      this.Size = new System.Drawing.Size(947, 23);
+      this.Size = new System.Drawing.Size(1263, 28);
       this.ResumeLayout(false);
       this.PerformLayout();
 

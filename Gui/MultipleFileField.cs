@@ -74,6 +74,14 @@ namespace RCPA.Gui
     public string Key { get; set; }
 
     [Localizable(true)]
+    [Category("RcpaComponent"), DescriptionAttribute("Gets or sets the button panel visible"), DefaultValue(true)]
+    public bool ButtonPanelVisible
+    {
+      get { return panel2.Visible; }
+      set { panel2.Visible = value; }
+    }
+
+    [Localizable(true)]
     [Category("RcpaComponent"), DescriptionAttribute("Gets or sets the Load Button visible"), DefaultValue(true)]
     public bool LoadButtonVisible
     {

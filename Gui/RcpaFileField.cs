@@ -44,6 +44,18 @@ namespace RCPA.Gui
       }
     }
 
+    public virtual bool ReadOnly
+    {
+      get
+      {
+        return txtValue.ReadOnly;
+      }
+      set
+      {
+        txtValue.ReadOnly = value;
+      }
+    }
+
     protected override string GetValidateError()
     {
       return "Input " + fileArgument.GetFileDescription() + " file";

@@ -52,6 +52,23 @@ namespace RCPA.Gui
     [Browsable(true)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Bindable(true)]
+    [Category("Design"), DescriptionAttribute("Gets or sets ReadOnly stored to config file")]
+    public bool ReadOnly
+    {
+      get
+      {
+        return this.TextEdit.ReadOnly;
+      }
+      set
+      {
+        this.TextEdit.ReadOnly = value;
+      }
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
     [Category("File"), DescriptionAttribute("Gets or sets the caption")]
     public string Caption
     {

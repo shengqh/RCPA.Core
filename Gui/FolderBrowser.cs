@@ -1,4 +1,4 @@
-﻿using Ookii.Dialogs;
+﻿using Ookii.Dialogs.WinForms;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
