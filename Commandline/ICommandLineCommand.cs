@@ -14,6 +14,8 @@ namespace RCPA.Commandline
     string Description { get; }
 
     bool Process(string[] args);
+
+    bool LinuxSupported { get; }
   }
 
   public abstract class AbstractCommandLineCommand<T> : ICommandLineCommand where T : AbstractOptions, new()
@@ -23,6 +25,8 @@ namespace RCPA.Commandline
     public abstract string Name { get; }
 
     public abstract string Description { get; }
+
+    public virtual bool LinuxSupported { get { return true; } }
 
     public virtual bool Process(string[] args)
     {

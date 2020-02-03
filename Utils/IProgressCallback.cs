@@ -31,6 +31,8 @@ namespace RCPA.Utils
     void SetMessage(int labelIndex, string format, params object[] args);
 
     void End();
+
+    bool IsConsole();
   }
 
   public abstract class AbstractProgressCallback : IProgressCallback
@@ -80,6 +82,11 @@ namespace RCPA.Utils
     }
 
     public abstract void End();
+
+    public virtual bool IsConsole()
+    {
+      return true;
+    }
 
     #endregion
   }

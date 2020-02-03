@@ -71,11 +71,11 @@ namespace RCPA
         var finishedProcessors = new ConcurrentList<IParallelTaskProcessor>();
         var curProcessors = new ConcurrentList<IParallelTaskProcessor>();
 
+        Progress.SetMessage("Start processing ... ");
+        DateTime start = DateTime.Now;
         Parallel.ForEach(taskProcessors, Option, (processor, loopState) =>
         {
           curProcessors.Add(processor);
-
-          Progress.SetMessage("Processing {0}, finished {1} / {2}", curProcessors.Count, finishedProcessors.Count, totalCount);
 
           processor.LoopState = loopState;
           processor.Progress = Progress;
@@ -91,8 +91,15 @@ namespace RCPA
             curProcessors.Remove(processor);
             finishedProcessors.Add(processor);
 
-            Progress.SetPosition(finishedProcessors.Count);
-            Progress.SetMessage("Processing {0}, finished {1} / {2}", curProcessors.Count, finishedProcessors.Count, totalCount);
+            if (!Progress.IsConsole())
+            {
+              Progress.SetPosition(finishedProcessors.Count);
+            }
+
+            DateTime end = DateTime.Now;
+            var cost = end - start;
+            var expectEnd = start.AddSeconds(cost.TotalSeconds / finishedProcessors.Count * totalCount) ;
+            Progress.SetMessage("{0} threads running, {1} / {2} finished, expect to be end at {3}", curProcessors.Count, finishedProcessors.Count, totalCount, expectEnd);
           }
           catch (Exception e)
           {
@@ -221,6 +228,11 @@ namespace RCPA
     public void End()
     {
       throw new NotImplementedException();
+    }
+
+    public bool IsConsole()
+    {
+      return Progress.IsConsole();
     }
 
     #endregion

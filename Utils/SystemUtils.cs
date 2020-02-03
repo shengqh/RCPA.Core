@@ -9,7 +9,7 @@ using System.IO;
 
 namespace RCPA.Utils
 {
-  public enum SystemType { Windows, Mono3Lower, Mono4Upper };
+  public enum SystemType { Windows, Mono3Lower, Mono4Upper, Mono6Upper };
 
   public static class SystemUtils
   {
@@ -28,10 +28,14 @@ namespace RCPA.Utils
         if (displayName != null)
         {
           var name = displayName.Invoke(null, null).ToString();
-          //Console.WriteLine("Current mono version = {0}", name);
+          Console.WriteLine("Current mono version = {0}", name);
           if (name.Length > 1 && Char.IsDigit(name[0]) && int.Parse(name[0].ToString()) <= 3)
           {
             CurrentSystem = SystemType.Mono3Lower;
+          }
+          if (name.Length > 1 && Char.IsDigit(name[0]) && int.Parse(name[0].ToString()) >= 6)
+          {
+            CurrentSystem = SystemType.Mono6Upper;
           }
         }
       }

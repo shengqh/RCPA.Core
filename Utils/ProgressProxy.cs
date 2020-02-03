@@ -109,6 +109,11 @@ namespace RCPA.Utils
     {
       rootControl.Invoke(new MethodInvoker(DoEnd));
     }
+
+    public override bool IsConsole()
+    {
+      return false;
+    }
     #endregion
 
     #region Implementation members invoked on the owner thread

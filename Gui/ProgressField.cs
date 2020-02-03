@@ -105,6 +105,11 @@ namespace RCPA.Gui
       proxy.End();
     }
 
+    public bool IsConsole()
+    {
+      return false;
+    }
+
     #endregion
   }
 }

@@ -18,5 +18,32 @@ namespace RCPA.Utils
       }
       return result;
     }
+
+    public static string GetTimeCost(TimeSpan cost)
+    {
+      var result = new StringBuilder();
+
+      if(cost.Days > 0)
+      {
+        result.Append(string.Format(" {0} days", cost.Days));
+      }
+
+      if (cost.Hours > 0)
+      {
+        result.Append(string.Format(" {0} hours", cost.Hours));
+      }
+
+      if (cost.Minutes > 0)
+      {
+        result.Append(string.Format(" {0} minutes", cost.Minutes));
+      }
+
+      if (cost.Seconds > 0)
+      {
+        result.Append(string.Format(" {0} Seconds", cost.Seconds));
+      }
+
+      return result.ToString();
+    }
   }
 }

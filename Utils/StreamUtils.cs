@@ -10,6 +10,11 @@ namespace System.IO
 
     private static GetCharposFunc funcByPlatform;
 
+    private static long GetCharposMono6(StreamReader s)
+    {
+      return s.BaseStream.Position;
+    }
+
     private static long GetCharposWindowsMono4(StreamReader s)
     {
       Int32 charpos = (Int32)s.GetType().InvokeMember("charPos",
@@ -49,6 +54,10 @@ namespace System.IO
       if (SystemUtils.CurrentSystem == SystemType.Mono3Lower)
       {
         funcByPlatform = GetCharposMono3;
+      }
+      else if (SystemUtils.CurrentSystem == SystemType.Mono6Upper)
+      {
+        funcByPlatform = GetCharposMono6;
       }
       else
       {

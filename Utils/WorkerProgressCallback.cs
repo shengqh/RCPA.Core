@@ -148,6 +148,11 @@ namespace RCPA.Utils
       }
     }
 
+    public override bool IsConsole()
+    {
+      return false;
+    }
+
     #endregion
   }
 }
