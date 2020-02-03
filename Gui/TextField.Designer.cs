@@ -36,18 +36,19 @@
       // TextEdit
       // 
       this.TextEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.TextEdit.Location = new System.Drawing.Point(193, 0);
+      this.TextEdit.Location = new System.Drawing.Point(257, 0);
       this.TextEdit.Margin = new System.Windows.Forms.Padding(0);
       this.TextEdit.Name = "TextEdit";
-      this.TextEdit.Size = new System.Drawing.Size(735, 20);
+      this.TextEdit.Size = new System.Drawing.Size(981, 22);
       this.TextEdit.TabIndex = 1;
       // 
       // lblCaption
       // 
       this.lblCaption.Dock = System.Windows.Forms.DockStyle.Left;
       this.lblCaption.Location = new System.Drawing.Point(0, 0);
+      this.lblCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblCaption.Name = "lblCaption";
-      this.lblCaption.Size = new System.Drawing.Size(193, 23);
+      this.lblCaption.Size = new System.Drawing.Size(257, 28);
       this.lblCaption.TabIndex = 2;
       this.lblCaption.Text = "Description";
       this.lblCaption.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -55,21 +56,23 @@
       // lblDescription
       // 
       this.lblDescription.Dock = System.Windows.Forms.DockStyle.Right;
-      this.lblDescription.Location = new System.Drawing.Point(928, 0);
+      this.lblDescription.Location = new System.Drawing.Point(1238, 0);
+      this.lblDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblDescription.Name = "lblDescription";
-      this.lblDescription.Size = new System.Drawing.Size(19, 23);
+      this.lblDescription.Size = new System.Drawing.Size(25, 28);
       this.lblDescription.TabIndex = 3;
       this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       // 
       // TextField
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.TextEdit);
       this.Controls.Add(this.lblDescription);
       this.Controls.Add(this.lblCaption);
+      this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.Name = "TextField";
-      this.Size = new System.Drawing.Size(947, 23);
+      this.Size = new System.Drawing.Size(1263, 28);
       this.ResumeLayout(false);
       this.PerformLayout();
 

@@ -27,7 +27,10 @@ namespace RCPA.Gui
 
     protected virtual void MyAfterLoadOption(object sender, EventArgs e)
     {
-      btnCancel.Visible = IsProcessorSupportProgress();
+      if (btnCancel.Visible != IsProcessorSupportProgress())
+      {
+        btnCancel.Visible = IsProcessorSupportProgress();
+      }
     }
 
     protected virtual void ShowReturnInfo(IEnumerable<string> returnInfo)

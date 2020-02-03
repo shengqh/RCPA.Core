@@ -28,7 +28,10 @@ namespace RCPA.Gui
 
       infoAdaptor = new ItemInfosListViewAdaptor(lvItems);
 
-      lvItems.KeyDown += new KeyEventHandler(lvItems_KeyDown);
+      if (lvItems.MultiSelect)
+      {
+        lvItems.KeyDown += new KeyEventHandler(lvItems_KeyDown);
+      }
 
       Childrens.Add(lvItems);
 

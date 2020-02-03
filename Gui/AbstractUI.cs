@@ -55,7 +55,7 @@ namespace RCPA.Gui
       }
     }
 
-    private void UpdateButtons()
+    public void UpdateButtons()
     {
       if (this.buttonList != null)
       {

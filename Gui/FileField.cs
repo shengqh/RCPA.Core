@@ -62,6 +62,17 @@ namespace RCPA.Gui
     [Browsable(true)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Bindable(true)]
+    [Category("File"), DescriptionAttribute("Gets or sets ReadOnly"), DefaultValue(false)]
+    public bool ReadOnly
+    {
+      get { return Field.ReadOnly; }
+      set { Field.ReadOnly = value; }
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Always)]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [Bindable(true)]
     [Category("File"), DescriptionAttribute("Gets or sets the Open Button width")]
     public int WidthOpenButton
     {
