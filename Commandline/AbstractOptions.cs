@@ -43,7 +43,7 @@ namespace RCPA.Commandline
       }
     }
 
-    protected bool CheckPattern(string pattern, string patternName, bool required=false)
+    protected bool CheckPattern(string pattern, string patternName, bool required = false)
     {
       if (string.IsNullOrWhiteSpace(pattern) && !required)
       {
@@ -73,36 +73,47 @@ namespace RCPA.Commandline
       var pi = properties[propertyName];
 
       OptionAttribute oa = (OptionAttribute)Attribute.GetCustomAttribute(pi, typeof(OptionAttribute));
-      if (oa == null)
+      if (oa != null)
       {
-        throw new ArgumentException("Property {0} doesn't have attribute Option.", propertyName);
-      }
-
-      if (oa.MetaValue.Equals("FILE"))
-      {
-        string filename = pi.GetValue(this, null) as string;
-        if (!string.IsNullOrEmpty(filename) && !File.Exists(filename))
+        if (oa.MetaValue.Equals("FILE"))
         {
-          ParsingErrors.Add(string.Format("File {0} not exists : {1}.", oa.HelpText, filename));
-        }
-      }
-      else if (oa.MetaValue.Equals("DIRECTORY"))
-      {
-        string dirname = pi.GetValue(this, null) as string;
-        if (!string.IsNullOrEmpty(dirname) && !Directory.Exists(dirname))
-        {
-          ParsingErrors.Add(string.Format("Directory {0} not exists : {1}.", oa.HelpText, dirname));
-        }
-      }else if (oa.MetaValue.Equals("FILELIST"))
-      {
-        IList<string> filenames = pi.GetValue(this, null) as IList<string>;
-        foreach (var filename in filenames)
-        {
+          string filename = pi.GetValue(this, null) as string;
           if (!string.IsNullOrEmpty(filename) && !File.Exists(filename))
           {
             ParsingErrors.Add(string.Format("File {0} not exists : {1}.", oa.HelpText, filename));
           }
         }
+        else if (oa.MetaValue.Equals("DIRECTORY"))
+        {
+          string dirname = pi.GetValue(this, null) as string;
+          if (!string.IsNullOrEmpty(dirname) && !Directory.Exists(dirname))
+          {
+            ParsingErrors.Add(string.Format("Directory {0} not exists : {1}.", oa.HelpText, dirname));
+          }
+        }
+      }
+      else
+      {
+        OptionListAttribute ola = (OptionListAttribute)Attribute.GetCustomAttribute(pi, typeof(OptionListAttribute));
+        if (ola != null)
+        {
+          IList<string> filenames = pi.GetValue(this) as IList<string>;
+          if (ola.MetaValue.Equals("FILELIST"))
+          {
+            foreach (var filename in filenames)
+            {
+              if (!string.IsNullOrEmpty(filename) && !File.Exists(filename))
+              {
+                ParsingErrors.Add(string.Format("File {0} not exists : {1}.", ola.HelpText, filename));
+              }
+            }
+          }
+        }
+        else 
+        {
+          throw new ArgumentException("Property {0} doesn't have attribute Option/OptionList.", propertyName);
+        }
+
       }
     }
 
