@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace RCPA
 {
   public interface IParser<TSource, TTarget>

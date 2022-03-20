@@ -29,7 +29,7 @@ namespace RCPA.Seq
 
       string name = nameReg.Match(line).Groups[1].Value;
 
-      string description = "" ;
+      string description = "";
       while ((line = reader.ReadLine()) != null)
       {
         if (line.StartsWith("DE") && line.Contains("RecName:"))

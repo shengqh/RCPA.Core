@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RCPA.Utils
 {
@@ -171,7 +169,7 @@ namespace RCPA.Utils
   {
     public ConvertBigEndian32() : base(new int[] { 3, 2, 1, 0 }) { }
   }
-  
+
   internal class ConvertBigEndian64 : AbstractConvertEndian64
   {
     public ConvertBigEndian64() : base(new int[] { 7, 6, 5, 4, 3, 2, 1, 0 }) { }

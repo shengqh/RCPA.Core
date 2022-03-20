@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 
 namespace RCPA.Utils
@@ -85,7 +83,7 @@ namespace RCPA.Utils
       if (progressBarIndex == 0)
       {
         _position = val;
-        
+
         int curPercentage = (int)((_position - _minimum) / _range);
         if (curPercentage > 100)
         {

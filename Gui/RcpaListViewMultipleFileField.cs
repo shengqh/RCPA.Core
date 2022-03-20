@@ -1,8 +1,7 @@
+using RCPA.Gui.FileArgument;
 using System;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
-using RCPA.Gui.FileArgument;
 
 namespace RCPA.Gui
 {

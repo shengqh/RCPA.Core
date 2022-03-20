@@ -1,9 +1,6 @@
-﻿using System;
+﻿using RCPA.Parser;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using RCPA.Parser;
 
 namespace RCPA.Seq
 {

@@ -1,8 +1,5 @@
 using System;
-using System.Configuration;
 using System.Windows.Forms;
-using RCPA.Utils;
-using System.Xml.Linq;
 
 namespace RCPA.Gui
 {
@@ -47,7 +44,7 @@ namespace RCPA.Gui
     }
 
     protected override void DoPreConditionChanged(object sender, EventArgs e)
-    { 
+    {
       if (sender is CheckBox)
       {
         var cb = sender as CheckBox;
@@ -80,7 +77,7 @@ namespace RCPA.Gui
     protected virtual string GetValidateError()
     {
       var result = "Input " + title;
-      
+
       if (DefaultValue != string.Empty)
       {
         result = result + ", default value = " + DefaultValue;

@@ -1,10 +1,8 @@
-﻿using System;
+﻿using RCPA.Converter;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using RCPA.Converter;
-using System.Windows.Forms;
+using System.Linq;
 
 namespace RCPA.Format
 {
@@ -95,7 +93,7 @@ namespace RCPA.Format
 
     public string GetName()
     {
-      return Path.GetFileNameWithoutExtension( def.DefinitionFile);
+      return Path.GetFileNameWithoutExtension(def.DefinitionFile);
     }
 
     public string GetFormatFile()

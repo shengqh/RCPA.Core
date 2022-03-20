@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Configuration;
-using System.Windows.Forms;
-using RCPA.Utils;
-using System.Xml.Linq;
 using System.IO;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace RCPA.Gui
 {

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace RCPA.Utils
@@ -35,7 +34,7 @@ namespace RCPA.Utils
         {
           strResult.Append(strInitial.Substring((int)vChar - 19968, 1));
         }
-        else if((int)vChar < 128)
+        else if ((int)vChar < 128)
         {
           strResult.Append(vChar);
         }

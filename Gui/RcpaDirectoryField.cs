@@ -1,9 +1,7 @@
+using FolderSelect;
 using System;
-using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
-using RCPA.Utils;
-using FolderSelect;
 
 namespace RCPA.Gui
 {
@@ -16,7 +14,7 @@ namespace RCPA.Gui
     private readonly EventHandler myEvent;
 
     private FolderSelectDialog dialog;
-    
+
     public RcpaDirectoryField(Button btnDir, TextBox txtValue, String key, String dirDescription, bool required)
       : base(txtValue, key, dirDescription, string.Empty, required)
     {

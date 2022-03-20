@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace RCPA.Format
+﻿namespace RCPA.Format
 {
   public interface IFileDefinition
   {

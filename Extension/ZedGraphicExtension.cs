@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Linq;
-using System.Drawing.Drawing2D;
+﻿using MathNet.Numerics.Distributions;
 using MathNet.Numerics.Statistics;
-using MathNet.Numerics.Distributions;
-using RCPA.Utils;
 using RCPA;
+using RCPA.Utils;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace ZedGraph
 {

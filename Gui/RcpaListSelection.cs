@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace RCPA.Gui
@@ -32,7 +27,7 @@ namespace RCPA.Gui
 
     public object[] GetSelectedItems()
     {
-      return lbRight.Items.Cast<object>().ToArray();;
+      return lbRight.Items.Cast<object>().ToArray(); ;
     }
 
     private void btnAdd_Click(object sender, EventArgs e)

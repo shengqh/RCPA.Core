@@ -1,4 +1,3 @@
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace RCPA.Gui

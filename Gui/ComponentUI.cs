@@ -1,12 +1,9 @@
-﻿using System;
-using System.Configuration;
-using System.Windows.Forms;
-using RCPA.Utils;
-using System.Xml.Linq;
-using System.IO;
-using System.Reflection;
-using DigitalRune.Windows.Docking;
+﻿using DigitalRune.Windows.Docking;
+using System;
 using System.ComponentModel;
+using System.IO;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace RCPA.Gui
 {
@@ -33,7 +30,7 @@ namespace RCPA.Gui
 
     protected void DoRegisterRcpaComponent(Control parent)
     {
-      if(parent.HasChildren)
+      if (parent.HasChildren)
       {
         foreach (Control comp in parent.Controls)
         {

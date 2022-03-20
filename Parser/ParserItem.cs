@@ -1,5 +1,4 @@
-﻿using System;
-namespace RCPA.Parser
+﻿namespace RCPA.Parser
 {
   public class ParserItem
   {

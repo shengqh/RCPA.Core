@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RCPA.Seq
+﻿namespace RCPA.Seq
 {
   public interface IAccessNumberParser : IStringParser<string>
   {

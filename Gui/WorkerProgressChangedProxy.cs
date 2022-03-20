@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace RCPA.Gui
 {
@@ -20,7 +19,7 @@ namespace RCPA.Gui
     {
       if (e.UserState is WorkerProgressUserState)
       {
-        var eState = (WorkerProgressUserState) e.UserState;
+        var eState = (WorkerProgressUserState)e.UserState;
         if (eState.IsProgress)
         {
           int progressBarIndex = Math.Min(eState.ProgressBarIndex, this.progressBars.Length - 1);
@@ -46,7 +45,7 @@ namespace RCPA.Gui
 
       if (e.UserState is string)
       {
-        this.labels[0].Text = (string) e.UserState;
+        this.labels[0].Text = (string)e.UserState;
         return;
       }
 

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace RCPA
@@ -25,7 +24,7 @@ namespace RCPA
 
     private string ignoreHeaderPattern;
     private bool hasHeader;
-    public AnnotationFormat(string ignoreHeaderPattern = null, bool hasHeader=true)
+    public AnnotationFormat(string ignoreHeaderPattern = null, bool hasHeader = true)
     {
       this.ignoreHeaderPattern = ignoreHeaderPattern;
       this.hasHeader = hasHeader;
@@ -71,12 +70,12 @@ namespace RCPA
             break;
           }
 
-          if(EndRegex != null && EndRegex.Match(line).Success)
+          if (EndRegex != null && EndRegex.Match(line).Success)
           {
             break;
           }
 
-          if(!hasHeader && _format == null)
+          if (!hasHeader && _format == null)
           {
             var parts = line.Split('\t');
             var header = (from i in Enumerable.Range(1, parts.Length) select "X" + i.ToString()).Merge("\t");

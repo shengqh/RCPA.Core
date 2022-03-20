@@ -1,13 +1,11 @@
+using RCPA.Gui.FileArgument;
 using System;
-using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
-using RCPA.Gui.FileArgument;
-using RCPA.Utils;
 
 namespace RCPA.Gui
 {
-  public class RcpaFileField2<T> : RcpaTextField2<T>, IRcpaFileDirectoryComponent where T:Control
+  public class RcpaFileField2<T> : RcpaTextField2<T>, IRcpaFileDirectoryComponent where T : Control
   {
     private readonly Button btnFile;
 

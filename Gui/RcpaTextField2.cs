@@ -1,12 +1,9 @@
 using System;
-using System.Configuration;
 using System.Windows.Forms;
-using RCPA.Utils;
-using System.Xml.Linq;
 
 namespace RCPA.Gui
 {
-  public class RcpaTextField2<T> : AbstractRcpaComponent where T:Control
+  public class RcpaTextField2<T> : AbstractRcpaComponent where T : Control
   {
     private readonly string defaultValue;
 
@@ -46,7 +43,7 @@ namespace RCPA.Gui
     protected virtual string GetValidateError()
     {
       var result = "Input " + title;
-      
+
       if (defaultValue != string.Empty)
       {
         result = result + ", default value = " + defaultValue;

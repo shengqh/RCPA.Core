@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CommandLine;
+using CommandLine.Text;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
-using CommandLine;
-using CommandLine.Text;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace RCPA.Commandline
 {
@@ -109,7 +109,7 @@ namespace RCPA.Commandline
             }
           }
         }
-        else 
+        else
         {
           throw new ArgumentException("Property {0} doesn't have attribute Option/OptionList.", propertyName);
         }

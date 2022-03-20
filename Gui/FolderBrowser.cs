@@ -1,8 +1,5 @@
 ﻿using Ookii.Dialogs.WinForms;
 using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace RCPA.Gui
@@ -48,14 +45,16 @@ namespace RCPA.Gui
 
     public bool ShowNewFolderButton
     {
-      get {
+      get
+      {
         if (vista == null)
         {
           return this.dialog.ShowNewFolderButton;
         }
         return vista.ShowNewFolderButton;
       }
-      set {
+      set
+      {
         if (vista == null)
         {
           this.dialog.ShowNewFolderButton = value;

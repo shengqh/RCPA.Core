@@ -1,7 +1,7 @@
+using RCPA.Gui.FileArgument;
 using System;
 using System.ComponentModel.Design;
 using System.Windows.Forms;
-using RCPA.Gui.FileArgument;
 
 namespace RCPA.Gui
 {
@@ -77,7 +77,7 @@ namespace RCPA.Gui
 
     private bool IsDesignTime()
     {
-      object obj = GetService(typeof (IDesignerHost));
+      object obj = GetService(typeof(IDesignerHost));
       return obj != null;
     }
   }

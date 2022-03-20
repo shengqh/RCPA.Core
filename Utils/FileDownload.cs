@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Batte.CodeProject.Download;
-using System.Threading;
+using System.Collections.Generic;
 using System.IO;
 
 namespace RCPA.Utils

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-
-namespace RCPA.Converter
+﻿namespace RCPA.Converter
 {
   public class DoubleConverter<T> : AbstractPropertyNameConverter<T>
   {
     private string format;
 
-    public DoubleConverter(string propertyName, string format="")
+    public DoubleConverter(string propertyName, string format = "")
       : base(propertyName)
     {
       this.format = format;

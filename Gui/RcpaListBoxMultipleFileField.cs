@@ -1,13 +1,10 @@
+using RCPA.Gui.Event;
+using RCPA.Gui.FileArgument;
+using RCPA.Utils;
 using System;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using RCPA.Utils;
-using System.Collections.Generic;
-using RCPA.Gui.FileArgument;
-using System.Xml.Linq;
-using RCPA.Gui.Event;
 
 namespace RCPA.Gui
 {

@@ -1,9 +1,7 @@
-﻿using System;
+﻿using MathNet.Numerics.Statistics;
+using RCPA;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using RCPA;
-using MathNet.Numerics.Statistics;
 
 namespace MathNet.Numerics.Distributions
 {
@@ -25,7 +23,7 @@ namespace MathNet.Numerics.Distributions
 
   public static class DistributionExtensitions
   {
-      public static double TwoTailProbability(this IUnivariateDistribution nd, double value)
+    public static double TwoTailProbability(this IUnivariateDistribution nd, double value)
     {
       var result = nd.CumulativeDistribution(value);
       if (result > 0.5)

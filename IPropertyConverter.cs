@@ -1,5 +1,5 @@
-﻿using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text;
 namespace RCPA
 {
   public interface IPropertyConverter<T>

@@ -1,11 +1,8 @@
+using RCPA.Gui.Event;
+using RCPA.Utils;
 using System;
 using System.Linq;
-using System.Configuration;
 using System.Windows.Forms;
-using RCPA.Utils;
-using System.Collections.Generic;
-using RCPA.Gui.Event;
-using System.Xml.Linq;
 
 namespace RCPA.Gui
 {
@@ -120,7 +117,7 @@ namespace RCPA.Gui
     {
       return infoAdaptor;
     }
-  
+
     public void SelectAll()
     {
       for (int i = 0; i < lvItems.Items.Count; i++)

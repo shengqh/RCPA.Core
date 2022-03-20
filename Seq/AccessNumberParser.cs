@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-using RCPA.Seq;
-using System.IO;
 using RCPA.Parser;
+using System;
+using System.Text.RegularExpressions;
 
 namespace RCPA.Seq
 {

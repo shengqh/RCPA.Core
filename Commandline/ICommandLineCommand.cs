@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Linq;
-using CommandLine;
-using RCPA.Commandline;
-using RCPA;
 using System.IO;
+using System.Linq;
 
 namespace RCPA.Commandline
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-
-namespace RCPA.Converter
+﻿namespace RCPA.Converter
 {
   public class BooleanConverter<T> : AbstractPropertyNameConverter<T>
   {

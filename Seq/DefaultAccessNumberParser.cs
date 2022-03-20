@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace RCPA.Seq
 {
@@ -20,7 +17,7 @@ namespace RCPA.Seq
 
     private DefaultAccessNumberParser() { }
 
-//    private Regex defaultRegex = new Regex(@"(\S{1,20})");
+    //    private Regex defaultRegex = new Regex(@"(\S{1,20})");
     private Regex defaultRegex = new Regex(@"(\S{1,30})");
 
     #region IAccessNumberParser Members

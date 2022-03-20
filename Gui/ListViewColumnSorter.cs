@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-  using System.Collections;
-  using System.Windows.Forms;
-using System.Linq;
-using System.Text;
+﻿using System.Collections;
+using System.Windows.Forms;
 
 namespace RCPA.Gui
 {

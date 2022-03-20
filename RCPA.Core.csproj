@@ -186,6 +186,7 @@
     <Compile Include="AbstractParallelMainProcessor.cs" />
     <Compile Include="Extension\GenericCollectionExtension.cs" />
     <Compile Include="Extension\ReflectionExtension.cs" />
+    <Compile Include="Extension\SystemExtension.cs" />
     <Compile Include="Extension\WinFormsExtensions.cs" />
     <Compile Include="Gui\AbstractProcessorBaseUI.cs">
       <SubType>Form</SubType>

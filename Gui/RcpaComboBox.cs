@@ -1,9 +1,6 @@
 using System;
 using System.Linq;
-using System.Configuration;
 using System.Windows.Forms;
-using RCPA.Utils;
-using System.Xml.Linq;
 
 namespace RCPA.Gui
 {
@@ -17,7 +14,7 @@ namespace RCPA.Gui
 
     public T[] Items { get; private set; }
 
-    public RcpaComboBox(ComboBox cb, String key, T[] values, int defaultIndex, bool required=false, string description = "")
+    public RcpaComboBox(ComboBox cb, String key, T[] values, int defaultIndex, bool required = false, string description = "")
       : this(cb, key, values, (from v in values select v.ToString()).ToArray(), defaultIndex, required, description)
     { }
 

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace RCPA
 {
@@ -41,7 +38,7 @@ namespace RCPA
     private Action<T, string> setFunc;
     private Func<T, string> getFunc;
 
-    public AliasPropertyConverter(Func<string,bool> nameFunc, Action<T, string> setFunc, Func<T, string> getFunc)
+    public AliasPropertyConverter(Func<string, bool> nameFunc, Action<T, string> setFunc, Func<T, string> getFunc)
     {
       this.name = string.Empty;
       this.nameFunc = nameFunc;

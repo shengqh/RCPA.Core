@@ -1,12 +1,9 @@
-using System.Collections.Generic;
-using RCPA.Utils;
 using RCPA.Gui;
-using System.IO;
-using System.Linq;
-using System.Threading;
+using RCPA.Utils;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
-using System;
 
 namespace RCPA
 {

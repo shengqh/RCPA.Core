@@ -1,9 +1,5 @@
 using System;
-using System.Configuration;
-using System.IO;
 using System.Windows.Forms;
-using RCPA.Gui.FileArgument;
-using RCPA.Utils;
 using System.Xml.Linq;
 
 namespace RCPA.Gui

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Reflection;
 
 namespace RCPA.Utils
 {
@@ -23,7 +21,7 @@ namespace RCPA.Utils
     {
       var result = new StringBuilder();
 
-      if(cost.Days > 0)
+      if (cost.Days > 0)
       {
         result.Append(string.Format(" {0} days", cost.Days));
       }

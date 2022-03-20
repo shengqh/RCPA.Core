@@ -1,13 +1,12 @@
-﻿using System;
+﻿using RCPA.Utils;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Concurrent;
-using RCPA.Gui;
-using RCPA.Utils;
-using System.IO;
 
 namespace RCPA
 {
@@ -223,7 +222,8 @@ namespace RCPA
       {
         return new[] { "More than 100 files saved in " + aPath + "." };
       }
-      else {
+      else
+      {
         return result;
       }
     }

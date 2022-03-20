@@ -1,12 +1,11 @@
-﻿using System;
+﻿using RCPA.Utils;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Concurrent;
-using RCPA.Gui;
-using RCPA.Utils;
 
 namespace RCPA
 {
@@ -98,7 +97,7 @@ namespace RCPA
 
             DateTime end = DateTime.Now;
             var cost = end - start;
-            var expectEnd = start.AddSeconds(cost.TotalSeconds / finishedProcessors.Count * totalCount) ;
+            var expectEnd = start.AddSeconds(cost.TotalSeconds / finishedProcessors.Count * totalCount);
             Progress.SetMessage("{0} threads running, {1} / {2} finished, expect to be end at {3}", curProcessors.Count, finishedProcessors.Count, totalCount, expectEnd);
           }
           catch (Exception e)

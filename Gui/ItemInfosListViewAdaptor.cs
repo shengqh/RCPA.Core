@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Windows.Forms;
 
 namespace RCPA.Gui
@@ -24,13 +21,13 @@ namespace RCPA.Gui
         var items = lvItems.Items.Cast<ListViewItem>().ToList();
 
         var lstItems = from item in items
-                     let subitems = item.SubItems.Cast<ListViewItem.ListViewSubItem>()
-                     select new ItemInfo()
-                     {
-                       Selected = item.Selected,
-                       SubItems = (from subitem in subitems
-                                   select subitem.Text).ToList()
-                     };
+                       let subitems = item.SubItems.Cast<ListViewItem.ListViewSubItem>()
+                       select new ItemInfo()
+                       {
+                         Selected = item.Selected,
+                         SubItems = (from subitem in subitems
+                                     select subitem.Text).ToList()
+                       };
 
         ItemInfoList result = new ItemInfoList();
         result.AddRange(lstItems);

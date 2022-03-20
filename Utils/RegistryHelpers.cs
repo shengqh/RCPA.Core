@@ -1,8 +1,5 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace RCPA.Utils
 {
@@ -29,7 +26,7 @@ namespace RCPA.Utils
     public static object GetRegistryValue(string keyPath, string keyName)
     {
       RegistryKey registry = GetRegistryKey(keyPath);
-      if(registry == null)
+      if (registry == null)
       {
         return null;
       }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using RCPA.Gui.Event;
+﻿using RCPA.Gui.Event;
 using RCPA.Gui.FileArgument;
+using System;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace RCPA.Gui
 {

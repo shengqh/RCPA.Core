@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RCPA.Format;
-using RCPA.Converter;
+﻿using RCPA.Converter;
 
 namespace RCPA.Format
 {

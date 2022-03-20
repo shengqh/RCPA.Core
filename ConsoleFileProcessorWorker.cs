@@ -1,9 +1,9 @@
+using RCPA.Gui;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Text;
-using RCPA.Gui;
 
 namespace RCPA
 {
@@ -36,7 +36,7 @@ namespace RCPA
       }
       else
       {
-        var resultFiles = (List<string>) e.Result;
+        var resultFiles = (List<string>)e.Result;
 
         bool bIsFile = true;
         var sb = new StringBuilder();
@@ -68,7 +68,7 @@ namespace RCPA
     {
       if (e.UserState is WorkerProgressUserState)
       {
-        var eState = (WorkerProgressUserState) e.UserState;
+        var eState = (WorkerProgressUserState)e.UserState;
         if (eState.IsProgress)
         {
           Console.Out.WriteLine(eState.ProgressValue + "%");

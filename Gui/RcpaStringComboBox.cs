@@ -1,14 +1,12 @@
 using System;
-using System.Configuration;
 using System.Windows.Forms;
-using RCPA.Utils;
 
 namespace RCPA.Gui
 {
   public class RcpaStringComboBox : AbstractRcpaComponent
   {
     private readonly ComboBox cb;
-    
+
     public RcpaStringComboBox(ComboBox cb, String key, string[] values, string defaultValue)
     {
       this.cb = cb;

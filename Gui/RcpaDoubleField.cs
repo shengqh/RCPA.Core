@@ -1,7 +1,5 @@
 using System;
-using System.Configuration;
 using System.Windows.Forms;
-using RCPA.Utils;
 
 namespace RCPA.Gui
 {

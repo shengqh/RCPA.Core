@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RCPA.Utils
+﻿namespace RCPA.Utils
 {
   public interface IProgressCallback
   {

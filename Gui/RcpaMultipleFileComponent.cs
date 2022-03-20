@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
-using RCPA.Utils;
-using System.Configuration;
-using System.Xml.Linq;
+﻿using System.IO;
 
 namespace RCPA.Gui
 {
@@ -18,7 +10,7 @@ namespace RCPA.Gui
     {
       Adaptor = new OptionFileItemInfosAdaptor(items, key);
 
-      validator = new ItemInfosValidator(items, validateSelectedItemOnly, required, (m => File.Exists(m)),description, "File not exists : {0}");
+      validator = new ItemInfosValidator(items, validateSelectedItemOnly, required, (m => File.Exists(m)), description, "File not exists : {0}");
     }
 
     #region IRcpaComponent Members
