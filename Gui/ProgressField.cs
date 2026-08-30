@@ -103,6 +103,11 @@ namespace RCPA.Gui
       return false;
     }
 
+    public virtual void ShowCurrentMemory(string message)
+    {
+      SetMessage(message);
+    }
+
     #endregion
   }
 }

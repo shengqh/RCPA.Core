@@ -234,6 +234,11 @@ namespace RCPA
       return Progress.IsConsole();
     }
 
+    public virtual void ShowCurrentMemory(string message)
+    {
+      Progress.ShowCurrentMemory(message);
+    }
+
     #endregion
   }
 }

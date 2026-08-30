@@ -1,4 +1,6 @@
-﻿namespace RCPA.Utils
+﻿using System.Diagnostics;
+
+namespace RCPA.Utils
 {
   public interface IProgressCallback
   {
@@ -29,6 +31,8 @@
     void End();
 
     bool IsConsole();
+
+    void ShowCurrentMemory(string message);
   }
 
   public abstract class AbstractProgressCallback : IProgressCallback
@@ -82,6 +86,27 @@
     public virtual bool IsConsole()
     {
       return true;
+    }
+
+    public virtual void ShowCurrentMemory(string message)
+    {
+      System.Diagnostics.Process p = System.Diagnostics.Process.GetCurrentProcess();
+
+    double workingSet =
+        p.WorkingSet64 / 1024.0 / 1024 / 1024;
+
+    double privateMemory =
+        p.PrivateMemorySize64 / 1024.0 / 1024 / 1024;
+
+    double managedMemory =
+        System.GC.GetTotalMemory(false) / 1024.0 / 1024 / 1024;
+
+    SetMessage(
+        "{0}: WorkingSet={1:F2} GB, Private={2:F2} GB, Managed={3:F2} GB...",
+        message,
+        workingSet,
+        privateMemory,
+        managedMemory);
     }
 
     #endregion
